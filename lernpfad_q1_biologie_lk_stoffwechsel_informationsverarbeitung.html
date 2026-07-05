@@ -1,0 +1,1740 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernpfad Q1 Biologie LK – Stoffwechsel und Informationsverarbeitung auf zellulärer Ebene</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #18202b;
+      --muted: #5b6677;
+      --line: #d9e1ec;
+      --accent: #315a8c;
+      --accent2: #5c7fa9;
+      --soft: #eaf1f9;
+      --good: #2f6f4e;
+      --warn: #8a5a00;
+      --danger: #8a2d2d;
+      --shadow: 0 12px 30px rgba(24, 32, 43, .10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    header {
+      padding: 2.2rem clamp(1rem, 3vw, 2.5rem);
+      background: linear-gradient(135deg, #203a5d, #315a8c 58%, #7a99b8);
+      color: white;
+    }
+    header h1 {
+      max-width: 1100px;
+      margin: 0 auto .6rem;
+      font-size: clamp(1.7rem, 3.4vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
+    header p {
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      opacity: .94;
+    }
+    .meta {
+      max-width: 1100px;
+      margin: 1rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .35rem .65rem;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      font-size: .9rem;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 330px) 1fr;
+      gap: 1.2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem;
+    }
+    aside {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow: auto;
+      padding: 1rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .progresswrap {
+      margin-bottom: 1rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .progressbar {
+      height: .7rem;
+      background: #edf1f7;
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .progressbar > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width .25s ease;
+    }
+    #progresstext {
+      margin: .4rem 0 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .navlist {
+      display: grid;
+      gap: .35rem;
+    }
+    .navbtn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: .58rem .65rem;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      gap: .25rem;
+      align-items: center;
+      font: inherit;
+      line-height: 1.25;
+    }
+    .navbtn:hover { background: var(--soft); }
+    .navbtn.active {
+      background: var(--soft);
+      border-color: #b9cbe0;
+      color: #173d68;
+      font-weight: 700;
+    }
+    .navbtn.done .num {
+      background: #dcefe6;
+      color: var(--good);
+      border-color: #b2d7c6;
+    }
+    .num {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+    main {
+      min-width: 0;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      gap: .8rem;
+      align-items: center;
+      padding: .8rem 0;
+      background: linear-gradient(var(--bg), rgba(245,247,251,.92));
+      backdrop-filter: blur(6px);
+    }
+    .toolbar button, .printbtn {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: 999px;
+      padding: .6rem .9rem;
+      cursor: pointer;
+      color: var(--ink);
+      box-shadow: 0 3px 10px rgba(24,32,43,.05);
+      font: inherit;
+    }
+    .toolbar button:hover, .printbtn:hover { border-color: #aac0d8; color: var(--accent); }
+    .page {
+      display: none;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(1rem, 2.4vw, 2rem);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.2rem;
+    }
+    .page.active {
+      display: block;
+      animation: fade .18s ease-out;
+    }
+    @keyframes fade {
+      from { opacity: .35; transform: translateY(4px); }
+      to { opacity: 1; transform: none; }
+    }
+    .pagehead {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .6rem;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .kicker {
+      grid-column: 1 / -1;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.6vw, 2.35rem);
+      line-height: 1.12;
+    }
+    h3 {
+      margin-top: 1.4rem;
+      margin-bottom: .45rem;
+      color: #213b5a;
+    }
+    h4 { margin: 0 0 .35rem; color: #23384f; }
+    .done {
+      white-space: nowrap;
+      align-self: center;
+      padding: .45rem .65rem;
+      border-radius: 999px;
+      background: #f1f5fa;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .goals {
+      background: #f7f9fc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .8rem 1rem;
+    }
+    .goals h3 { margin-top: 0; }
+    .goals ul { margin-bottom: 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      overflow: hidden;
+      border-radius: 12px;
+      font-size: .96rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: .7rem;
+      vertical-align: top;
+    }
+    th {
+      background: #edf3fa;
+      text-align: left;
+      color: #223b59;
+    }
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .9rem;
+      margin: 1rem 0;
+    }
+    .card {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .9rem;
+    }
+    .card p:last-child { margin-bottom: 0; }
+    .callout, .note, .exam, .task, .warning {
+      margin: 1rem 0;
+      padding: .9rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+    .callout { background: #eef5ff; border-color: #cfe0f5; }
+    .note { background: #f4faf6; border-color: #c5e4d3; }
+    .exam { background: #f7f2e7; border-color: #e6d3a4; }
+    .task { background: #f8f1fb; border-color: #dec5ec; }
+    .warning { background: #fff0f0; border-color: #efc2c2; }
+    .steps { padding-left: 1.25rem; }
+    .steps li { margin: .35rem 0; }
+    .selfcheck {
+      margin-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+    .qa {
+      margin: .55rem 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+      overflow: hidden;
+    }
+    .qa summary {
+      cursor: pointer;
+      padding: .75rem .9rem;
+      font-weight: 700;
+      color: #223b59;
+    }
+    .qa p {
+      padding: 0 .9rem .85rem;
+      margin: 0;
+    }
+    .seealso {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 2px dashed #c9d4e2;
+      color: var(--muted);
+      min-height: 3.5rem;
+    }
+    .columns {
+      columns: 3 16rem;
+      column-gap: 2rem;
+    }
+    .columns ul {
+      margin-top: 0;
+      break-inside: avoid;
+    }
+    .checkgrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .55rem;
+      margin: 1rem 0;
+    }
+    .checkgrid label {
+      display: block;
+      padding: .65rem .75rem;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+    footer {
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+      padding: 0 1.2rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { position: relative; max-height: none; }
+      .grid2 { grid-template-columns: 1fr; }
+      .checkgrid { grid-template-columns: 1fr; }
+      .pagehead { grid-template-columns: 1fr; }
+      .done { justify-self: start; }
+    }
+    @media print {
+      body { background: white; }
+      header, aside, .toolbar { display: none !important; }
+      .layout { display: block; padding: 0; }
+      .page { display: block !important; box-shadow: none; border: 0; page-break-after: always; }
+      .qa p { display: block; }
+      details > summary { list-style: none; }
+      .seealso { min-height: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lernpfad Q1 Biologie LK: Stoffwechsel und Informationsverarbeitung auf zellulärer Ebene</h1>
+    <p>Ein klickbarer Wiederholungspfad für Schülerinnen und Schüler der Klasse 11 im Leistungskurs Biologie. Bearbeiten Sie die Seiten selbstständig, prüfen Sie Ihr Verständnis mit den Selbstchecks und ergänzen Sie später Ihre Unterrichtsmaterialien unter „Siehe auch ...“.</p>
+    <div class="meta">
+      <span class="pill">Q1 · Biologie · Leistungskurs</span>
+      <span class="pill">Berlin · gymnasiale Oberstufe</span>
+      <span class="pill">Stand: 21.06.2026</span>
+      <span class="pill">selbstständige Wiederholung</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside aria-label="Navigation">
+      <div class="progresswrap">
+        <strong>Fortschritt</strong>
+        <div class="progressbar" aria-hidden="true"><div id="progressfill"></div></div>
+        <p id="progresstext">0 von 25 Seiten erledigt</p>
+      </div>
+      <nav class="navlist">
+        <button class="navbtn" data-target="start"><span class="num">01</span><span>Start: Lernpfad Q1 Biologie LK</span></button>
+<button class="navbtn" data-target="ueberblick"><span class="num">02</span><span>1. Überblick: Zellen als Stoffwechsel- und Informationssysteme</span></button>
+<button class="navbtn" data-target="membranen"><span class="num">03</span><span>2. Biomembranen und Kompartimentierung</span></button>
+<button class="navbtn" data-target="transport"><span class="num">04</span><span>3. Stofftransport zwischen Kompartimenten</span></button>
+<button class="navbtn" data-target="enzyme"><span class="num">05</span><span>4. Enzyme und Stoffwechselregulation</span></button>
+<button class="navbtn" data-target="energie"><span class="num">06</span><span>5. Energie, Redoxreaktionen und ATP</span></button>
+<button class="navbtn" data-target="mitochondrium"><span class="num">07</span><span>6. Mitochondrium und Gesamtlogik der Zellatmung</span></button>
+<button class="navbtn" data-target="glykolyse"><span class="num">08</span><span>7. Glykolyse</span></button>
+<button class="navbtn" data-target="citratzyklus"><span class="num">09</span><span>8. Oxidative Decarboxylierung und Tricarbonsäurezyklus</span></button>
+<button class="navbtn" data-target="atmungskette"><span class="num">10</span><span>9. Atmungskette und chemiosmotische ATP-Bildung</span></button>
+<button class="navbtn" data-target="gaerung"><span class="num">11</span><span>10. Alkoholische Gärung und Milchsäuregärung</span></button>
+<button class="navbtn" data-target="stoffwechsel_vernetzung"><span class="num">12</span><span>11. Stoffwechsel vernetzt denken</span></button>
+<button class="navbtn" data-target="nervenzelle"><span class="num">13</span><span>12. Nervenzelle: Bau und Funktion</span></button>
+<button class="navbtn" data-target="ruhepotential"><span class="num">14</span><span>13. Ruhepotenzial</span></button>
+<button class="navbtn" data-target="aktionspotential"><span class="num">15</span><span>14. Aktionspotenzial</span></button>
+<button class="navbtn" data-target="leitung"><span class="num">16</span><span>15. Erregungsleitung und Potenzialmessungen</span></button>
+<button class="navbtn" data-target="synapse"><span class="num">17</span><span>16. Erregende chemische Synapse</span></button>
+<button class="navbtn" data-target="neuromuskulaer"><span class="num">18</span><span>17. Neuromuskuläre Synapse und Stoffeinwirkung</span></button>
+<button class="navbtn" data-target="hemmung_summation"><span class="num">19</span><span>18. Hemmende Synapse und Verrechnung</span></button>
+<button class="navbtn" data-target="sinneszellen"><span class="num">20</span><span>19. Sinneszellen und Rezeptorpotenzial</span></button>
+<button class="navbtn" data-target="lernen"><span class="num">21</span><span>20. Lernen, neuronale Plastizität und Störungen</span></button>
+<button class="navbtn" data-target="hormone"><span class="num">22</span><span>21. Hormone und Verschränkung hormoneller und neuronaler Steuerung</span></button>
+<button class="navbtn" data-target="methoden"><span class="num">23</span><span>22. Experimente, Modelle und Daten auswerten</span></button>
+<button class="navbtn" data-target="klausurtraining"><span class="num">24</span><span>23. Klausurtraining: Operatoren und typische Aufgabenformate</span></button>
+<button class="navbtn" data-target="glossar"><span class="num">25</span><span>24. Glossar und Abschluss-Selbstcheck</span></button>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="toolbar">
+        <div>
+          <button id="prevBtn" type="button">← Zurück</button>
+          <button id="nextBtn" type="button">Weiter →</button>
+        </div>
+        <button class="printbtn" type="button" onclick="window.print()">Drucken / als PDF sichern</button>
+      </div>
+
+      
+<article id="start" class="page" data-title="Start: Lernpfad Q1 Biologie LK">
+  <div class="pagehead">
+    <span class="kicker">Orientierung</span>
+    <h2>Start: Lernpfad Q1 Biologie LK</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="start"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>den Aufbau des Lernpfads kennen</li><li>Ihre Wiederholung eigenständig planen</li><li>zwischen Grundstruktur und LK-Vertiefung unterscheiden</li></ul>
+  </section>
+  <section class="content">
+    
+<div class="callout">
+  <p><strong>Worum geht es?</strong> In diesem Lernpfad wiederholen Sie das Themenfeld <em>Stoffwechsel und Informationsverarbeitung auf zellulärer Ebene</em>. Sie arbeiten sich von Biomembranen und Energieumwandlung über Zellatmung und Gärung bis zur neuronalen und hormonellen Informationsverarbeitung vor.</p>
+</div>
+<h3>So nutzen Sie den Lernpfad</h3>
+<ol class="steps">
+  <li>Bearbeiten Sie die Seiten in der vorgeschlagenen Reihenfolge oder springen Sie gezielt zu einem Thema.</li>
+  <li>Markieren Sie eine Seite als erledigt, wenn Sie die Lernziele sicher erklären können.</li>
+  <li>Nutzen Sie die Selbstchecks nicht als „Abfrage“, sondern als Diagnose: Was können Sie wirklich aus dem Kopf rekonstruieren?</li>
+  <li>Ergänzen Sie später unter <em>Siehe auch ...</em> Ihre Unterrichtsmaterialien, Hefteinträge, Arbeitsblätter und Klausurhinweise.</li>
+</ol>
+<h3>Leistungskurs-Niveau</h3>
+<p>Im Leistungskurs reicht reines Wiedergeben nicht aus. Sie sollen biologische Prozesse auf mehreren Systemebenen verknüpfen, Modelle kritisch nutzen, Daten auswerten, Experimente planen und biologische Sachverhalte fachsprachlich präzise beurteilen.</p>
+<div class="grid2">
+  <div class="card">
+    <h4>Stoffwechsel</h4>
+    <p>Biomembranen, Stofftransport, Enzyme, ATP, Redoxreaktionen, Zellatmung, Atmungskette, chemiosmotische ATP-Bildung, Gärung.</p>
+  </div>
+  <div class="card">
+    <h4>Informationsverarbeitung</h4>
+    <p>Nervenzellen, Ruhe- und Aktionspotenzial, Erregungsleitung, Synapsen, Sinneszellen, Lernen, neuronale Plastizität, hormonelle Steuerung.</p>
+  </div>
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Woran merken Sie, dass Sie ein Thema wirklich verstanden haben?</summary>
+          <p>Sie können es ohne Vorlage erklären, auf ein neues Material anwenden, eine typische Klausuraufgabe dazu bearbeiten und fachsprachlich korrekt begründen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum gehören Stoffwechsel und Informationsverarbeitung in ein gemeinsames Themenfeld?</summary>
+          <p>Beide beruhen auf zellulären Strukturen, Membranen, Energieumwandlung, Regulation und Kommunikation zwischen Kompartimenten beziehungsweise Zellen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="ueberblick" class="page" data-title="1. Überblick: Zellen als Stoffwechsel- und Informationssysteme">
+  <div class="pagehead">
+    <span class="kicker">Basiskonzepte</span>
+    <h2>1. Überblick: Zellen als Stoffwechsel- und Informationssysteme</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="ueberblick"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>die zentralen Basiskonzepte des Themenfelds benennen</li><li>Stoffwechsel und Informationsverarbeitung als zelluläre Systemleistungen einordnen</li><li>Klausurantworten basiskonzeptorientiert strukturieren</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Zellen sind offene Systeme. Sie nehmen Stoffe und Informationen auf, wandeln Energie um, regulieren Reaktionen und reagieren auf Signale. Das Themenfeld verbindet daher zwei große Perspektiven:</p>
+<div class="grid2">
+  <div class="card">
+    <h4>Stoff- und Energieumwandlung</h4>
+    <p>Stoffwechselprozesse sind gekoppelte Reaktionsketten. Energie wird nicht „erzeugt“, sondern umgewandelt; ein Teil wird stets entwertet, z. B. als Wärme. ATP dient als kurzfristig nutzbarer Energieträger.</p>
+  </div>
+  <div class="card">
+    <h4>Information und Kommunikation</h4>
+    <p>Nervenzellen und Sinneszellen verarbeiten Reize in Form elektrischer und chemischer Signale. Synapsen und Hormone ermöglichen Kommunikation und Regulation im Organismus.</p>
+  </div>
+</div>
+<h3>Vier Basiskonzepte, die Sie ständig mitdenken sollten</h3>
+<table>
+  <thead><tr><th>Basiskonzept</th><th>Leitfrage</th><th>Beispiel</th></tr></thead>
+  <tbody>
+    <tr><td>Struktur und Funktion</td><td>Wie ermöglicht ein Bauprinzip eine Leistung?</td><td>Faltungen der inneren Mitochondrienmembran; Myelinscheiden; Rezeptorproteine.</td></tr>
+    <tr><td>Kompartimentierung</td><td>Warum brauchen Zellen abgegrenzte Reaktionsräume?</td><td>Protonengradient an der inneren Mitochondrienmembran; Vesikeltransport.</td></tr>
+    <tr><td>Stoff- und Energieumwandlung</td><td>Wie werden Stoffe umgesetzt und Energieformen gekoppelt?</td><td>Glucoseabbau, NADH/H<sup>+</sup>, Atmungskette, ATP-Synthase.</td></tr>
+    <tr><td>Steuerung und Regelung</td><td>Wie werden Prozesse angepasst und stabilisiert?</td><td>Enzymhemmung, Rückkopplung, Homöostase, hormonelle Regelkreise.</td></tr>
+  </tbody>
+</table>
+<div class="exam">
+  <strong>Klausurblick:</strong> Gute Antworten verknüpfen diese Basiskonzepte ausdrücklich. Schreiben Sie nicht nur, <em>was</em> passiert, sondern <em>warum</em> die Struktur, das Kompartiment oder die Regulation biologisch sinnvoll ist.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Was bedeutet „offenes System“ im Zusammenhang mit Zellen?</summary>
+          <p>Zellen stehen im Austausch mit ihrer Umgebung: Stoffe, Energie und Informationen werden aufgenommen, abgegeben und intern verarbeitet.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist Kompartimentierung mehr als nur räumliche Ordnung?</summary>
+          <p>Kompartimente ermöglichen unterschiedliche Reaktionsbedingungen, getrennte Stoffwechselwege, gerichteten Transport und den Aufbau von Gradienten.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="membranen" class="page" data-title="2. Biomembranen und Kompartimentierung">
+  <div class="pagehead">
+    <span class="kicker">Struktur und Funktion</span>
+    <h2>2. Biomembranen und Kompartimentierung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="membranen"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>das Fluid-Mosaik-Modell erklären</li><li>Funktionen von Biomembranen an Beispielen erläutern</li><li>Kompartimentierung als Voraussetzung von Stoffwechselprozessen darstellen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Biomembranen bestehen im Kern aus einer Phospholipid-Doppelschicht mit eingelagerten Proteinen. Sie sind keine starren Wände, sondern dynamische Grenzflächen. Das Fluid-Mosaik-Modell beschreibt Membranen als bewegliche Strukturen, in denen Lipide und viele Proteine lateral beweglich sind.</p>
+<h3>Zentrale Funktionen von Biomembranen</h3>
+<ul>
+  <li><strong>Abgrenzung:</strong> Membranen trennen Kompartimente und schaffen unterschiedliche Reaktionsräume.</li>
+  <li><strong>Selektive Permeabilität:</strong> Kleine unpolare Moleküle diffundieren relativ leicht; Ionen und größere polare Moleküle benötigen Transportproteine.</li>
+  <li><strong>Signalaufnahme:</strong> Rezeptoren erkennen Signalmoleküle und lösen intrazelluläre Reaktionen aus.</li>
+  <li><strong>Energieumwandlung:</strong> Membranen ermöglichen elektrochemische Gradienten, z. B. an der inneren Mitochondrienmembran.</li>
+  <li><strong>Oberflächenvergrößerung:</strong> Faltungen erhöhen die Fläche für membrangebundene Prozesse.</li>
+</ul>
+<h3>Kompartimentierung im Mitochondrium</h3>
+<p>Das Mitochondrium besitzt Außenmembran, Intermembranraum, innere Membran und Matrix. Diese Räume sind funktional verschieden: Die oxidative Decarboxylierung und der Tricarbonsäurezyklus laufen vor allem in der Matrix ab, während Atmungskette und ATP-Synthase an der inneren Membran lokalisiert sind.</p>
+<div class="note">
+  <strong>Merksatz:</strong> Ohne Membran keine gerichtete Ladungs- und Stofftrennung; ohne gerichtete Trennung kein Protonengradient; ohne Protonengradient keine chemiosmotische ATP-Bildung.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum kann die innere Mitochondrienmembran nicht einfach durch eine beliebige Zellgrenze ersetzt werden?</summary>
+          <p>Sie ist hoch spezialisiert: Sie enthält Transportkomplexe der Atmungskette, die ATP-Synthase und schafft durch geringe Protonenpermeabilität die Voraussetzung für den Protonengradienten.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Was ist an der Formulierung „Membranen sind undurchlässig“ problematisch?</summary>
+          <p>Membranen sind selektiv permeabel, nicht absolut undurchlässig. Die Durchlässigkeit hängt von Molekülgröße, Polarität, Ladung und Transportproteinen ab.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="transport" class="page" data-title="3. Stofftransport zwischen Kompartimenten">
+  <div class="pagehead">
+    <span class="kicker">Diffusion, Osmose, aktiver Transport</span>
+    <h2>3. Stofftransport zwischen Kompartimenten</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="transport"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>passive und aktive Transportformen unterscheiden</li><li>Osmose auf Teilchenebene erklären</li><li>Plasmolyse und Deplasmolyse fachsprachlich deuten</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Stofftransport ist die Grundlage dafür, dass Zellen ihre innere Zusammensetzung regulieren können. Entscheidend ist, ob ein Transport entlang oder gegen ein Konzentrations- beziehungsweise elektrochemisches Gefälle erfolgt.</p>
+<table>
+  <thead><tr><th>Transportform</th><th>Energiebedarf</th><th>Mechanismus</th><th>Beispiel</th></tr></thead>
+  <tbody>
+    <tr><td>Einfache Diffusion</td><td>kein ATP</td><td>entlang des Konzentrationsgefälles durch die Lipidschicht</td><td>O<sub>2</sub>, CO<sub>2</sub></td></tr>
+    <tr><td>Erleichterte Diffusion</td><td>kein ATP</td><td>über Kanal- oder Carrierproteine entlang des Gefälles</td><td>Ionenkanäle, Glucosetransporter</td></tr>
+    <tr><td>Osmose</td><td>kein ATP</td><td>Diffusion von Wasser durch eine semipermeable Membran</td><td>Plasmolyse und Deplasmolyse bei Pflanzenzellen</td></tr>
+    <tr><td>Primär aktiver Transport</td><td>ATP-Verbrauch</td><td>Pumpe gegen das elektrochemische Gefälle</td><td>Natrium-Kalium-Pumpe</td></tr>
+    <tr><td>Sekundär aktiver Transport</td><td>indirekt energieabhängig</td><td>Nutzung eines zuvor aufgebauten Ionengradienten</td><td>Symport oder Antiport</td></tr>
+    <tr><td>Endo-/Exocytose</td><td>energieabhängig</td><td>Vesikeltransport größerer Stoffmengen</td><td>Transmitterfreisetzung an Synapsen</td></tr>
+  </tbody>
+</table>
+<h3>Osmose fachsprachlich sauber erklären</h3>
+<p>Bei der Osmose diffundiert Wasser durch eine semipermeable Membran in Richtung der höheren Konzentration gelöster, nicht frei permeabler Teilchen. In Pflanzenzellen führt Wasserverlust zur Plasmolyse, Wasseraufnahme zur Deplasmolyse und zum Aufbau von Turgor.</p>
+<div class="task">
+  <strong>Mini-Aufgabe:</strong> Erklären Sie, warum eine rote Zwiebelzelle in konzentrierter Salzlösung plasmolysiert. Verwenden Sie die Begriffe <em>semipermeable Membran</em>, <em>Konzentrationsgefälle</em>, <em>Wasserpotenzial</em> und <em>Protoplast</em>.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist Osmose kein Transport gelöster Salzteilchen?</summary>
+          <p>Bei Osmose wird Wasser durch eine semipermeable Membran transportiert; die gelösten Teilchen können die Membran nicht oder nicht frei passieren.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum kostet erleichterte Diffusion kein ATP?</summary>
+          <p>Sie erfolgt entlang eines bestehenden Konzentrations- oder elektrochemischen Gefälles; Transportproteine erleichtern den Weg, treiben ihn aber nicht energetisch an.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="enzyme" class="page" data-title="4. Enzyme und Stoffwechselregulation">
+  <div class="pagehead">
+    <span class="kicker">Katalyse und Kontrolle</span>
+    <h2>4. Enzyme und Stoffwechselregulation</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="enzyme"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Enzyme als Biokatalysatoren erklären</li><li>Substrat- und Wirkungsspezifität unterscheiden</li><li>kompetitive und allosterische Hemmung vergleichen</li><li>K<sub>M</sub> als kinetischen Parameter deuten</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Enzyme sind Biokatalysatoren. Sie senken die Aktivierungsenergie einer Reaktion, ohne die Lage des chemischen Gleichgewichts zu verändern. In Zellen ermöglichen sie Reaktionen unter milden Bedingungen und machen Stoffwechselwege regulierbar.</p>
+<h3>Wichtige Begriffe</h3>
+<div class="grid2">
+  <div class="card">
+    <h4>Substratspezifität</h4>
+    <p>Ein Enzym bindet nur bestimmte Substrate, weil aktives Zentrum und Substrat räumlich und chemisch zueinander passen.</p>
+  </div>
+  <div class="card">
+    <h4>Wirkungsspezifität</h4>
+    <p>Ein Enzym katalysiert in der Regel nur einen bestimmten Reaktionstyp und erzeugt bestimmte Produkte.</p>
+  </div>
+  <div class="card">
+    <h4>kompetitive Hemmung</h4>
+    <p>Ein Hemmstoff konkurriert mit dem Substrat um das aktive Zentrum. Eine hohe Substratkonzentration kann die Hemmung teilweise verdrängen.</p>
+  </div>
+  <div class="card">
+    <h4>allosterische Hemmung</h4>
+    <p>Ein Effektor bindet außerhalb des aktiven Zentrums und verändert die Enzymstruktur. Dadurch verändert sich die Aktivität.</p>
+  </div>
+</div>
+<h3>Michaelis-Menten-Konstante im Leistungskurs</h3>
+<p>Die Michaelis-Menten-Konstante K<sub>M</sub> ist die Substratkonzentration, bei der die Reaktionsgeschwindigkeit halbmaximal ist. Ein niedriger K<sub>M</sub>-Wert spricht meist für eine hohe scheinbare Affinität des Enzyms zum Substrat. Wichtig ist: K<sub>M</sub> ist kein einfacher „Bindungswert“, sondern ein kinetischer Parameter.</p>
+<h3>Einflussfaktoren auf enzymatische Reaktionen</h3>
+<ul>
+  <li><strong>Temperatur:</strong> zunächst höhere Teilchenbewegung und mehr wirksame Zusammenstöße; bei zu hoher Temperatur Denaturierung.</li>
+  <li><strong>pH-Wert:</strong> Veränderung von Ladungen, Bindungen und Raumstruktur; jedes Enzym besitzt einen funktionalen pH-Bereich.</li>
+  <li><strong>Substratkonzentration:</strong> Sättigungskurve, da aktive Zentren begrenzt sind.</li>
+  <li><strong>Enzymgifte:</strong> Hemmstoffe können aktivitätsmindernd oder irreversibel wirken.</li>
+</ul>
+<div class="exam">
+  <strong>Klausurblick:</strong> Bei Diagrammen zu Enzymen müssen Sie Achsen, Kurvenverlauf, biologische Ursache und mögliche Grenzen der Aussage unterscheiden.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum verändert ein Enzym nicht die Lage des chemischen Gleichgewichts?</summary>
+          <p>Es senkt die Aktivierungsenergie für Hin- und Rückreaktion, verändert aber nicht die freie Enthalpie beziehungsweise das Verhältnis der Gleichgewichtskonzentrationen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Was bedeutet eine halbmaximale Reaktionsgeschwindigkeit bei K&lt;sub&gt;M&lt;/sub&gt;?</summary>
+          <p>Bei dieser Substratkonzentration erreicht die Reaktion die Hälfte von v<sub>max</sub>; der Wert erlaubt Aussagen über die Kinetik und die scheinbare Substrataffinität.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="energie" class="page" data-title="5. Energie, Redoxreaktionen und ATP">
+  <div class="pagehead">
+    <span class="kicker">Stoff- und Energieumwandlung</span>
+    <h2>5. Energie, Redoxreaktionen und ATP</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="energie"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>ATP als Energiekoppler erklären</li><li>Oxidation und Reduktion im Stoffwechsel anwenden</li><li>NAD<sup>+</sup>/NADH/H<sup>+</sup> als Redoxsystem deuten</li><li>Energieentwertung biologisch einordnen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Lebende Systeme halten ihre Ordnung aufrecht, indem sie ständig Energie umwandeln. Dabei gilt: Energie wird nicht verbraucht, sondern in andere Formen überführt. Biologisch nutzbare Energie wird häufig in chemischen Bindungen, Ionengradienten oder angeregten Elektronenzuständen zwischengespeichert.</p>
+<h3>ATP/ADP-System</h3>
+<p>ATP ist ein universeller, kurzfristiger Energieträger. Bei der Hydrolyse von ATP zu ADP und Phosphat wird Energie frei, die an endergone Prozesse gekoppelt werden kann, z. B. aktiven Transport, Bewegung oder Biosynthesen.</p>
+<h3>Redoxreaktionen im Stoffwechsel</h3>
+<p>Bei Redoxreaktionen werden Elektronen übertragen. Im abbauenden Stoffwechsel wird Glucose schrittweise oxidiert. Elektronen und Protonen werden auf Coenzyme wie NAD<sup>+</sup> übertragen. Es entsteht NADH/H<sup>+</sup>, das Elektronen zur Atmungskette transportiert.</p>
+<div class="grid2">
+  <div class="card">
+    <h4>Oxidation</h4>
+    <p>Elektronenabgabe. Im Stoffwechsel häufig verbunden mit Wasserstoffabgabe oder Sauerstoffaufnahme.</p>
+  </div>
+  <div class="card">
+    <h4>Reduktion</h4>
+    <p>Elektronenaufnahme. NAD<sup>+</sup> wird bei der Aufnahme von Elektronen und Protonen zu NADH/H<sup>+</sup> reduziert.</p>
+  </div>
+</div>
+<h3>Energieentwertung</h3>
+<p>Bei jeder Energieumwandlung wird ein Teil der Energie als Wärme verteilt und ist für die Zelle nicht mehr vollständig nutzbar. Deshalb müssen Zellen ständig energiereiche Stoffe aufnehmen oder herstellen.</p>
+<div class="task">
+  <strong>Formulierungsübung:</strong> Schreiben Sie einen Satz, der erklärt, warum „ATP enthält Energie“ ungenauer ist als „ATP ermöglicht die Kopplung exergoner und endergoner Prozesse“.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist NADH/H&lt;sup&gt;+&lt;/sup&gt; für die Zellatmung wichtig?</summary>
+          <p>Es transportiert energiereiche Elektronen aus Abbauschritten zur Atmungskette, wo ihre Energie zum Aufbau eines Protonengradienten genutzt wird.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Was bedeutet energetische Kopplung?</summary>
+          <p>Eine exergone Reaktion oder ein energetisch günstiger Prozess treibt einen endergonen Prozess an, der allein nicht spontan ablaufen würde.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="mitochondrium" class="page" data-title="6. Mitochondrium und Gesamtlogik der Zellatmung">
+  <div class="pagehead">
+    <span class="kicker">Dissimilation</span>
+    <h2>6. Mitochondrium und Gesamtlogik der Zellatmung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="mitochondrium"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>die Teilprozesse der Zellatmung räumlich zuordnen</li><li>Stoff- und Energiebilanz unterscheiden</li><li>Mitochondrienbau und Funktion verknüpfen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die Zellatmung ist der schrittweise oxidative Abbau organischer Stoffe. Am Beispiel Glucose lässt sich die Grundlogik besonders gut erkennen: Kohlenstoff wird letztlich zu CO<sub>2</sub> oxidiert, Sauerstoff wird zu Wasser reduziert, und ein Teil der frei werdenden Energie wird zur ATP-Bildung genutzt.</p>
+<h3>Räume und Teilprozesse</h3>
+<table>
+  <thead><tr><th>Teilprozess</th><th>Ort</th><th>Hauptfunktion</th></tr></thead>
+  <tbody>
+    <tr><td>Glykolyse</td><td>Cytoplasma</td><td>Glucose wird zu Pyruvat abgebaut; etwas ATP und NADH/H<sup>+</sup> entstehen.</td></tr>
+    <tr><td>oxidative Decarboxylierung</td><td>Mitochondrienmatrix</td><td>Pyruvat wird zu Acetyl-CoA umgewandelt; CO<sub>2</sub> und NADH/H<sup>+</sup> entstehen.</td></tr>
+    <tr><td>Tricarbonsäurezyklus</td><td>Mitochondrienmatrix</td><td>Acetylgruppen werden vollständig zu CO<sub>2</sub> oxidiert; Reduktionsäquivalente entstehen.</td></tr>
+    <tr><td>Atmungskette und oxidative Phosphorylierung</td><td>innere Mitochondrienmembran</td><td>Elektronenfluss, Protonengradient, ATP-Bildung über ATP-Synthase.</td></tr>
+  </tbody>
+</table>
+<h3>Stoff- und Energiebilanz</h3>
+<p>Eine Bilanz muss zwischen Stoffbilanz und Energiebilanz unterscheiden. Stofflich betrachtet werden Kohlenstoffgerüste abgebaut und Elektronen auf Sauerstoff übertragen. Energetisch betrachtet entstehen ATP, reduzierte Coenzyme und ein Protonengradient.</p>
+<div class="note">
+  <strong>Wichtig:</strong> Die meisten ATP-Moleküle entstehen nicht direkt in Glykolyse oder Tricarbonsäurezyklus, sondern indirekt über die Atmungskette und chemiosmotische ATP-Bildung.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist Sauerstoff der terminale Elektronenakzeptor?</summary>
+          <p>Am Ende der Atmungskette nimmt Sauerstoff Elektronen und Protonen auf und wird zu Wasser reduziert. Dadurch bleibt der Elektronenfluss möglich.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist der Ort der Teilprozesse klausurrelevant?</summary>
+          <p>Die räumliche Trennung ermöglicht spezifische Reaktionsbedingungen, Transportprozesse und den Aufbau des Protonengradienten an der inneren Membran.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="glykolyse" class="page" data-title="7. Glykolyse">
+  <div class="pagehead">
+    <span class="kicker">Vom C6- zum C3-Körper</span>
+    <h2>7. Glykolyse</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="glykolyse"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>die Glykolyse in Phasen gliedern</li><li>die Nettobilanz pro Glucose angeben</li><li>Substratkettenphosphorylierung von oxidativer Phosphorylierung unterscheiden</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die Glykolyse läuft im Cytoplasma ab und benötigt keinen Sauerstoff. Dabei wird ein Glucosemolekül mit sechs Kohlenstoffatomen in zwei Pyruvatmoleküle mit jeweils drei Kohlenstoffatomen umgewandelt.</p>
+<h3>Grundstruktur der Glykolyse</h3>
+<ol class="steps">
+  <li><strong>Investitionsphase:</strong> ATP wird eingesetzt, um Glucose zu aktivieren.</li>
+  <li><strong>Spaltungsphase:</strong> Der C6-Körper wird in zwei C3-Körper überführt.</li>
+  <li><strong>Ertragsphase:</strong> ATP entsteht durch Substratkettenphosphorylierung; NAD<sup>+</sup> wird zu NADH/H<sup>+</sup> reduziert.</li>
+</ol>
+<h3>Bilanz pro Glucose</h3>
+<ul>
+  <li>2 Pyruvat</li>
+  <li>netto 2 ATP</li>
+  <li>2 NADH/H<sup>+</sup></li>
+</ul>
+<p>Die Glykolyse ist evolutionsbiologisch alt und findet bei sehr vielen Organismen statt. Da sie im Cytoplasma abläuft und keinen Sauerstoff benötigt, kann sie auch unter anaeroben Bedingungen ATP liefern, allerdings mit geringer Ausbeute.</p>
+<div class="exam">
+  <strong>Klausurblick:</strong> Verwechseln Sie nicht „anaerob“ mit „Gärung“. Die Glykolyse ist ein Teilprozess; Gärung dient vor allem der Regeneration von NAD<sup>+</sup>, damit die Glykolyse weiterlaufen kann.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum muss in der Glykolyse zunächst ATP investiert werden?</summary>
+          <p>Die Glucose wird phosphoryliert und dadurch reaktiver gemacht; erst danach können Spaltung und Energiegewinnung effektiv ablaufen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist NAD&lt;sup&gt;+&lt;/sup&gt; für die Glykolyse notwendig?</summary>
+          <p>NAD<sup>+</sup> nimmt Elektronen und Protonen auf. Ohne Regeneration von NAD<sup>+</sup> käme die Glykolyse zum Stillstand.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="citratzyklus" class="page" data-title="8. Oxidative Decarboxylierung und Tricarbonsäurezyklus">
+  <div class="pagehead">
+    <span class="kicker">CO₂-Bildung und Reduktionsäquivalente</span>
+    <h2>8. Oxidative Decarboxylierung und Tricarbonsäurezyklus</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="citratzyklus"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>oxidative Decarboxylierung erklären</li><li>die Funktion des Tricarbonsäurezyklus darstellen</li><li>CO<sub>2</sub>-Bildung und Reduktionsäquivalente zuordnen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Nach der Glykolyse gelangt Pyruvat bei aeroben Bedingungen in die Mitochondrien. Dort wird es oxidativ decarboxyliert: Ein Kohlenstoffatom wird als CO<sub>2</sub> abgespalten, NAD<sup>+</sup> wird reduziert und es entsteht Acetyl-CoA.</p>
+<h3>Oxidative Decarboxylierung</h3>
+<p>Pro Pyruvat entsteht:</p>
+<ul>
+  <li>1 CO<sub>2</sub></li>
+  <li>1 NADH/H<sup>+</sup></li>
+  <li>1 Acetyl-CoA</li>
+</ul>
+<h3>Tricarbonsäurezyklus</h3>
+<p>Im Tricarbonsäurezyklus wird die Acetylgruppe vollständig oxidiert. Die frei werdenden Elektronen werden auf NAD<sup>+</sup> und FAD übertragen. Das entstehende NADH/H<sup>+</sup> und FADH<sub>2</sub> liefert Elektronen für die Atmungskette.</p>
+<h3>Pro Acetyl-CoA entstehen typischerweise</h3>
+<ul>
+  <li>2 CO<sub>2</sub></li>
+  <li>3 NADH/H<sup>+</sup></li>
+  <li>1 FADH<sub>2</sub></li>
+  <li>1 GTP beziehungsweise ATP-Äquivalent</li>
+</ul>
+<div class="note">
+  <strong>Denken Sie zyklisch:</strong> Der Tricarbonsäurezyklus verbraucht die Acetylgruppe, regeneriert aber sein Startmolekül. Genau deshalb ist er ein Zyklus.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum entstehen in diesen Schritten viele Reduktionsäquivalente?</summary>
+          <p>Die Kohlenstoffverbindungen werden oxidiert; die dabei frei werdenden Elektronen werden auf NAD<sup>+</sup> und FAD übertragen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist Acetyl-CoA eine zentrale Schnittstelle?</summary>
+          <p>Es verbindet Kohlenhydrat-, Fett- und teilweise Aminosäureabbau mit dem Tricarbonsäurezyklus.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="atmungskette" class="page" data-title="9. Atmungskette und chemiosmotische ATP-Bildung">
+  <div class="pagehead">
+    <span class="kicker">LK-Schwerpunkt</span>
+    <h2>9. Atmungskette und chemiosmotische ATP-Bildung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="atmungskette"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>den Elektronenfluss in der Atmungskette erklären</li><li>Protonengradient und ATP-Synthase verknüpfen</li><li>das energetische Modell der Atmungskette darstellen</li><li>Entkopplung biologisch deuten</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die Atmungskette befindet sich in der inneren Mitochondrienmembran. NADH/H<sup>+</sup> und FADH<sub>2</sub> liefern Elektronen an Proteinkomplexe der Atmungskette. Die Elektronen werden schrittweise weitergegeben; dabei wird Energie frei, mit der Protonen aus der Matrix in den Intermembranraum gepumpt werden.</p>
+<h3>Chemiosmotische Kopplung</h3>
+<ol class="steps">
+  <li>Reduzierte Coenzyme geben Elektronen an die Atmungskette ab.</li>
+  <li>Elektronentransport setzt Energie frei.</li>
+  <li>Protonen werden in den Intermembranraum gepumpt.</li>
+  <li>Es entsteht ein elektrochemischer Protonengradient.</li>
+  <li>Protonen strömen durch die ATP-Synthase zurück in die Matrix.</li>
+  <li>Die ATP-Synthase koppelt diesen Rückstrom an die Bildung von ATP aus ADP und Phosphat.</li>
+</ol>
+<h3>Energetisches Modell der Atmungskette</h3>
+<p>Im Leistungskurs sollten Sie die Atmungskette als Modell einer stufenweisen Energieentwertung erklären können. Die Elektronen fallen nicht „auf einmal“ auf Sauerstoff zurück, sondern durchlaufen mehrere Redoxsysteme. Dadurch kann ein Teil der Energie kontrolliert in einem Protonengradienten zwischengespeichert werden.</p>
+<div class="warning">
+  <strong>Typischer Fehler:</strong> Die ATP-Synthase „pumpt“ nicht einfach ATP heraus. Sie nutzt den Protonenrückfluss, um ADP und Phosphat zu ATP zu verknüpfen.
+</div>
+<h3>Entkopplung</h3>
+<p>Wird die innere Membran für Protonen durchlässig, bricht der Gradient zusammen. Elektronentransport kann weiterlaufen, aber die ATP-Ausbeute sinkt stark; Energie wird vor allem als Wärme frei.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum braucht die Atmungskette eine intakte innere Mitochondrienmembran?</summary>
+          <p>Nur eine weitgehend protonenundurchlässige Membran ermöglicht den Aufbau eines elektrochemischen Protonengradienten.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist Sauerstoffmangel so schnell problematisch?</summary>
+          <p>Ohne Sauerstoff als terminalen Elektronenakzeptor stockt die Atmungskette; NADH/H<sup>+</sup> kann nicht ausreichend reoxidiert werden und die ATP-Bildung sinkt.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="gaerung" class="page" data-title="10. Alkoholische Gärung und Milchsäuregärung">
+  <div class="pagehead">
+    <span class="kicker">anaerobe Regeneration von NAD⁺</span>
+    <h2>10. Alkoholische Gärung und Milchsäuregärung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="gaerung"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Gärung als NAD<sup>+</sup>-Regeneration erklären</li><li>alkoholische Gärung und Milchsäuregärung vergleichen</li><li>Gärung und Zellatmung energetisch unterscheiden</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Gärungen ermöglichen unter anaeroben Bedingungen die Regeneration von NAD<sup>+</sup>. Dadurch kann die Glykolyse weiterlaufen und wenigstens eine geringe Menge ATP durch Substratkettenphosphorylierung liefern.</p>
+<table>
+  <thead><tr><th>Gärung</th><th>Ausgangsstoff nach Glykolyse</th><th>Endprodukte</th><th>Funktion</th></tr></thead>
+  <tbody>
+    <tr><td>Milchsäuregärung</td><td>Pyruvat</td><td>Lactat</td><td>NADH/H<sup>+</sup> wird zu NAD<sup>+</sup> reoxidiert.</td></tr>
+    <tr><td>Alkoholische Gärung</td><td>Pyruvat</td><td>Ethanol und CO<sub>2</sub></td><td>NADH/H<sup>+</sup> wird zu NAD<sup>+</sup> reoxidiert.</td></tr>
+  </tbody>
+</table>
+<h3>Vergleich mit Zellatmung</h3>
+<p>Gärung ist energetisch deutlich weniger ergiebig als aerobe Zellatmung, da die organischen Endprodukte noch energiereich sind. Bei der Zellatmung werden Kohlenstoffverbindungen dagegen weitgehend zu CO<sub>2</sub> oxidiert.</p>
+<div class="task">
+  <strong>Transfer:</strong> Erklären Sie, warum Muskelzellen bei starker Belastung kurzfristig Lactat bilden können, obwohl der Mensch grundsätzlich aerob atmet.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist die ATP-Ausbeute der Gärung gering?</summary>
+          <p>Nur die Glykolyse liefert ATP; die Endprodukte sind nicht vollständig oxidiert und enthalten noch viel chemische Energie.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum entsteht bei der alkoholischen Gärung CO&lt;sub&gt;2&lt;/sub&gt;, bei der Milchsäuregärung aber nicht?</summary>
+          <p>Bei der alkoholischen Gärung wird Pyruvat decarboxyliert; bei der Milchsäuregärung wird Pyruvat direkt zu Lactat reduziert.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="stoffwechsel_vernetzung" class="page" data-title="11. Stoffwechsel vernetzt denken">
+  <div class="pagehead">
+    <span class="kicker">Bilanz, Regulation, Gesundheit</span>
+    <h2>11. Stoffwechsel vernetzt denken</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="stoffwechsel_vernetzung"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Stoffwechselwege funktional verknüpfen</li><li>Regulation und Bilanz zusammendenken</li><li>Kontexte wie Fettleber biologisch einordnen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Stoffwechselwege laufen nicht isoliert nebeneinander. Sie sind räumlich, energetisch und regulatorisch verbunden. Für das Leistungskursniveau ist besonders wichtig, dass Sie Verknüpfungen erkennen und nicht nur einzelne Reaktionsschritte auswendig wiedergeben.</p>
+<h3>Vernetzungspunkte</h3>
+<ul>
+  <li><strong>Acetyl-CoA:</strong> Schnittstelle zwischen Kohlenhydrat- und Fettstoffwechsel.</li>
+  <li><strong>NAD<sup>+</sup>/NADH/H<sup>+</sup>:</strong> Kopplung zwischen oxidativen Abbauschritten und Atmungskette.</li>
+  <li><strong>ATP/ADP-Verhältnis:</strong> Signal für Energiebedarf und Stoffwechselregulation.</li>
+  <li><strong>Enzyme:</strong> Schaltstellen, an denen Stoffwechselwege aktiviert oder gehemmt werden.</li>
+  <li><strong>Membranen:</strong> Voraussetzung für Gradienten, Vesikeltransport und Signalübertragung.</li>
+</ul>
+<h3>Kontextbezug: Ernährung und Fettleber</h3>
+<p>Ein Überangebot energiereicher Stoffe kann Stoffwechselwege verschieben. Wird mehr Energie aufgenommen als verbraucht, können Kohlenstoffgerüste in Speicherstoffe überführt werden. Im Unterricht kann dies z. B. an Kontexten wie übermäßigem Zuckerkonsum, Lipogenese und Fettleber verknüpft werden.</p>
+<div class="exam">
+  <strong>Klausurblick:</strong> Bei materialgebundenen Aufgaben müssen Sie aus Daten heraus begründen, welcher Stoffwechselweg begünstigt, gehemmt oder überlastet ist. Nennen Sie dabei immer die beobachtete Datenbasis.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist Acetyl-CoA eine sinnvolle Stelle für Stoffwechselvernetzung?</summary>
+          <p>Es kann aus verschiedenen Nährstoffen entstehen und in den Tricarbonsäurezyklus eingehen oder als Baustein für Biosynthesen dienen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist ein hoher NADH/H&lt;sup&gt;+&lt;/sup&gt;-Spiegel regulatorisch bedeutsam?</summary>
+          <p>Er zeigt an, dass viele Elektronenäquivalente vorhanden sind; ohne ausreichende Reoxidation kann der oxidative Abbau stocken.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="nervenzelle" class="page" data-title="12. Nervenzelle: Bau und Funktion">
+  <div class="pagehead">
+    <span class="kicker">Information und Kommunikation</span>
+    <h2>12. Nervenzelle: Bau und Funktion</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="nervenzelle"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>den Bau einer Nervenzelle funktionsbezogen erklären</li><li>Axonhügel und Synapse als Schaltstellen einordnen</li><li>Frequenzcodierung von Amplitudencodierung unterscheiden</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Nervenzellen sind spezialisiert auf Aufnahme, Verarbeitung und Weiterleitung von Informationen. Ihre Struktur ist eng mit ihrer Funktion verknüpft.</p>
+<h3>Bauteile und Funktionen</h3>
+<table>
+  <thead><tr><th>Struktur</th><th>Funktion</th></tr></thead>
+  <tbody>
+    <tr><td>Dendriten</td><td>Aufnahme synaptischer Signale.</td></tr>
+    <tr><td>Zellkörper/Soma</td><td>Stoffwechselzentrum; Integration von Signalen.</td></tr>
+    <tr><td>Axonhügel</td><td>Entscheidende Zone für die Entstehung eines Aktionspotenzials.</td></tr>
+    <tr><td>Axon</td><td>Weiterleitung elektrischer Erregung.</td></tr>
+    <tr><td>Myelinscheide</td><td>Elektrische Isolation, Beschleunigung der Erregungsleitung.</td></tr>
+    <tr><td>Ranvier-Schnürringe</td><td>Orte hoher Dichte spannungsabhängiger Ionenkanäle.</td></tr>
+    <tr><td>Synaptische Endknöpfchen</td><td>Übertragung auf nachgeschaltete Zellen.</td></tr>
+  </tbody>
+</table>
+<h3>Grundprinzip der Codierung</h3>
+<p>Die Stärke eines Reizes wird bei Nervenzellen nicht durch höhere Amplitude einzelner Aktionspotenziale codiert. Aktionspotenziale folgen dem Alles-oder-nichts-Prinzip. Reizstärke wird vor allem über die Frequenz von Aktionspotenzialen und über die Anzahl aktivierter Neuronen codiert.</p>
+<div class="note">
+  <strong>Merksatz:</strong> Dendriten sammeln, der Axonhügel entscheidet, das Axon leitet weiter, die Synapse überträgt.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist der Axonhügel besonders wichtig?</summary>
+          <p>Dort werden eingehende Potenziale integriert; wird der Schwellenwert erreicht, entsteht ein Aktionspotenzial.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum werden stärkere Reize nicht durch höhere Aktionspotenziale dargestellt?</summary>
+          <p>Aktionspotenziale haben eine weitgehend konstante Amplitude; stärkere Reize erhöhen vor allem die Frequenz der Aktionspotenziale.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="ruhepotential" class="page" data-title="13. Ruhepotenzial">
+  <div class="pagehead">
+    <span class="kicker">elektrochemische Grundlagen</span>
+    <h2>13. Ruhepotenzial</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="ruhepotential"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>das Ruhepotenzial kausal erklären</li><li>Konzentrationsgefälle und elektrisches Gegenfeld verknüpfen</li><li>die Funktion der Natrium-Kalium-Pumpe richtig einordnen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Das Ruhepotenzial ist die elektrische Spannung zwischen Zellinnerem und Außenraum einer unerregten Nervenzelle. Typisch ist ein negatives Zellinneres gegenüber außen.</p>
+<h3>Ursachen des Ruhepotenzials</h3>
+<ul>
+  <li>Ungleiche Ionenverteilung: außen viel Na<sup>+</sup>, innen viel K<sup>+</sup> und organische Anionen.</li>
+  <li>Selektive Permeabilität: In Ruhe ist die Membran vor allem für K<sup>+</sup> durchlässig.</li>
+  <li>K<sup>+</sup>-Diffusion nach außen hinterlässt negative Ladung im Zellinneren.</li>
+  <li>Elektrisches Gegenfeld bremst die weitere K<sup>+</sup>-Diffusion.</li>
+  <li>Die Natrium-Kalium-Pumpe erhält die Konzentrationsgradienten langfristig aufrecht.</li>
+</ul>
+<h3>Gleichgewichtsidee</h3>
+<p>Das Ruhepotenzial entsteht nicht durch völlige Ladungstrennung, sondern durch sehr kleine Verschiebungen von Ionen an der Membran. Entscheidend ist das Zusammenspiel aus Konzentrationsgefälle und elektrischem Feld.</p>
+<div class="warning">
+  <strong>Typischer Fehler:</strong> Die Natrium-Kalium-Pumpe „macht“ nicht allein das Ruhepotenzial. Sie erhält die Gradienten, während selektive Permeabilität und Ionenbewegung das Potenzial unmittelbar prägen.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist das Zellinnere im Ruhepotenzial negativ?</summary>
+          <p>K<sup>+</sup> diffundiert durch Leckkanäle nach außen, während große Anionen innen bleiben; dadurch entsteht innen ein Ladungsüberschuss negativer Teilchen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum verschwindet das Ruhepotenzial nicht dauerhaft?</summary>
+          <p>Die Natrium-Kalium-Pumpe und selektive Membranpermeabilität erhalten die ungleiche Ionenverteilung und damit die Voraussetzungen des Potenzials.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="aktionspotential" class="page" data-title="14. Aktionspotenzial">
+  <div class="pagehead">
+    <span class="kicker">Alles-oder-nichts</span>
+    <h2>14. Aktionspotenzial</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="aktionspotential"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>die Phasen des Aktionspotenzials erklären</li><li>spannungsabhängige Ionenkanäle funktional deuten</li><li>Alles-oder-nichts-Prinzip und Refraktärzeit anwenden</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Ein Aktionspotenzial ist eine kurzzeitige, stereotyp ablaufende Änderung des Membranpotenzials. Es entsteht, wenn am Axonhügel der Schwellenwert erreicht wird.</p>
+<h3>Phasen des Aktionspotenzials</h3>
+<table>
+  <thead><tr><th>Phase</th><th>Ionenkanäle</th><th>Veränderung des Potenzials</th></tr></thead>
+  <tbody>
+    <tr><td>Ruhe</td><td>K<sup>+</sup>-Leckkanäle dominieren</td><td>innen negativ</td></tr>
+    <tr><td>Depolarisation</td><td>spannungsabhängige Na<sup>+</sup>-Kanäle öffnen</td><td>Na<sup>+</sup> strömt ein, Zellinneres wird positiver</td></tr>
+    <tr><td>Overshoot</td><td>Na<sup>+</sup>-Einstrom maximal, dann Inaktivierung</td><td>Membranpotenzial wird kurz positiv</td></tr>
+    <tr><td>Repolarisation</td><td>Na<sup>+</sup>-Kanäle inaktiviert, K<sup>+</sup>-Kanäle geöffnet</td><td>K<sup>+</sup> strömt aus, Potenzial wird negativer</td></tr>
+    <tr><td>Hyperpolarisation</td><td>K<sup>+</sup>-Kanäle schließen verzögert</td><td>Potenzial wird kurz negativer als Ruhewert</td></tr>
+    <tr><td>Rückkehr zum Ruhewert</td><td>Leckkanäle und Pumpenwirkung</td><td>Ausgangszustand wird stabilisiert</td></tr>
+  </tbody>
+</table>
+<h3>Refraktärzeit</h3>
+<p>Während der absoluten Refraktärzeit kann kein neues Aktionspotenzial ausgelöst werden, weil Na<sup>+</sup>-Kanäle inaktiviert sind. In der relativen Refraktärzeit ist ein stärkerer Reiz nötig. Die Refraktärzeit begrenzt die maximale Frequenz und trägt zur Fortleitung in eine Richtung bei.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum gibt es beim Aktionspotenzial einen Schwellenwert?</summary>
+          <p>Erst ab einer bestimmten Depolarisation öffnen genügend spannungsabhängige Na<sup>+</sup>-Kanäle, sodass eine positive Rückkopplung entsteht.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist die Refraktärzeit für die Informationsleitung wichtig?</summary>
+          <p>Sie verhindert unmittelbare Rückerregung, begrenzt die Frequenz und unterstützt die gerichtete Weiterleitung entlang des Axons.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="leitung" class="page" data-title="15. Erregungsleitung und Potenzialmessungen">
+  <div class="pagehead">
+    <span class="kicker">kontinuierlich, saltatorisch, elektrotonisch</span>
+    <h2>15. Erregungsleitung und Potenzialmessungen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="leitung"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>kontinuierliche und saltatorische Leitung vergleichen</li><li>elektrotonische Leitung erklären</li><li>Potenzialmessungen auswerten</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Aktionspotenziale werden entlang des Axons weitergeleitet, indem lokale Ionenströme benachbarte Membranabschnitte depolarisieren. Dabei wird das Aktionspotenzial nicht wie ein fertiges Objekt verschoben, sondern an jedem Abschnitt neu gebildet.</p>
+<h3>Kontinuierliche und saltatorische Leitung</h3>
+<table>
+  <thead><tr><th>Leitungstyp</th><th>Merkmal</th><th>Folge</th></tr></thead>
+  <tbody>
+    <tr><td>kontinuierlich</td><td>Aktionspotenzial wird an jedem Membranabschnitt neu ausgelöst</td><td>langsamer, typisch für marklose Axone</td></tr>
+    <tr><td>saltatorisch</td><td>Erregung „springt“ von Schnürring zu Schnürring</td><td>schneller und energiesparender, typisch für markhaltige Axone</td></tr>
+  </tbody>
+</table>
+<h3>Elektrotonische Erregungsleitung</h3>
+<p>Elektrotonische Ausbreitung bezeichnet passive Spannungsänderungen über kurze Strecken. Sie ist wichtig für postsynaptische Potenziale an Dendriten und Soma. Im Unterschied zum Aktionspotenzial nimmt sie mit Entfernung ab.</p>
+<h3>Potenzialmessungen</h3>
+<p>Messdiagramme zeigen meist Membranpotenzial gegen Zeit. Lesen Sie zuerst Achsen und Einheiten, dann Ruhewert, Schwellenwert, Amplitude, Dauer und mögliche Störungen durch Hemmstoffe oder veränderte Ionenkonzentrationen.</p>
+<div class="task">
+  <strong>Diagrammtraining:</strong> Skizzieren Sie ein Aktionspotenzial und markieren Sie Ruhepotenzial, Schwellenwert, Depolarisation, Repolarisation, Hyperpolarisation und Refraktärzeit.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist saltatorische Leitung energiesparender?</summary>
+          <p>Ionenströme und damit Pumpaufwand konzentrieren sich vor allem auf die Ranvier-Schnürringe statt auf die gesamte Axonmembran.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum nimmt ein elektrotonisches Potenzial mit der Entfernung ab?</summary>
+          <p>Es breitet sich passiv aus; durch Membran- und Innenwiderstände geht Spannung über die Strecke verloren.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="synapse" class="page" data-title="16. Erregende chemische Synapse">
+  <div class="pagehead">
+    <span class="kicker">elektrisch zu chemisch zu elektrisch</span>
+    <h2>16. Erregende chemische Synapse</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="synapse"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>den Ablauf chemischer Signalübertragung erklären</li><li>Exocytose und Rezeptorbindung einordnen</li><li>PSP und EPSP unterscheiden</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Chemische Synapsen übertragen Signale von einer präsynaptischen Zelle auf eine postsynaptische Zelle. Dabei wird ein elektrisches Signal zunächst in ein chemisches und dann wieder in ein elektrisches Signal übersetzt.</p>
+<h3>Ablauf an einer erregenden Synapse</h3>
+<ol class="steps">
+  <li>Ein Aktionspotenzial erreicht das präsynaptische Endknöpfchen.</li>
+  <li>Spannungsabhängige Ca<sup>2+</sup>-Kanäle öffnen sich.</li>
+  <li>Ca<sup>2+</sup> strömt ein und bewirkt Vesikelfusion.</li>
+  <li>Neurotransmitter werden per Exocytose in den synaptischen Spalt freigesetzt.</li>
+  <li>Transmitter binden an Rezeptoren der postsynaptischen Membran.</li>
+  <li>Ligandengesteuerte Ionenkanäle öffnen sich.</li>
+  <li>Ein postsynaptisches Potenzial entsteht, bei erregenden Synapsen ein EPSP.</li>
+  <li>Der Transmitter wird abgebaut, wiederaufgenommen oder diffundiert weg.</li>
+</ol>
+<h3>PSP und EPSP</h3>
+<p>Ein postsynaptisches Potenzial (PSP) ist eine lokale, abgestufte Veränderung des Membranpotenzials. Ein EPSP depolarisiert die postsynaptische Membran und erhöht die Wahrscheinlichkeit, dass am Axonhügel ein Aktionspotenzial entsteht.</p>
+<div class="warning">
+  <strong>Typischer Fehler:</strong> Der Transmitter löst nicht automatisch ein Aktionspotenzial aus. Er erzeugt zunächst ein postsynaptisches Potenzial. Erst die Verrechnung vieler Signale entscheidet über ein Aktionspotenzial.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist Ca&lt;sup&gt;2+&lt;/sup&gt; an der Synapse entscheidend?</summary>
+          <p>Der Ca<sup>2+</sup>-Einstrom koppelt das ankommende Aktionspotenzial an die Vesikelfusion und Transmitterfreisetzung.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist eine chemische Synapse langsamer als direkte elektrische Weiterleitung?</summary>
+          <p>Die Signalübertragung umfasst Transmitterfreisetzung, Diffusion, Rezeptorbindung und Kanalöffnung; diese Schritte benötigen Zeit.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="neuromuskulaer" class="page" data-title="17. Neuromuskuläre Synapse und Stoffeinwirkung">
+  <div class="pagehead">
+    <span class="kicker">Motorik und pharmakologische Angriffe</span>
+    <h2>17. Neuromuskuläre Synapse und Stoffeinwirkung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="neuromuskulaer"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>die neuromuskuläre Synapse erklären</li><li>Angriffspunkte von Stoffen an Synapsen systematisch einordnen</li><li>Wirkungen auf Signalübertragung kausal ableiten</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die neuromuskuläre Synapse verbindet motorische Nervenzellen mit Muskelfasern. Der typische Transmitter ist Acetylcholin. Die Übertragung führt über Endplattenpotenziale zur Erregung der Muskelfaser und schließlich zur Kontraktion.</p>
+<h3>Acetylcholin-System</h3>
+<ul>
+  <li>Acetylcholin wird aus Vesikeln freigesetzt.</li>
+  <li>Es bindet an Rezeptoren der motorischen Endplatte.</li>
+  <li>Na<sup>+</sup>-Einstrom depolarisiert die Muskelmembran.</li>
+  <li>Acetylcholinesterase baut Acetylcholin ab.</li>
+  <li>Cholin wird wieder aufgenommen und zur Neubildung von Acetylcholin genutzt.</li>
+</ul>
+<h3>Stoffeinwirkung an Synapsen</h3>
+<p>Stoffe können an verschiedenen Stellen der synaptischen Übertragung wirken:</p>
+<table>
+  <thead><tr><th>Angriffsort</th><th>Mögliche Wirkung</th><th>Folge</th></tr></thead>
+  <tbody>
+    <tr><td>Ca<sup>2+</sup>-Kanäle</td><td>verminderte Transmitterfreisetzung</td><td>Lähmung oder abgeschwächte Signalübertragung</td></tr>
+    <tr><td>Vesikelfusion</td><td>Blockade der Exocytose</td><td>kein oder wenig Transmitter im synaptischen Spalt</td></tr>
+    <tr><td>Rezeptoren</td><td>Agonist oder Antagonist</td><td>Übererregung oder Blockade</td></tr>
+    <tr><td>Transmitterabbau</td><td>Hemmung der Acetylcholinesterase</td><td>anhaltende Erregung, Krämpfe möglich</td></tr>
+    <tr><td>Wiederaufnahme</td><td>verstärkte oder verlängerte Transmitterwirkung</td><td>veränderte Signalstärke und -dauer</td></tr>
+  </tbody>
+</table>
+<div class="exam">
+  <strong>Klausurblick:</strong> Bei Gift- oder Medikamentenaufgaben müssen Sie zuerst den Angriffsort bestimmen und dann kausal ableiten, wie sich EPSP, Aktionspotenzialfrequenz oder Muskelaktivität verändern.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum kann eine Acetylcholinesterase-Hemmung zu Krämpfen führen?</summary>
+          <p>Acetylcholin bleibt länger im synaptischen Spalt, Rezeptoren werden dauerhaft aktiviert und die Muskelmembran bleibt übererregt.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum kann ein Rezeptorantagonist lähmend wirken?</summary>
+          <p>Er blockiert Rezeptoren, ohne sie zu aktivieren; der Transmitter kann seine Wirkung nicht entfalten.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="hemmung_summation" class="page" data-title="18. Hemmende Synapse und Verrechnung">
+  <div class="pagehead">
+    <span class="kicker">LK: IPSP, zeitliche und räumliche Summation</span>
+    <h2>18. Hemmende Synapse und Verrechnung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="hemmung_summation"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>EPSP und IPSP vergleichen</li><li>zeitliche und räumliche Summation erklären</li><li>Verrechnung am Axonhügel als Informationsverarbeitung deuten</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Nervenzellen verrechnen erregende und hemmende Signale. Entscheidend ist, ob am Axonhügel der Schwellenwert erreicht wird. Die postsynaptischen Potenziale sind abgestuft und können sich gegenseitig verstärken oder abschwächen.</p>
+<h3>EPSP und IPSP</h3>
+<table>
+  <thead><tr><th>Potenzial</th><th>Wirkung auf Membranpotenzial</th><th>Folge für Aktionspotenzialwahrscheinlichkeit</th></tr></thead>
+  <tbody>
+    <tr><td>EPSP</td><td>Depolarisation</td><td>Wahrscheinlichkeit steigt</td></tr>
+    <tr><td>IPSP</td><td>Hyperpolarisation oder stabilisierende Wirkung</td><td>Wahrscheinlichkeit sinkt</td></tr>
+  </tbody>
+</table>
+<h3>Zeitliche Summation</h3>
+<p>Mehrere Potenziale derselben Synapse treffen so schnell hintereinander ein, dass sie sich überlagern. Dadurch kann die Gesamtdepolarisation größer werden.</p>
+<h3>Räumliche Summation</h3>
+<p>Potenziale verschiedener Synapsen treffen gleichzeitig oder fast gleichzeitig am Axonhügel ein und werden miteinander verrechnet. Hemmende Signale können erregende Signale abschwächen.</p>
+<h3>Verrechnung als Informationsverarbeitung</h3>
+<p>Die Nervenzelle ist kein Kabel, sondern ein informationsverarbeitendes System. Eingangssignale werden gewichtet, zeitlich und räumlich integriert und in eine Ausgangsfrequenz von Aktionspotenzialen übersetzt.</p>
+<div class="task">
+  <strong>Transfer:</strong> Erklären Sie, warum eine einzelne hemmende Synapse in der Nähe des Axonhügels besonders wirksam sein kann.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum sind postsynaptische Potenziale abgestuft, Aktionspotenziale aber nicht?</summary>
+          <p>PSP hängen von Transmittermenge und Kanalöffnung ab; Aktionspotenziale entstehen erst ab Schwelle nach dem Alles-oder-nichts-Prinzip.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum kann ein IPSP ein Aktionspotenzial verhindern?</summary>
+          <p>Es entfernt das Membranpotenzial vom Schwellenwert oder stabilisiert es, sodass erregende Einflüsse nicht ausreichen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="sinneszellen" class="page" data-title="19. Sinneszellen und Rezeptorpotenzial">
+  <div class="pagehead">
+    <span class="kicker">LK: primäre und sekundäre Sinneszellen</span>
+    <h2>19. Sinneszellen und Rezeptorpotenzial</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="sinneszellen"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Transduktion erklären</li><li>primäre und sekundäre Sinneszellen unterscheiden</li><li>Rezeptorpotenzial und Aktionspotenzial vergleichen</li><li>Codierung von Reizinformation erläutern</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Sinneszellen übersetzen Reize aus der Umwelt oder dem Körperinneren in elektrische Signale. Dieser Vorgang heißt Transduktion. Das entstehende Rezeptorpotenzial ist meist abgestuft und hängt von der Reizstärke ab.</p>
+<h3>Primäre und sekundäre Sinneszellen</h3>
+<table>
+  <thead><tr><th>Typ</th><th>Merkmal</th><th>Beispielhafte Einordnung</th></tr></thead>
+  <tbody>
+    <tr><td>primäre Sinneszelle</td><td>bildet selbst Aktionspotenziale aus</td><td>Riechzellen lassen sich häufig als primäre Sinneszellen behandeln.</td></tr>
+    <tr><td>sekundäre Sinneszelle</td><td>bildet kein eigenes Aktionspotenzial, sondern beeinflusst eine Nervenzelle über Transmitterfreisetzung</td><td>Haarzellen im Innenohr oder Fotorezeptoren der Netzhaut werden als sekundäre Sinneszellen betrachtet.</td></tr>
+  </tbody>
+</table>
+<h3>Rezeptorpotenzial</h3>
+<p>Ein Rezeptorpotenzial ist eine lokale Änderung des Membranpotenzials einer Sinneszelle. Es ist graduiert: Ein stärkerer Reiz kann ein stärkeres Rezeptorpotenzial auslösen. Danach wird die Information in Aktionspotenzialfrequenzen oder Transmitterfreisetzung übersetzt.</p>
+<h3>Codierung und Decodierung von Information</h3>
+<p>Biologische Information wird nicht als „Bedeutung“ durch das Axon geschickt. Das Nervensystem codiert Reizmerkmale in physikalisch messbaren Mustern, z. B. Frequenzen, Aktivierungsmustern und räumlicher Zuordnung. Die Decodierung erfolgt in neuronalen Netzwerken.</p>
+<div class="note">
+  <strong>LK-Perspektive:</strong> Entscheidend ist die Umwandlung: Reizenergie → Rezeptorpotenzial → Transmitterfreisetzung oder Aktionspotenzialmuster → Verarbeitung im Nervensystem.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist das Rezeptorpotenzial nicht dasselbe wie ein Aktionspotenzial?</summary>
+          <p>Es ist lokal und graduiert, während ein Aktionspotenzial nach Überschreiten des Schwellenwerts stereotyp und nach dem Alles-oder-nichts-Prinzip abläuft.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Was bedeutet Codierung im Nervensystem?</summary>
+          <p>Reizmerkmale werden in messbare neuronale Muster übersetzt, z. B. Frequenz, Ort der Aktivierung oder Aktivitätsmuster mehrerer Neuronen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="lernen" class="page" data-title="20. Lernen, neuronale Plastizität und Störungen">
+  <div class="pagehead">
+    <span class="kicker">LK: Zelluläre Prozesse des Lernens</span>
+    <h2>20. Lernen, neuronale Plastizität und Störungen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="lernen"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>neuronale Plastizität als Grundlage von Lernen erklären</li><li>Störungen des Nervensystems nach Ebenen ordnen</li><li>neurophysiologische Verfahren hinsichtlich Messgröße und Grenzen beurteilen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Lernen beruht nicht auf einem einzelnen Speicherort, sondern auf veränderten Verbindungen und Aktivitätsmustern neuronaler Netzwerke. Auf zellulärer Ebene ist neuronale Plastizität zentral: Synapsen können in ihrer Stärke verändert, neu gebildet oder zurückgebaut werden.</p>
+<h3>Formen zellulärer Plastizität</h3>
+<ul>
+  <li><strong>veränderte Transmitterfreisetzung:</strong> präsynaptische Endknöpfchen können mehr oder weniger Transmitter freisetzen.</li>
+  <li><strong>veränderte Rezeptordichte:</strong> postsynaptische Membranen können empfindlicher oder weniger empfindlich werden.</li>
+  <li><strong>strukturelle Veränderung:</strong> Synapsen und dendritische Dornen können umgebaut werden.</li>
+  <li><strong>Langzeitpotenzierung:</strong> häufig genutzte synaptische Verbindungen können langfristig verstärkt werden.</li>
+</ul>
+<h3>Störungen des neuronalen Systems</h3>
+<p>Störungen können auf verschiedenen Ebenen entstehen: Ionenkanäle, Transmitterhaushalt, Myelinscheiden, Rezeptoren, Synapsen, neuronale Netzwerke oder degenerative Prozesse. Eine gute Erklärung benennt die betroffene Ebene und leitet daraus Symptome ab.</p>
+<h3>Neurophysiologische Verfahren</h3>
+<p>Verfahren wie EEG, EMG oder bildgebende Methoden liefern unterschiedliche Informationen. Wichtig ist, was tatsächlich gemessen wird: elektrische Aktivität, Muskelaktivität, Durchblutung, Stoffwechselaktivität oder strukturelle Veränderungen. Jedes Verfahren hat Grenzen.</p>
+<div class="exam">
+  <strong>Klausurblick:</strong> Wenn ein Material ein neurophysiologisches Verfahren beschreibt, trennen Sie Messgröße, biologische Interpretation und methodische Grenze.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist Lernen ein zellulär erklärbarer Prozess, aber nicht auf eine einzelne Zelle reduzierbar?</summary>
+          <p>Synaptische Veränderungen finden auf Zellebene statt, doch Erinnern und Verhalten entstehen aus Netzwerken vieler Zellen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum muss man bei EEG oder EMG vorsichtig interpretieren?</summary>
+          <p>Die Verfahren messen indirekte oder aggregierte Signale; daraus kann man nicht ohne weiteres einzelne Gedanken oder einzelne Synapsen ablesen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="hormone" class="page" data-title="21. Hormone und Verschränkung hormoneller und neuronaler Steuerung">
+  <div class="pagehead">
+    <span class="kicker">LK: Verhalten, Regelung, Homöostase</span>
+    <h2>21. Hormone und Verschränkung hormoneller und neuronaler Steuerung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="hormone"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>neuronale und hormonelle Steuerung vergleichen</li><li>Hormonwirkung über Rezeptoren erklären</li><li>negative und positive Rückkopplung unterscheiden</li><li>Homöostase als Regelungsprinzip erläutern</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Im Leistungskurs wird die zelluläre Informationsverarbeitung auf die organismische Ebene erweitert. Nervensystem und Hormonsystem steuern beide Informationen, unterscheiden sich aber in Geschwindigkeit, Reichweite und Wirkungsdauer.</p>
+<table>
+  <thead><tr><th>Merkmal</th><th>neuronale Steuerung</th><th>hormonelle Steuerung</th></tr></thead>
+  <tbody>
+    <tr><td>Signalform</td><td>elektrische Erregung und Transmitter</td><td>Hormone als chemische Botenstoffe im Blut</td></tr>
+    <tr><td>Geschwindigkeit</td><td>sehr schnell</td><td>oft langsamer</td></tr>
+    <tr><td>Wirkungsdauer</td><td>kurz und präzise</td><td>häufig länger anhaltend</td></tr>
+    <tr><td>Zielgenauigkeit</td><td>durch Verschaltung sehr zielgerichtet</td><td>durch Rezeptoren an Zielzellen bestimmt</td></tr>
+  </tbody>
+</table>
+<h3>Hormonwirkung</h3>
+<p>Hormone wirken nur an Zellen mit passenden Rezeptoren. Peptidhormone binden meist an Membranrezeptoren und lösen Signalkaskaden aus. Steroidhormone können Zellmembranen passieren und über intrazelluläre Rezeptoren Genaktivität beeinflussen.</p>
+<h3>Homöostase und Rückkopplung</h3>
+<p>Viele physiologische Größen werden über negative Rückkopplung stabilisiert. Positive Rückkopplung verstärkt einen Prozess und ist nur in bestimmten Situationen sinnvoll. Die Regulation des Hormonspiegels zeigt, dass Steuerung und Regelung immer auch zeitliche Dynamik besitzen.</p>
+<div class="task">
+  <strong>Transfer:</strong> Erklären Sie an einem Stressbeispiel, warum eine rein neuronale Betrachtung menschlichen Verhaltens unvollständig wäre.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum wirken Hormone nicht auf alle Körperzellen gleich?</summary>
+          <p>Nur Zielzellen mit passenden Rezeptoren können das Hormonsignal erkennen und eine spezifische Antwort auslösen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Warum ist negative Rückkopplung für Homöostase wichtig?</summary>
+          <p>Sie wirkt Abweichungen von einem Sollbereich entgegen und stabilisiert physiologische Zustände.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="methoden" class="page" data-title="22. Experimente, Modelle und Daten auswerten">
+  <div class="pagehead">
+    <span class="kicker">Erkenntnisgewinnung</span>
+    <h2>22. Experimente, Modelle und Daten auswerten</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="methoden"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Enzymexperimente hypothesengeleitet planen</li><li>Modelle zu Biomembranen und Nervenzellen kritisch nutzen</li><li>Daten fachsprachlich beschreiben, erklären und bewerten</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Der Rahmenlehrplan betont nicht nur Fachwissen, sondern auch naturwissenschaftliches Arbeiten. In diesem Themenfeld sind besonders Osmose-Untersuchungen, Enzymexperimente, Potenzialmessungen, Modellkritik und Dateninterpretation wichtig.</p>
+<h3>Experiment planen: Enzymaktivität</h3>
+<p>Eine gute Versuchsplanung enthält:</p>
+<ul>
+  <li>Fragestellung</li>
+  <li>Hypothese mit Begründung</li>
+  <li>unabhängige Variable, abhängige Variable, Kontrollvariablen</li>
+  <li>Kontrollansatz</li>
+  <li>Messmethode und Auswertung</li>
+  <li>Sicherheitsaspekte</li>
+  <li>Fehlerquellen und Aussagegrenzen</li>
+</ul>
+<h3>Modelle beurteilen</h3>
+<p>Modelle sind gezielte Vereinfachungen. Sie helfen, biologische Prozesse zu verstehen, sind aber nie identisch mit dem realen System. Eine Modellkritik muss daher immer doppelt argumentieren: Was macht das Modell sichtbar? Was lässt es weg oder verfälscht es?</p>
+<h3>Daten auswerten</h3>
+<p>Bei Diagrammen und Tabellen sollten Sie systematisch vorgehen:</p>
+<ol class="steps">
+  <li>Materialart und Fragestellung klären.</li>
+  <li>Achsen, Einheiten und Versuchsbedingungen lesen.</li>
+  <li>Trends, Maxima, Minima, Schwellenwerte und Ausnahmen beschreiben.</li>
+  <li>Biologische Erklärung liefern.</li>
+  <li>Aussagekraft und Grenzen bewerten.</li>
+</ol>
+<div class="exam">
+  <strong>Klausurblick:</strong> „Beschreiben“ bedeutet nicht „erklären“. Trennen Sie sichtbare Datenbefunde von biologischer Deutung.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum braucht ein Enzymexperiment Kontrollvariablen?</summary>
+          <p>Nur wenn andere Einflussgrößen konstant gehalten werden, kann man die Wirkung der unabhängigen Variable sinnvoll beurteilen.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Was ist eine gute Modellkritik?</summary>
+          <p>Sie benennt Nutzen und Grenzen des Modells bezogen auf eine konkrete Fragestellung.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="klausurtraining" class="page" data-title="23. Klausurtraining: Operatoren und typische Aufgabenformate">
+  <div class="pagehead">
+    <span class="kicker">Anwendung</span>
+    <h2>23. Klausurtraining: Operatoren und typische Aufgabenformate</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="klausurtraining"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Operatoren in Arbeitsaufträgen unterscheiden</li><li>typische materialgebundene Aufgaben erkennen</li><li>eigene Klausurantworten strukturieren</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Im Leistungskurs werden Sie selten nur Begriffe reproduzieren. Häufig müssen Sie Material auswerten, biologische Mechanismen erklären und begründete Urteile formulieren.</p>
+<h3>Operatoren sicher unterscheiden</h3>
+<table>
+  <thead><tr><th>Operator</th><th>Was wird erwartet?</th><th>Typischer Fehler</th></tr></thead>
+  <tbody>
+    <tr><td>nennen/angeben</td><td>knappe, fachlich korrekte Angaben</td><td>lange Erklärungen ohne klare Antwort</td></tr>
+    <tr><td>beschreiben</td><td>Material oder Vorgang geordnet darstellen, ohne vertiefte Ursache</td><td>zu früh erklären oder bewerten</td></tr>
+    <tr><td>erklären</td><td>Ursache-Wirkungs-Zusammenhang herstellen</td><td>nur behaupten, nicht kausal ableiten</td></tr>
+    <tr><td>erläutern</td><td>erklären und durch Beispiele, Materialbezug oder Details verständlich machen</td><td>kein Bezug zum Material</td></tr>
+    <tr><td>analysieren</td><td>Material systematisch zerlegen und Zusammenhänge herausarbeiten</td><td>bloße Nacherzählung</td></tr>
+    <tr><td>beurteilen/bewerten</td><td>kriteriengeleitet zu einem begründeten Urteil kommen</td><td>Meinung ohne Kriterien und Fachbasis</td></tr>
+  </tbody>
+</table>
+<h3>Typische Aufgabenformate in diesem Themenfeld</h3>
+<ul>
+  <li>Diagramm zur Enzymaktivität auswerten und Hemmtyp ableiten.</li>
+  <li>Osmoseversuch erklären und eine Kontrolluntersuchung planen.</li>
+  <li>Stoffwechselbilanz anhand eines Materials korrigieren.</li>
+  <li>Atmungskette bei Sauerstoffmangel oder Entkopplung erklären.</li>
+  <li>Wirkung eines Nervengifts an Synapsen ableiten.</li>
+  <li>Potenzialdiagramm interpretieren.</li>
+  <li>neuronale und hormonelle Regulation in einem Fallbeispiel vergleichen.</li>
+</ul>
+<div class="task">
+  <strong>Übungsauftrag:</strong> Wählen Sie drei Seiten dieses Lernpfads aus und formulieren Sie jeweils eine mögliche Klausuraufgabe mit Operator und Erwartungshorizont in Stichpunkten.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Warum ist Materialbezug im Leistungskurs besonders wichtig?</summary>
+          <p>Viele Aufgaben verlangen, dass Fachwissen auf konkrete Daten, Abbildungen oder Versuchsbeschreibungen angewendet wird.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Was unterscheidet Bewerten von bloßem Meinen?</summary>
+          <p>Bewerten nutzt Kriterien, fachliche Belege, Abwägung und ein begründetes Urteil.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="glossar" class="page" data-title="24. Glossar und Abschluss-Selbstcheck">
+  <div class="pagehead">
+    <span class="kicker">Wiederholen und sichern</span>
+    <h2>24. Glossar und Abschluss-Selbstcheck</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="glossar"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>zentrale Fachbegriffe aktiv wiederholen</li><li>eigene Lücken diagnostizieren</li><li>das Themenfeld vernetzt zusammenfassen</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Nutzen Sie diese Seite als letzte Diagnose vor einer Klausur oder vor einer mündlichen Wiederholung.</p>
+<h3>Begriffe, die Sie sicher verwenden sollten</h3>
+<div class="columns">
+  <ul>
+    <li>Kompartimentierung</li>
+    <li>Biomembran</li>
+    <li>Diffusion, Osmose</li>
+    <li>Plasmolyse, Deplasmolyse</li>
+    <li>aktiver und passiver Transport</li>
+    <li>Endocytose, Exocytose</li>
+    <li>Substratspezifität</li>
+    <li>Wirkungsspezifität</li>
+    <li>Enzymhemmung</li>
+    <li>Michaelis-Menten-Konstante</li>
+  </ul>
+  <ul>
+    <li>ATP/ADP-System</li>
+    <li>Redoxreaktion</li>
+    <li>Glykolyse</li>
+    <li>oxidative Decarboxylierung</li>
+    <li>Tricarbonsäurezyklus</li>
+    <li>Atmungskette</li>
+    <li>chemiosmotische ATP-Bildung</li>
+    <li>alkoholische Gärung</li>
+    <li>Milchsäuregärung</li>
+    <li>energetisches Modell</li>
+  </ul>
+  <ul>
+    <li>Ruhepotenzial</li>
+    <li>Aktionspotenzial</li>
+    <li>elektrotonische Leitung</li>
+    <li>kontinuierliche Leitung</li>
+    <li>saltatorische Leitung</li>
+    <li>PSP, EPSP, IPSP</li>
+    <li>räumliche und zeitliche Summation</li>
+    <li>Rezeptorpotenzial</li>
+    <li>neuronale Plastizität</li>
+    <li>Homöostase</li>
+  </ul>
+</div>
+<h3>Abschluss-Selbstcheck</h3>
+<div class="checkgrid">
+  <label><input type="checkbox"> Ich kann Membranstruktur und Transportprozesse erklären.</label>
+  <label><input type="checkbox"> Ich kann Enzymdiagramme auswerten und Hemmungen vergleichen.</label>
+  <label><input type="checkbox"> Ich kann Zellatmung räumlich und energetisch darstellen.</label>
+  <label><input type="checkbox"> Ich kann chemiosmotische ATP-Bildung erklären.</label>
+  <label><input type="checkbox"> Ich kann Gärung funktional von Zellatmung unterscheiden.</label>
+  <label><input type="checkbox"> Ich kann Ruhe- und Aktionspotenzial kausal herleiten.</label>
+  <label><input type="checkbox"> Ich kann Synapsen und Stoffeinwirkungen erklären.</label>
+  <label><input type="checkbox"> Ich kann EPSP/IPSP und Summation anwenden.</label>
+  <label><input type="checkbox"> Ich kann Sinneszellen und Rezeptorpotenziale erläutern.</label>
+  <label><input type="checkbox"> Ich kann neuronale und hormonelle Steuerung vergleichen.</label>
+</div>
+<div class="exam">
+  <strong>Letzter Test:</strong> Erklären Sie das gesamte Themenfeld in fünf Minuten mündlich: Membran → Enzym → ATP → Mitochondrium → Atmungskette → Nervenzelle → Synapse → Sinneszelle → Hormone. Wenn Sie die Übergänge sauber formulieren können, ist Ihre Wiederholung gut vernetzt.
+</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+    
+        <details class="qa">
+          <summary>Welche drei Themen würden Sie zuerst wiederholen, wenn Sie morgen Klausur hätten?</summary>
+          <p>Priorisieren Sie die Themen, bei denen Sie Mechanismen nicht aus dem Kopf erklären können oder bei denen Sie Diagramme unsicher auswerten.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Was ist das wichtigste Qualitätsmerkmal einer sehr guten LK-Antwort?</summary>
+          <p>Sie verbindet Materialbezug, Fachsprache, kausale Erklärung, Basiskonzepte und eine klare Struktur.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+    </main>
+  </div>
+
+  <footer>
+    <p>Hinweis für die manuelle Weiterbearbeitung: Jede Seite endet mit „Siehe auch ...“. Dort können Links auf konkrete Arbeitsblätter, Hefteinträge, Präsentationen, Versuchsprotokolle oder Klausurhinweise ergänzt werden.</p>
+  </footer>
+
+  <script>
+    const pages = ["start", "ueberblick", "membranen", "transport", "enzyme", "energie", "mitochondrium", "glykolyse", "citratzyklus", "atmungskette", "gaerung", "stoffwechsel_vernetzung", "nervenzelle", "ruhepotential", "aktionspotential", "leitung", "synapse", "neuromuskulaer", "hemmung_summation", "sinneszellen", "lernen", "hormone", "methoden", "klausurtraining", "glossar"];
+    const buttons = Array.from(document.querySelectorAll('.navbtn'));
+    const pageEls = Array.from(document.querySelectorAll('.page'));
+    const boxes = Array.from(document.querySelectorAll('.donebox'));
+    const progressFill = document.getElementById('progressfill');
+    const progressText = document.getElementById('progresstext');
+    let current = pages[0];
+
+    function storageKey(id) { return 'bio-q1-lk-lernpfad-' + id; }
+
+    function updateProgress() {
+      let done = 0;
+      boxes.forEach(box => {
+        const checked = localStorage.getItem(storageKey(box.dataset.page)) === '1';
+        box.checked = checked;
+        if (checked) done++;
+      });
+      buttons.forEach(btn => {
+        const id = btn.dataset.target;
+        btn.classList.toggle('done', localStorage.getItem(storageKey(id)) === '1');
+      });
+      const pct = Math.round(done / pages.length * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `${done} von ${pages.length} Seiten erledigt · ${pct} %`;
+    }
+
+    function showPage(id, push=true) {
+      if (!pages.includes(id)) id = pages[0];
+      current = id;
+      pageEls.forEach(p => p.classList.toggle('active', p.id === id));
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+      const idx = pages.indexOf(id);
+      document.getElementById('prevBtn').disabled = idx === 0;
+      document.getElementById('nextBtn').disabled = idx === pages.length - 1;
+      if (push) history.replaceState(null, '', '#' + id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.target)));
+    boxes.forEach(box => box.addEventListener('change', () => {
+      localStorage.setItem(storageKey(box.dataset.page), box.checked ? '1' : '0');
+      updateProgress();
+    }));
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx > 0) showPage(pages[idx - 1]);
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx < pages.length - 1) showPage(pages[idx + 1]);
+    });
+
+    updateProgress();
+    showPage(location.hash ? location.hash.substring(1) : pages[0], false);
+  </script>
+</body>
+</html>

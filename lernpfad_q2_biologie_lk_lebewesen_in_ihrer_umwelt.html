@@ -1,0 +1,1539 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernpfad Q2 Biologie LK – Lebewesen in ihrer Umwelt</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #18202b;
+      --muted: #5b6677;
+      --line: #d9e1ec;
+      --accent: #315a8c;
+      --accent2: #5c7fa9;
+      --soft: #eaf1f9;
+      --good: #2f6f4e;
+      --warn: #8a5a00;
+      --danger: #8a2d2d;
+      --shadow: 0 12px 30px rgba(24, 32, 43, .10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    header {
+      padding: 2.2rem clamp(1rem, 3vw, 2.5rem);
+      background: linear-gradient(135deg, #203a5d, #315a8c 58%, #7a99b8);
+      color: white;
+    }
+    header h1 {
+      max-width: 1100px;
+      margin: 0 auto .6rem;
+      font-size: clamp(1.7rem, 3.4vw, 3.1rem);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
+    header p {
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      opacity: .94;
+    }
+    .meta {
+      max-width: 1100px;
+      margin: 1rem auto 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .35rem .65rem;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      font-size: .9rem;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 330px) 1fr;
+      gap: 1.2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1.2rem;
+    }
+    aside {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow: auto;
+      padding: 1rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .progresswrap {
+      margin-bottom: 1rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .progressbar {
+      height: .7rem;
+      background: #edf1f7;
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .progressbar > div {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width .25s ease;
+    }
+    #progresstext {
+      margin: .4rem 0 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .navlist {
+      display: grid;
+      gap: .35rem;
+    }
+    .navbtn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: .58rem .65rem;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 2.4rem 1fr;
+      gap: .25rem;
+      align-items: center;
+      font: inherit;
+      line-height: 1.25;
+    }
+    .navbtn:hover { background: var(--soft); }
+    .navbtn.active {
+      background: var(--soft);
+      border-color: #b9cbe0;
+      color: #173d68;
+      font-weight: 700;
+    }
+    .navbtn.done .num {
+      background: #dcefe6;
+      color: var(--good);
+      border-color: #b2d7c6;
+    }
+    .num {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+    main {
+      min-width: 0;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      gap: .8rem;
+      align-items: center;
+      padding: .8rem 0;
+      background: linear-gradient(var(--bg), rgba(245,247,251,.92));
+      backdrop-filter: blur(6px);
+    }
+    .toolbar button, .printbtn {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: 999px;
+      padding: .6rem .9rem;
+      cursor: pointer;
+      color: var(--ink);
+      box-shadow: 0 3px 10px rgba(24,32,43,.05);
+      font: inherit;
+    }
+    .toolbar button:hover, .printbtn:hover { border-color: #aac0d8; color: var(--accent); }
+    .page {
+      display: none;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(1rem, 2.4vw, 2rem);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.2rem;
+    }
+    .page.active {
+      display: block;
+      animation: fade .18s ease-out;
+    }
+    @keyframes fade {
+      from { opacity: .35; transform: translateY(4px); }
+      to { opacity: 1; transform: none; }
+    }
+    .pagehead {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .6rem;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+    .kicker {
+      grid-column: 1 / -1;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.6vw, 2.35rem);
+      line-height: 1.12;
+    }
+    h3 {
+      margin-top: 1.4rem;
+      margin-bottom: .45rem;
+      color: #213b5a;
+    }
+    h4 { margin: 0 0 .35rem; color: #23384f; }
+    .done {
+      white-space: nowrap;
+      align-self: center;
+      padding: .45rem .65rem;
+      border-radius: 999px;
+      background: #f1f5fa;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .goals {
+      background: #f7f9fc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .8rem 1rem;
+    }
+    .goals h3 { margin-top: 0; }
+    .goals ul { margin-bottom: 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      overflow: hidden;
+      border-radius: 12px;
+      font-size: .96rem;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: .7rem;
+      vertical-align: top;
+    }
+    th {
+      background: #edf3fa;
+      text-align: left;
+      color: #223b59;
+    }
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .9rem;
+      margin: 1rem 0;
+    }
+    .card {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: .9rem;
+    }
+    .card p:last-child { margin-bottom: 0; }
+    .callout, .note, .exam, .task, .warning {
+      margin: 1rem 0;
+      padding: .9rem 1rem;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+    }
+    .callout { background: #eef5ff; border-color: #cfe0f5; }
+    .note { background: #f4faf6; border-color: #c5e4d3; }
+    .exam { background: #f7f2e7; border-color: #e6d3a4; }
+    .task { background: #f8f1fb; border-color: #dec5ec; }
+    .warning { background: #fff0f0; border-color: #efc2c2; }
+    .steps { padding-left: 1.25rem; }
+    .steps li { margin: .35rem 0; }
+    .selfcheck {
+      margin-top: 1.4rem;
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+    .qa {
+      margin: .55rem 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+      overflow: hidden;
+    }
+    .qa summary {
+      cursor: pointer;
+      padding: .75rem .9rem;
+      font-weight: 700;
+      color: #223b59;
+    }
+    .qa p {
+      padding: 0 .9rem .85rem;
+      margin: 0;
+    }
+    .seealso {
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 2px dashed #c9d4e2;
+      color: var(--muted);
+      min-height: 3.5rem;
+    }
+    .columns {
+      columns: 3 16rem;
+      column-gap: 2rem;
+    }
+    .columns ul {
+      margin-top: 0;
+      break-inside: avoid;
+    }
+    .checkgrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .55rem;
+      margin: 1rem 0;
+    }
+    .checkgrid label {
+      display: block;
+      padding: .65rem .75rem;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+    footer {
+      max-width: 1400px;
+      margin: 0 auto 2rem;
+      padding: 0 1.2rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { position: relative; max-height: none; }
+      .grid2 { grid-template-columns: 1fr; }
+      .checkgrid { grid-template-columns: 1fr; }
+      .pagehead { grid-template-columns: 1fr; }
+      .done { justify-self: start; }
+    }
+    @media print {
+      body { background: white; }
+      header, aside, .toolbar { display: none !important; }
+      .layout { display: block; padding: 0; }
+      .page { display: block !important; box-shadow: none; border: 0; page-break-after: always; }
+      .qa p { display: block; }
+      details > summary { list-style: none; }
+      .seealso { min-height: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lernpfad Q2 Biologie LK: Lebewesen in ihrer Umwelt</h1>
+    <p>Ein klickbarer Wiederholungspfad für Schülerinnen und Schüler der Klasse 11 im Leistungskurs Biologie. Bearbeiten Sie die Seiten selbstständig, prüfen Sie Ihr Verständnis mit den Selbstchecks und ergänzen Sie später Ihre Unterrichtsmaterialien unter „Siehe auch ...“.</p>
+    <div class="meta">
+      <span class="pill">Q2 · Biologie · Leistungskurs</span>
+      <span class="pill">Berlin · gymnasiale Oberstufe</span>
+      <span class="pill">Stand: 22.06.2026</span>
+      <span class="pill">selbstständige Wiederholung</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside aria-label="Navigation">
+      <div class="progresswrap">
+        <strong>Fortschritt</strong>
+        <div class="progressbar" aria-hidden="true"><div id="progressfill"></div></div>
+        <p id="progresstext">0 von 27 Seiten erledigt</p>
+      </div>
+      <nav class="navlist">
+        <button class="navbtn" data-target="start"><span class="num">01</span><span>Start: Lernpfad Q2 Biologie LK</span></button>
+<button class="navbtn" data-target="ueberblick"><span class="num">02</span><span>1. Überblick: Lebewesen in ihrer Umwelt</span></button>
+<button class="navbtn" data-target="oekosystem"><span class="num">03</span><span>2. Ökosystem, Biotop und Biozönose</span></button>
+<button class="navbtn" data-target="abiotische_faktoren"><span class="num">04</span><span>3. Abiotische Faktoren, Toleranz und ökologische Potenz</span></button>
+<button class="navbtn" data-target="temperatur"><span class="num">05</span><span>4. Temperatur, RGT-Regel und Klimaregeln</span></button>
+<button class="navbtn" data-target="licht_wasser"><span class="num">06</span><span>5. Licht, Wasser und Pflanzenanpassungen</span></button>
+<button class="navbtn" data-target="blatt_chloroplast"><span class="num">07</span><span>6. Blattaufbau und Feinbau des Chloroplasten</span></button>
+<button class="navbtn" data-target="pigmente"><span class="num">08</span><span>7. Pigmente, Absorptionsspektrum und Chromatografie</span></button>
+<button class="navbtn" data-target="lichtreaktionen"><span class="num">09</span><span>8. Lichtreaktionen und energetisches Modell</span></button>
+<button class="navbtn" data-target="calvin"><span class="num">10</span><span>9. Calvin-Zyklus, C3-Pflanzen und Tracer-Methode</span></button>
+<button class="navbtn" data-target="fotosynthese_faktoren"><span class="num">11</span><span>10. Fotosyntheserate und abiotische Faktoren</span></button>
+<button class="navbtn" data-target="c4"><span class="num">12</span><span>11. C4-Pflanzen und Angepasstheit an Wärme/Trockenheit</span></button>
+<button class="navbtn" data-target="assimilation_dissimilation"><span class="num">13</span><span>12. Aufbauender und abbauender Stoffwechsel im Zusammenhang</span></button>
+<button class="navbtn" data-target="wechselbeziehungen"><span class="num">14</span><span>13. Intra- und interspezifische Wechselbeziehungen</span></button>
+<button class="navbtn" data-target="konkurrenz_nische"><span class="num">15</span><span>14. Konkurrenz, Konkurrenzausschluss und ökologische Nische</span></button>
+<button class="navbtn" data-target="populationen"><span class="num">16</span><span>15. Populationsdichte und Populationswachstum</span></button>
+<button class="navbtn" data-target="regulation"><span class="num">17</span><span>16. Dichteabhängige und dichteunabhängige Faktoren</span></button>
+<button class="navbtn" data-target="lotka"><span class="num">18</span><span>17. Räuber-Beute-Beziehungen und Lotka-Volterra-Regeln</span></button>
+<button class="navbtn" data-target="nahrungsnetz"><span class="num">19</span><span>18. Nahrungsnetz, Energiefluss und Kohlenstoffkreislauf</span></button>
+<button class="navbtn" data-target="stickstoff"><span class="num">20</span><span>19. Stickstoffkreislauf</span></button>
+<button class="navbtn" data-target="methoden"><span class="num">21</span><span>20. Ökologische Untersuchungsmethoden</span></button>
+<button class="navbtn" data-target="biodiversitaet"><span class="num">22</span><span>21. Biodiversität, Stabilität und Ökosystemmanagement</span></button>
+<button class="navbtn" data-target="klimawandel"><span class="num">23</span><span>22. Anthropogener Treibhauseffekt und Ökosysteme</span></button>
+<button class="navbtn" data-target="nachhaltigkeit"><span class="num">24</span><span>23. Nachhaltigkeit, ökologischer Fußabdruck und hormonartig wirkende Stoffe</span></button>
+<button class="navbtn" data-target="tarnen"><span class="num">25</span><span>24. Tarnen, Täuschen, Mimikry und Mimese</span></button>
+<button class="navbtn" data-target="klausurtraining"><span class="num">26</span><span>25. Klausurtraining: Operatoren und typische Aufgabenformate</span></button>
+<button class="navbtn" data-target="glossar"><span class="num">27</span><span>26. Glossar und Abschluss-Selbstcheck</span></button>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="toolbar">
+        <div>
+          <button id="prevBtn" type="button">← Zurück</button>
+          <button id="nextBtn" type="button">Weiter →</button>
+        </div>
+        <button class="printbtn" type="button" onclick="window.print()">Drucken / als PDF sichern</button>
+      </div>
+
+      <article id="start" class="page" data-title="Start: Lernpfad Q2 Biologie LK">
+  <div class="pagehead">
+    <span class="kicker">Orientierung</span>
+    <h2>Start: Lernpfad Q2 Biologie LK</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="start"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>den Aufbau des Lernpfads kennen</li><li>Ihre Wiederholung im Themenfeld Q2 eigenständig planen</li><li>zwischen Grundstruktur und LK-Vertiefung unterscheiden</li></ul>
+  </section>
+  <section class="content">
+    <div class="callout">
+  <p><strong>Worum geht es?</strong> In diesem Lernpfad wiederholen Sie das Themenfeld <em>Lebewesen in ihrer Umwelt</em>. Sie arbeiten sich von Ökosystemen und Umweltfaktoren über Fotosynthese, Wechselbeziehungen und Populationsökologie bis zu Stoffkreisläufen, Biodiversität, Klimawandel und Nachhaltigkeit vor.</p>
+</div>
+<h3>So nutzen Sie den Lernpfad</h3>
+<ol class="steps">
+  <li>Bearbeiten Sie die Seiten in der vorgeschlagenen Reihenfolge oder springen Sie gezielt zu einem Thema.</li>
+  <li>Markieren Sie eine Seite als erledigt, wenn Sie die Lernziele sicher erklären und an Material anwenden können.</li>
+  <li>Nutzen Sie die Selbstchecks als Diagnose: Können Sie Fachbegriffe, Mechanismen, Diagramme und Materialdaten sinnvoll verknüpfen?</li>
+  <li>Ergänzen Sie später unter <em>Siehe auch ...</em> Ihre Unterrichtsmaterialien, Hefteinträge, Arbeitsblätter, Experimente und Klausurhinweise.</li>
+</ol>
+<h3>Leistungskurs-Niveau</h3>
+<p>Im Leistungskurs geht es nicht nur um Begriffe. Sie sollen ökologische Systeme modellieren, Daten auswerten, Hypothesen entwickeln, Methoden beurteilen und Folgen menschlichen Handelns kriteriengeleitet bewerten.</p>
+<div class="grid2">
+  <div class="card">
+    <h4>Ökologie und Systeme</h4>
+    <p>Ökosystem, Biotop, Biozönose, abiotische und biotische Faktoren, Toleranz, ökologische Potenz, ökologische Nische, Nahrungsnetz, Stoffkreisläufe.</p>
+  </div>
+  <div class="card">
+    <h4>Stoffwechsel und Nachhaltigkeit</h4>
+    <p>Fotosynthese, Primär- und Sekundärreaktionen, Calvin-Zyklus, Energiefluss, Kohlenstoff- und Stickstoffkreislauf, Biodiversität, Klimawandel, Ökosystemmanagement.</p>
+  </div>
+</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Wann ist eine Seite wirklich erledigt?</summary>
+          <p>Wenn Sie die zentralen Begriffe definieren, typische Diagramme auswerten und die Inhalte an einem unbekannten Materialbeispiel anwenden können.</p>
+        </details>
+        <details class="qa">
+          <summary>Was unterscheidet eine gute LK-Antwort von einer reinen Wiedergabe?</summary>
+          <p>Eine gute LK-Antwort verknüpft Fachwissen, Materialbezug, Basiskonzepte, nachvollziehbare Begründungen und gegebenenfalls Bewertungskriterien.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="ueberblick" class="page" data-title="1. Überblick: Lebewesen in ihrer Umwelt">
+  <div class="pagehead">
+    <span class="kicker">RLP-Orientierung</span>
+    <h2>1. Überblick: Lebewesen in ihrer Umwelt</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="ueberblick"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>die Großstruktur des Themenfeldes darstellen</li><li>Ökologie als Untersuchung von Wechselbeziehungen verstehen</li><li>RLP-Inhalte zu sinnvollen Lernblöcken ordnen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Die Leitidee</h3>
+<p>Ökologie untersucht die Wechselbeziehungen zwischen Lebewesen und ihrer unbelebten und belebten Umwelt. Ein Ökosystem ist dabei kein bloßer „Ort“, sondern ein Beziehungsgefüge aus Lebensraum, Lebensgemeinschaft, Stoffflüssen, Energieflüssen und Regulationsprozessen.</p>
+<div class="grid2">
+  <div class="card"><h4>Unbelebte Umwelt</h4><p>Temperatur, Licht, Wasser, Boden, pH-Wert, Salzgehalt und andere Faktoren begrenzen oder ermöglichen Leben.</p></div>
+  <div class="card"><h4>Belebte Umwelt</h4><p>Konkurrenz, Räuber-Beute-Beziehungen, Parasitismus, Symbiose, Fortpflanzungsstrategien und Populationsdynamik strukturieren Lebensgemeinschaften.</p></div>
+</div>
+<h3>Vier große Lernblöcke</h3>
+<ol class="steps">
+  <li><strong>Strukturen und Umweltfaktoren:</strong> Ökosystem, Biotop, Biozönose, Toleranzkurven, ökologische Potenz, Angepasstheiten.</li>
+  <li><strong>Aufbauender Stoffwechsel:</strong> Blatt, Chloroplast, Pigmente, Lichtreaktionen, Calvin-Zyklus, C3- und C4-Pflanzen.</li>
+  <li><strong>Wechselbeziehungen und Populationen:</strong> Konkurrenz, Nische, Lotka-Volterra, Wachstum, K- und r-Strategien.</li>
+  <li><strong>Ökosysteme unter menschlichem Einfluss:</strong> Stoffkreisläufe, Energiefluss, Klimawandel, Biodiversität, Renaturierung, Nachhaltigkeit.</li>
+</ol>
+<div class="exam"><strong>Klausurhinweis:</strong> Ökologie-Aufgaben sind häufig materialgebunden. Trainieren Sie deshalb besonders das Übersetzen von Diagrammen, Tabellen, Karten, Experimenten und Textquellen in fachliche Erklärungen.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist Ökologie mehr als Artenkenntnis?</summary>
+          <p>Weil Ökologie Beziehungen, Prozesse, Rückkopplungen und Systemveränderungen untersucht, nicht nur das Vorkommen einzelner Arten.</p>
+        </details>
+        <details class="qa">
+          <summary>Welche Basiskonzepte sind in Q2 besonders wichtig?</summary>
+          <p>Struktur und Funktion, Stoff- und Energieumwandlung, Information und Kommunikation, Steuerung und Regelung sowie individuelle und evolutive Entwicklung.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="oekosystem" class="page" data-title="2. Ökosystem, Biotop und Biozönose">
+  <div class="pagehead">
+    <span class="kicker">Grundbegriffe</span>
+    <h2>2. Ökosystem, Biotop und Biozönose</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="oekosystem"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Ökosystem, Biotop und Biozönose präzise unterscheiden</li><li>ein Ökosystem als offenes System beschreiben</li><li>abiotische und biotische Faktoren zuordnen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Begriffe sauber trennen</h3>
+<table>
+  <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Biotop</strong></td><td>Lebensraum mit seinen abiotischen Bedingungen</td><td>Teich, Buchenwald, Trockenrasen, Hochmoor</td></tr>
+    <tr><td><strong>Biozönose</strong></td><td>Lebensgemeinschaft aller Populationen im Biotop</td><td>Produzenten, Konsumenten, Destruenten eines Teichs</td></tr>
+    <tr><td><strong>Ökosystem</strong></td><td>Einheit aus Biotop und Biozönose mit Stoff- und Energieflüssen</td><td>Teichökosystem, Waldökosystem, Stadtökosystem</td></tr>
+  </tbody>
+</table>
+<h3>Ökosysteme sind offen und dynamisch</h3>
+<p>Ein Ökosystem besitzt keine vollständig scharfen Grenzen. Energie, Stoffe und Organismen können ein- und austreten. Deshalb ist die Abgrenzung immer auch eine Modellentscheidung: Für eine Klausur müssen Sie begründen können, welche Ebene gerade betrachtet wird.</p>
+<div class="callout"><p><strong>Typischer Fehler:</strong> „Der Wald ist ein Biotop.“ Das kann je nach Kontext zu ungenau sein. Der Wald als Lebensraum ist ein Biotop; als Lebensraum mit Lebensgemeinschaft, Stoffkreisläufen und Energiefluss ist er ein Ökosystem.</p></div>
+<h3>Abiotisch oder biotisch?</h3>
+<ul>
+  <li><strong>Abiotische Faktoren:</strong> Temperatur, Licht, Wasser, Bodenstruktur, Mineralstoffverfügbarkeit, pH-Wert, Salzgehalt.</li>
+  <li><strong>Biotische Faktoren:</strong> Nahrung, Konkurrenz, Fressfeinde, Parasiten, Symbionten, Fortpflanzungspartner, Krankheitserreger.</li>
+</ul>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist ein Ökosystem mehr als Biotop plus Artenliste?</summary>
+          <p>Weil auch Wechselwirkungen, Stoffkreisläufe, Energiefluss und Regulationsprozesse dazugehören.</p>
+        </details>
+        <details class="qa">
+          <summary>Wie grenzen Sie ein Ökosystem sinnvoll ab?</summary>
+          <p>Sie legen eine räumliche und funktionale Betrachtungsebene fest und begründen diese mit der Fragestellung.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="abiotische_faktoren" class="page" data-title="3. Abiotische Faktoren, Toleranz und ökologische Potenz">
+  <div class="pagehead">
+    <span class="kicker">Umweltfaktoren</span>
+    <h2>3. Abiotische Faktoren, Toleranz und ökologische Potenz</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="abiotische_faktoren"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Toleranzkurven auswerten</li><li>stenöke und euryöke Arten unterscheiden</li><li>physiologische und ökologische Potenz erklären</li></ul>
+  </section>
+  <section class="content">
+    <h3>Toleranzkurven lesen</h3>
+<p>Eine Toleranzkurve zeigt, wie die Leistungsfähigkeit oder das Vorkommen einer Art von einem Umweltfaktor abhängt. Wichtige Abschnitte sind Minimum, Maximum, Pessimum, Präferendum und Optimum.</p>
+<div class="grid2">
+  <div class="card"><h4>Stenök</h4><p>Eine Art toleriert nur einen engen Bereich eines Umweltfaktors. Solche Arten können gute Zeigerarten sein.</p></div>
+  <div class="card"><h4>Euryök</h4><p>Eine Art toleriert einen breiten Bereich eines Umweltfaktors und kann dadurch unterschiedliche Lebensräume besiedeln.</p></div>
+</div>
+<h3>Physiologische und ökologische Potenz</h3>
+<p>Die <strong>physiologische Potenz</strong> beschreibt den Toleranzbereich ohne Konkurrenz und andere biotische Wechselwirkungen. Die <strong>ökologische Potenz</strong> beschreibt den tatsächlich nutzbaren Bereich unter natürlichen Bedingungen, also unter Einwirkung von Konkurrenz, Räubern, Parasiten und weiteren Faktoren.</p>
+<div class="exam"><strong>Materialtraining:</strong> Wenn zwei Kurven gezeigt werden, vergleichen Sie nicht nur „höher“ und „niedriger“. Benennen Sie Optimum, Toleranzbreite, Pessima und mögliche ökologische Konsequenzen.</div>
+<h3>Limitierende Faktoren</h3>
+<p>Ein Faktor kann begrenzend wirken, wenn er außerhalb des günstigen Bereichs liegt. Häufig bestimmt nicht der Durchschnittswert, sondern eine Extrembelastung das Überleben: Frostnächte, Dürreperioden, Hitzestress oder Lichtmangel.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen Optimum und Präferendum?</summary>
+          <p>Das Optimum ist der beste Wert; das Präferendum ist der bevorzugte Bereich um das Optimum.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist die ökologische Potenz oft kleiner als die physiologische Potenz?</summary>
+          <p>Weil in der Natur zusätzliche biotische Faktoren wie Konkurrenz oder Fressfeinde den nutzbaren Bereich einschränken.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="temperatur" class="page" data-title="4. Temperatur, RGT-Regel und Klimaregeln">
+  <div class="pagehead">
+    <span class="kicker">Abiotischer Faktor Temperatur</span>
+    <h2>4. Temperatur, RGT-Regel und Klimaregeln</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="temperatur"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Temperatureinflüsse auf Organismen erklären</li><li>RGT-Regel fachlich begrenzt anwenden</li><li>homoiotherme und poikilotherme Tiere vergleichen</li><li>Klimaregeln kritisch nutzen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Temperatur als Umweltfaktor</h3>
+<p>Temperatur beeinflusst Enzymaktivität, Membranfluidität, Stoffwechselrate, Verdunstung, Entwicklungsdauer und Verbreitungsgrenzen. Sie wirkt deshalb auf der molekularen, organismischen und populationsökologischen Ebene.</p>
+<h3>RGT-Regel</h3>
+<p>Die RGT-Regel beschreibt näherungsweise, dass sich die Geschwindigkeit vieler chemischer und enzymatischer Reaktionen bei einer Temperaturerhöhung um 10 °C etwa verdoppelt bis verdreifacht. Sie gilt nur innerhalb eines biologisch tolerierten Bereichs. Bei zu hohen Temperaturen denaturieren Proteine, Membranen verlieren ihre Funktionsfähigkeit und Organismen geraten in Stress.</p>
+<div class="grid2">
+  <div class="card"><h4>Poikilotherm</h4><p>Die Körpertemperatur folgt stark der Umgebungstemperatur. Aktivität und Stoffwechsel sind deshalb stark temperaturabhängig.</p></div>
+  <div class="card"><h4>Homoiotherm</h4><p>Die Körpertemperatur wird weitgehend konstant gehalten. Das ermöglicht Aktivität in unterschiedlichen Umgebungen, kostet aber Energie.</p></div>
+</div>
+<h3>Bergmann und Allen</h3>
+<p>Klimaregeln beschreiben statistische Muster bei gleichwarmen Tieren: In kälteren Regionen sind nah verwandte Formen oft größer, und Körperanhänge sind häufig kürzer. Diese Regeln sind keine Naturgesetze; sie müssen als Hypothesen im Materialkontext geprüft werden.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum darf die RGT-Regel nicht unbegrenzt fortgeschrieben werden?</summary>
+          <p>Weil biologische Systeme bei hohen Temperaturen durch Proteindenaturierung, Membranschäden und Stressreaktionen ihre Funktionsfähigkeit verlieren.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum kostet Homoiothermie Energie?</summary>
+          <p>Weil Wärmeproduktion, Kühlung und Regulation aktive physiologische Prozesse erfordern.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="licht_wasser" class="page" data-title="5. Licht, Wasser und Pflanzenanpassungen">
+  <div class="pagehead">
+    <span class="kicker">Abiotische Faktoren</span>
+    <h2>5. Licht, Wasser und Pflanzenanpassungen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="licht_wasser"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Licht und Wasser als limitierende Faktoren erklären</li><li>Hydro-, Hygro-, Meso- und Xerophyten unterscheiden</li><li>Blattstrukturen funktional deuten</li></ul>
+  </section>
+  <section class="content">
+    <h3>Licht</h3>
+<p>Licht ist Energiequelle der Fotosynthese und zugleich Signal. Lichtintensität, Lichtqualität, Tageslänge und Beschattung beeinflussen Wachstum, Blattbau und Konkurrenzfähigkeit von Pflanzen.</p>
+<h3>Wasser</h3>
+<p>Wasser ist Reaktionspartner, Lösungsmittel, Transportmedium, Turgorfaktor und Kühlmittel. Wassermangel schränkt Spaltöffnungen, CO₂-Aufnahme und Fotosynthese ein; zu viel Wasser kann Sauerstoffmangel im Boden verursachen.</p>
+<table>
+  <thead><tr><th>Pflanzentyp</th><th>Lebensraum</th><th>typische Struktur/Funktion</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Hydrophyten</strong></td><td>Wasserpflanzen</td><td>Luftgewebe, reduzierte Cuticula, angepasste Spaltöffnungen</td></tr>
+    <tr><td><strong>Hygrophyten</strong></td><td>feuchte Standorte</td><td>dünne Blätter, große Oberfläche, geringe Verdunstungsbegrenzung</td></tr>
+    <tr><td><strong>Mesophyten</strong></td><td>mittlere Wasserverfügbarkeit</td><td>„Standardblatt“ mit ausgeglichener Regulation</td></tr>
+    <tr><td><strong>Xerophyten</strong></td><td>trockene Standorte</td><td>dicke Cuticula, versenkte Stomata, kleine Blattfläche, Wasserspeicher</td></tr>
+  </tbody>
+</table>
+<div class="exam"><strong>LK-Formulierung:</strong> Beschreiben Sie nicht nur Strukturen. Erklären Sie, welchen Selektionsvorteil eine Struktur unter bestimmten Umweltbedingungen bietet.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum kann Wassermangel die Fotosyntheserate senken, obwohl Licht vorhanden ist?</summary>
+          <p>Weil geschlossene Stomata die CO₂-Aufnahme begrenzen und Wasser selbst als Reaktionspartner und Turgorfaktor benötigt wird.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist eine funktionale Angepasstheit?</summary>
+          <p>Eine Struktur oder ein Prozess, der unter bestimmten Umweltbedingungen die Überlebens- oder Fortpflanzungschancen erhöht.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="blatt_chloroplast" class="page" data-title="6. Blattaufbau und Feinbau des Chloroplasten">
+  <div class="pagehead">
+    <span class="kicker">Struktur und Funktion</span>
+    <h2>6. Blattaufbau und Feinbau des Chloroplasten</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="blatt_chloroplast"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Blattgewebe funktional zuordnen</li><li>den Feinbau des Chloroplasten erklären</li><li>Struktur-Funktion-Beziehungen präzise formulieren</li></ul>
+  </section>
+  <section class="content">
+    <h3>Blatt als Organ der Fotosynthese</h3>
+<p>Ein Laubblatt ist für Lichtaufnahme, Gasaustausch, Wasserhaushalt und Stofftransport organisiert. Cuticula, Epidermis, Palisadenparenchym, Schwammparenchym, Leitbündel und Stomata erfüllen dabei unterschiedliche Funktionen.</p>
+<div class="grid2">
+  <div class="card"><h4>Palisadenparenchym</h4><p>Viele Chloroplasten, lichtzugewandte Lage, hohe Fotosyntheseleistung.</p></div>
+  <div class="card"><h4>Schwammparenchym</h4><p>Interzellularräume erleichtern Gastransport von CO₂, O₂ und Wasserdampf.</p></div>
+</div>
+<h3>Chloroplast</h3>
+<p>Chloroplasten besitzen eine Doppelmembran, Stroma, Thylakoide, Grana und Stroma-Thylakoide. Die Lichtreaktionen laufen an der Thylakoidmembran ab; der Calvin-Zyklus findet im Stroma statt.</p>
+<div class="callout"><p><strong>Basiskonzept Struktur und Funktion:</strong> Die räumliche Trennung ermöglicht unterschiedliche Reaktionsbedingungen. Die Thylakoidmembran trägt Pigmente, Elektronentransportketten und ATP-Synthasen; das Stroma enthält Enzyme des Calvin-Zyklus.</p></div>
+<h3>Typische Klausuraufgabe</h3>
+<p>Bei einem Blattquerschnitt sollen Sie Strukturen nicht nur benennen, sondern ihre Bedeutung für Fotosynthese, Verdunstungsschutz, Gaswechsel oder Standortanpassung erläutern.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist das Palisadenparenchym meist lichtzugewandt?</summary>
+          <p>Weil dort viele Chloroplasten dicht angeordnet sind und ein hoher Anteil des einfallenden Lichts genutzt werden kann.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist Kompartimentierung im Chloroplasten wichtig?</summary>
+          <p>Weil Lichtreaktionen und Calvin-Zyklus unterschiedliche Orte, Moleküle und Reaktionsbedingungen benötigen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="pigmente" class="page" data-title="7. Pigmente, Absorptionsspektrum und Chromatografie">
+  <div class="pagehead">
+    <span class="kicker">Fachliches Verfahren</span>
+    <h2>7. Pigmente, Absorptionsspektrum und Chromatografie</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="pigmente"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Fotosynthesepigmente funktional erklären</li><li>Absorptions- und Wirkungsspektrum unterscheiden</li><li>Chromatografie als Trennverfahren deuten</li></ul>
+  </section>
+  <section class="content">
+    <h3>Pigmente absorbieren Licht</h3>
+<p>Chlorophyll a, Chlorophyll b und Carotinoide absorbieren Licht unterschiedlicher Wellenlängen. Dadurch kann ein breiterer Teil des sichtbaren Lichts genutzt werden. Nicht absorbierte Wellenlängen werden reflektiert oder durchgelassen; deshalb erscheinen viele Blätter grün.</p>
+<h3>Absorptionsspektrum und Wirkungsspektrum</h3>
+<ul>
+  <li>Das <strong>Absorptionsspektrum</strong> zeigt, welche Wellenlängen ein Pigment oder Pigmentgemisch aufnimmt.</li>
+  <li>Das <strong>Wirkungsspektrum</strong> zeigt, bei welchen Wellenlängen die Fotosyntheseleistung hoch oder niedrig ist.</li>
+</ul>
+<p>Beide Spektren hängen zusammen, sind aber nicht identisch: Das Wirkungsspektrum ergibt sich aus dem Zusammenspiel mehrerer Pigmente, Energieübertragungen und Reaktionszentren.</p>
+<h3>Chromatografie</h3>
+<p>Bei der Chromatografie werden Blattpigmente aufgrund unterschiedlicher Löslichkeit und unterschiedlicher Wechselwirkung mit stationärer und mobiler Phase getrennt. In Klausuren ist wichtig, das Verfahren nicht nur zu beschreiben, sondern die Trennung fachlich zu begründen.</p>
+<div class="exam"><strong>Operatorentraining:</strong> „Erläutern Sie die Bedeutung zusätzlicher Pigmente“ verlangt eine Funktionsbegründung: mehr nutzbare Wellenlängen, Energieübertragung, Lichtschutz.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist grünes Licht für viele Blätter weniger wirksam als rotes oder blaues Licht?</summary>
+          <p>Weil grüne Wellenlängen von Chlorophyllen vergleichsweise schwach absorbiert und stärker reflektiert oder durchgelassen werden.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum können Carotinoide die Fotosynthese unterstützen?</summary>
+          <p>Sie erweitern die nutzbare Lichtabsorption und können zusätzlich Lichtschutzfunktionen übernehmen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="lichtreaktionen" class="page" data-title="8. Lichtreaktionen und energetisches Modell">
+  <div class="pagehead">
+    <span class="kicker">Aufbauender Stoffwechsel</span>
+    <h2>8. Lichtreaktionen und energetisches Modell</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="lichtreaktionen"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>die Lichtreaktionen modellhaft erklären</li><li>Elektronentransport, Protonengradient und ATP-Bildung verknüpfen</li><li>das energetische Modell der Lichtreaktionen anwenden</li></ul>
+  </section>
+  <section class="content">
+    <h3>Grundlogik</h3>
+<p>In den Lichtreaktionen wird Lichtenergie genutzt, um Elektronen auf ein höheres Energieniveau zu bringen. Über Elektronentransportketten werden Redoxenergie, Protonentransport und ATP-Bildung gekoppelt. Außerdem entsteht NADPH als Reduktionsmittel für den Calvin-Zyklus.</p>
+<ol class="steps">
+  <li>Photosystem II absorbiert Licht; Wasser wird oxidiert. Es entstehen Elektronen, Protonen und Sauerstoff.</li>
+  <li>Elektronen fließen über eine Transportkette; dabei wird ein Protonengradient über der Thylakoidmembran aufgebaut.</li>
+  <li>Die ATP-Synthase nutzt den Protonengradienten zur Bildung von ATP.</li>
+  <li>Photosystem I hebt Elektronen erneut energetisch an; NADP⁺ wird zu NADPH reduziert.</li>
+</ol>
+<h3>Lichtsammelkomplexe</h3>
+<p>Lichtsammelkomplexe enthalten mehrere Pigmente. Sie übertragen Anregungsenergie auf das Reaktionszentrum. Dadurch wird die Wahrscheinlichkeit erhöht, dass Lichtenergie für Ladungstrennung und Elektronentransport nutzbar wird.</p>
+<div class="callout"><p><strong>Modellgrenze:</strong> Pfeilschemata sind nützlich, aber stark vereinfacht. Eine sehr gute Antwort benennt Energieumwandlung, Redoxreaktionen, Protonengradient und Membranbindung als zusammenhängendes System.</p></div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist Wasser in den Lichtreaktionen wichtig?</summary>
+          <p>Wasser liefert Elektronen und Protonen; Sauerstoff entsteht als Nebenprodukt der Wasserspaltung.</p>
+        </details>
+        <details class="qa">
+          <summary>Welche Funktion hat der Protonengradient?</summary>
+          <p>Er speichert elektrochemische Energie, die die ATP-Synthase zur ATP-Bildung nutzt.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="calvin" class="page" data-title="9. Calvin-Zyklus, C3-Pflanzen und Tracer-Methode">
+  <div class="pagehead">
+    <span class="kicker">CO₂-Fixierung</span>
+    <h2>9. Calvin-Zyklus, C3-Pflanzen und Tracer-Methode</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="calvin"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Fixierung, Reduktion und Regeneration des Calvin-Zyklus erklären</li><li>ATP und NADPH funktional zuordnen</li><li>C3-Pflanzen und Tracer-Methode einordnen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Drei Phasen</h3>
+<table>
+  <thead><tr><th>Phase</th><th>Kernprozess</th><th>Bedeutung</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Fixierung</strong></td><td>CO₂ wird durch Rubisco an Ribulose-1,5-bisphosphat gebunden.</td><td>Ein anorganisches Kohlenstoffatom gelangt in organische Moleküle.</td></tr>
+    <tr><td><strong>Reduktion</strong></td><td>Zwischenprodukte werden unter Verbrauch von ATP und NADPH reduziert.</td><td>Es entstehen energiereichere organische Verbindungen.</td></tr>
+    <tr><td><strong>Regeneration</strong></td><td>Ribulose-1,5-bisphosphat wird unter ATP-Verbrauch wiederhergestellt.</td><td>Der Zyklus kann erneut CO₂ fixieren.</td></tr>
+  </tbody>
+</table>
+<h3>C3-Pflanzen</h3>
+<p>C3-Pflanzen bilden als erstes stabiles Produkt der CO₂-Fixierung eine Verbindung mit drei Kohlenstoffatomen. Unter heißen und trockenen Bedingungen geraten sie durch Stomataschluss und Photorespiration leichter an Grenzen.</p>
+<h3>Tracer-Methode</h3>
+<p>Mit markiertem Kohlenstoff lässt sich verfolgen, in welchen Molekülen CO₂ nach kurzer Zeit auftaucht. Dadurch kann man Reaktionsabfolgen rekonstruieren. In der Auswertung ist entscheidend, zeitliche Reihenfolgen und Markierungsmuster zu deuten.</p>
+<div class="exam"><strong>Merksatz:</strong> Die Lichtreaktionen liefern ATP und NADPH; der Calvin-Zyklus nutzt ATP und NADPH, um CO₂ in organische Stoffe einzubauen.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum benötigt der Calvin-Zyklus ATP und NADPH?</summary>
+          <p>ATP liefert Energie für Umwandlungen und Regeneration; NADPH liefert Reduktionsäquivalente für die Bildung energiereicher organischer Stoffe.</p>
+        </details>
+        <details class="qa">
+          <summary>Was zeigt eine Tracer-Untersuchung?</summary>
+          <p>Sie zeigt, in welchen Molekülen ein markiertes Atom zu bestimmten Zeitpunkten nachweisbar ist und erlaubt Rückschlüsse auf Reaktionswege.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="fotosynthese_faktoren" class="page" data-title="10. Fotosyntheserate und abiotische Faktoren">
+  <div class="pagehead">
+    <span class="kicker">Daten auswerten</span>
+    <h2>10. Fotosyntheserate und abiotische Faktoren</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="fotosynthese_faktoren"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Fotosynthesekurven auswerten</li><li>limitierende Faktoren erkennen</li><li>Lichtkompensationspunkt und Sättigung erläutern</li></ul>
+  </section>
+  <section class="content">
+    <h3>Fotosynthese als Netto- und Bruttogröße</h3>
+<p>Pflanzen betreiben Fotosynthese und Zellatmung. Die gemessene Nettofotosynthese ergibt sich aus der Fotosyntheseleistung abzüglich der Atmung. Am Lichtkompensationspunkt gleichen sich CO₂-Aufnahme durch Fotosynthese und CO₂-Abgabe durch Zellatmung aus.</p>
+<h3>Wichtige Einflussfaktoren</h3>
+<ul>
+  <li><strong>Lichtintensität:</strong> zunächst limitierend, später Sättigung; bei Extremwerten kann Photoinhibition auftreten.</li>
+  <li><strong>CO₂-Konzentration:</strong> Substrat des Calvin-Zyklus; wirkt bei ausreichendem Licht und geeigneter Temperatur limitierend.</li>
+  <li><strong>Temperatur:</strong> beeinflusst Enzyme, Membranen und Photorespiration; Optimum statt unbegrenzter Steigerung.</li>
+  <li><strong>Wasserverfügbarkeit:</strong> beeinflusst Stomata, CO₂-Aufnahme, Turgor und Hitzestress.</li>
+</ul>
+<h3>Limitierender Faktor</h3>
+<p>Der limitierende Faktor ist derjenige Faktor, dessen Veränderung unter den gegebenen Bedingungen die Rate am stärksten beeinflusst. Wenn ein anderer Faktor begrenzt, führt die Erhöhung eines nicht limitierenden Faktors kaum zu einer Ratezunahme.</p>
+<div class="exam"><strong>Klausurtipp:</strong> Bei Kurven immer Achsen, Einheiten, Anfangsbereich, Plateau, Optimum, Abfall und mögliche biologische Ursachen nennen.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum steigt die Fotosyntheserate bei mehr Licht nicht unbegrenzt?</summary>
+          <p>Weil andere Faktoren wie CO₂-Angebot, Enzymkapazität, Temperatur oder Wasserverfügbarkeit limitierend werden.</p>
+        </details>
+        <details class="qa">
+          <summary>Was bedeutet Lichtkompensationspunkt?</summary>
+          <p>An diesem Punkt sind CO₂-Aufnahme durch Fotosynthese und CO₂-Abgabe durch Zellatmung gleich groß; die Netto-CO₂-Bilanz ist null.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="c4" class="page" data-title="11. C4-Pflanzen und Angepasstheit an Wärme/Trockenheit">
+  <div class="pagehead">
+    <span class="kicker">LK-Vertiefung</span>
+    <h2>11. C4-Pflanzen und Angepasstheit an Wärme/Trockenheit</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="c4"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>C3- und C4-Pflanzen vergleichen</li><li>den Vorteil räumlicher Trennung erklären</li><li>ökologische Bedingungen für C4-Vorteile benennen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Das Problem: Photorespiration</h3>
+<p>Rubisco kann CO₂, aber auch O₂ umsetzen. Bei hoher Temperatur, niedriger CO₂-Konzentration im Blatt und teilweise geschlossenen Stomata nimmt Photorespiration zu. Dadurch sinkt die Effizienz der Kohlenstofffixierung.</p>
+<h3>Die C4-Lösung</h3>
+<p>C4-Pflanzen fixieren CO₂ zunächst mithilfe der PEP-Carboxylase in Mesophyllzellen. Die entstehenden C4-Verbindungen transportieren Kohlenstoff in Bündelscheidenzellen, wo CO₂ wieder freigesetzt und im Calvin-Zyklus verarbeitet wird.</p>
+<div class="grid2">
+  <div class="card"><h4>Vorteil</h4><p>CO₂ wird in der Nähe von Rubisco konzentriert. Das verringert Photorespiration und verbessert die Effizienz bei Wärme und Trockenheit.</p></div>
+  <div class="card"><h4>Kosten</h4><p>Der CO₂-Konzentrierungsmechanismus benötigt zusätzliche Energie. Bei kühlen, lichtarmen Bedingungen ist C4 nicht automatisch überlegen.</p></div>
+</div>
+<h3>Ökologischer Bezug</h3>
+<p>C4-Pflanzen sind häufig in warmen, lichtreichen Lebensräumen konkurrenzstark. Ihre Angepasstheit ist ein Beispiel dafür, wie Stoffwechsel, Anatomie und Umweltbedingungen zusammenhängen.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist PEP-Carboxylase für C4-Pflanzen wichtig?</summary>
+          <p>Sie fixiert CO₂ effektiv und ermöglicht den Aufbau eines CO₂-Konzentrierungsmechanismus.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum sind C4-Pflanzen nicht unter allen Bedingungen überlegen?</summary>
+          <p>Weil der C4-Mechanismus zusätzliche Energie kostet und vor allem unter warmen, lichtreichen und oft trockenen Bedingungen Vorteile bringt.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="assimilation_dissimilation" class="page" data-title="12. Aufbauender und abbauender Stoffwechsel im Zusammenhang">
+  <div class="pagehead">
+    <span class="kicker">Vernetzung</span>
+    <h2>12. Aufbauender und abbauender Stoffwechsel im Zusammenhang</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="assimilation_dissimilation"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Assimilation und Dissimilation unterscheiden</li><li>Fotosynthese und Zellatmung verknüpfen</li><li>Stoffwechselprozesse im Ökosystemkontext erklären</li></ul>
+  </section>
+  <section class="content">
+    <h3>Assimilation und Dissimilation</h3>
+<p><strong>Assimilation</strong> bezeichnet den Aufbau körpereigener oder energiereicher organischer Stoffe. <strong>Dissimilation</strong> bezeichnet den Abbau energiereicher organischer Stoffe zur Energiebereitstellung.</p>
+<table>
+  <thead><tr><th>Prozess</th><th>Grundfunktion</th><th>Ökosystembezug</th></tr></thead>
+  <tbody>
+    <tr><td>Fotosynthese</td><td>Aufbau organischer Stoffe aus CO₂ und Wasser mithilfe von Lichtenergie</td><td>Primärproduktion; Grundlage vieler Nahrungsketten</td></tr>
+    <tr><td>Zellatmung</td><td>Abbau organischer Stoffe zur ATP-Bildung</td><td>CO₂-Rückführung; Energieversorgung von Produzenten, Konsumenten und Destruenten</td></tr>
+  </tbody>
+</table>
+<h3>Autotroph und heterotroph</h3>
+<p>Autotrophe Organismen bauen organische Stoffe aus anorganischen Kohlenstoffquellen auf. Heterotrophe Organismen nutzen organische Stoffe anderer Lebewesen als Kohlenstoff- und Energiequelle.</p>
+<div class="callout"><p><strong>Wichtige Vernetzung:</strong> Fotosynthese und Zellatmung sind nicht einfach „Gegenteile“. Sie sind unterschiedliche Stoffwechselwege, die im Ökosystem über Stoffkreisläufe und Energiefluss gekoppelt sind.</p></div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum betreiben Pflanzen auch Zellatmung?</summary>
+          <p>Auch Pflanzen benötigen ATP für Zellprozesse; dafür bauen sie organische Stoffe in der Zellatmung ab.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist Energiefluss kein Kreislauf?</summary>
+          <p>Energie wird bei jeder Umwandlung teilweise als Wärme entwertet; Stoffe können kreisen, Energie muss ständig neu zugeführt werden.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="wechselbeziehungen" class="page" data-title="13. Intra- und interspezifische Wechselbeziehungen">
+  <div class="pagehead">
+    <span class="kicker">Biotische Faktoren</span>
+    <h2>13. Intra- und interspezifische Wechselbeziehungen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="wechselbeziehungen"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>intraspezifische und interspezifische Beziehungen unterscheiden</li><li>Konkurrenz, Parasitismus, Symbiose und Räuber-Beute-Beziehungen erklären</li><li>Wechselwirkungen materialbezogen klassifizieren</li></ul>
+  </section>
+  <section class="content">
+    <h3>Intraspezifisch oder interspezifisch?</h3>
+<p><strong>Intraspezifische Beziehungen</strong> bestehen zwischen Individuen derselben Art, etwa Konkurrenz um Partner, Reviere oder Nahrung. <strong>Interspezifische Beziehungen</strong> bestehen zwischen Individuen verschiedener Arten.</p>
+<table>
+  <thead><tr><th>Beziehung</th><th>Wirkung</th><th>Beispielhafte Deutung</th></tr></thead>
+  <tbody>
+    <tr><td>Konkurrenz</td><td>beide Partner werden durch Nutzung derselben Ressource beeinträchtigt</td><td>zwei Pflanzenarten konkurrieren um Licht</td></tr>
+    <tr><td>Parasitismus</td><td>Parasit profitiert, Wirt wird geschädigt, meist nicht sofort getötet</td><td>Zecke auf Säugetier</td></tr>
+    <tr><td>Symbiose</td><td>beide Partner profitieren</td><td>Mykorrhiza, Flechte</td></tr>
+    <tr><td>Räuber-Beute</td><td>Räuber profitiert, Beute wird getötet</td><td>Luchs und Hase als vereinfachtes Modell</td></tr>
+  </tbody>
+</table>
+<h3>Schutz- und Abwehrverhalten</h3>
+<p>Wechselbeziehungen führen zu Angepasstheiten: Tarnung, Warntracht, Gifte, Stacheln, Fluchtverhalten, Schwarmbildung oder gegenseitige Abhängigkeiten. Solche Merkmale lassen sich über Struktur und Funktion sowie Information und Kommunikation deuten.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist Parasitismus nicht dasselbe wie Räuber-Beute-Beziehung?</summary>
+          <p>Beim Parasitismus lebt der Parasit meist länger auf oder in einem Wirt und tötet ihn nicht unmittelbar; beim Räuber-Beute-Verhältnis wird die Beute in der Regel getötet und gefressen.</p>
+        </details>
+        <details class="qa">
+          <summary>Kann Konkurrenz auch innerhalb einer Art auftreten?</summary>
+          <p>Ja. Intraspezifische Konkurrenz kann besonders stark sein, weil Individuen derselben Art sehr ähnliche Ressourcen benötigen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="konkurrenz_nische" class="page" data-title="14. Konkurrenz, Konkurrenzausschluss und ökologische Nische">
+  <div class="pagehead">
+    <span class="kicker">Nischenkonzept</span>
+    <h2>14. Konkurrenz, Konkurrenzausschluss und ökologische Nische</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="konkurrenz_nische"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>ökologische Nische als Beziehungsgefüge erklären</li><li>Konkurrenzvermeidung und Konkurrenzausschluss unterscheiden</li><li>fundamentale und realisierte Nische anwenden</li></ul>
+  </section>
+  <section class="content">
+    <h3>Ökologische Nische</h3>
+<p>Die ökologische Nische ist nicht der „Wohnort“ einer Art. Sie beschreibt die Gesamtheit der Ansprüche, Wechselwirkungen und Funktionen einer Art in ihrem Ökosystem: Ressourcen, Umweltfaktoren, Aktivitätszeiten, Fortpflanzung, Feinde, Konkurrenten und Rolle im Stoff- und Energiefluss.</p>
+<div class="grid2">
+  <div class="card"><h4>Fundamentale Nische</h4><p>Der theoretisch nutzbare Bereich unter Berücksichtigung der physiologischen Möglichkeiten einer Art.</p></div>
+  <div class="card"><h4>Realisierte Nische</h4><p>Der tatsächlich genutzte Bereich unter natürlichen Bedingungen, insbesondere unter Konkurrenzdruck.</p></div>
+</div>
+<h3>Konkurrenzausschluss und Konkurrenzvermeidung</h3>
+<p>Wenn zwei Arten dauerhaft exakt dieselbe begrenzte Ressource in derselben Weise nutzen, kann eine Art die andere verdrängen. Häufig entstehen jedoch Nischendifferenzierungen: unterschiedliche Nahrung, Aktivitätszeiten, Mikrohabitate oder Wurzeltiefen.</p>
+<div class="exam"><strong>Klausurformulierung:</strong> „Die ökologische Nische ist die Summe der Umweltansprüche und Wechselbeziehungen einer Art“ ist deutlich besser als „Die Nische ist der Lebensraum“.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist „Nische = Lebensraum“ falsch oder zumindest unzureichend?</summary>
+          <p>Weil die Nische nicht nur den Ort, sondern auch Ressourcen, Bedingungen, Wechselwirkungen und Funktionen einer Art umfasst.</p>
+        </details>
+        <details class="qa">
+          <summary>Wie kann Konkurrenzvermeidung aussehen?</summary>
+          <p>Arten nutzen unterschiedliche Ressourcen, Zeiten, Räume oder Strategien, wodurch die direkte Konkurrenz sinkt.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="populationen" class="page" data-title="15. Populationsdichte und Populationswachstum">
+  <div class="pagehead">
+    <span class="kicker">Populationen</span>
+    <h2>15. Populationsdichte und Populationswachstum</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="populationen"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Populationsdichte definieren und berechnen</li><li>exponentielles und logistisches Wachstum unterscheiden</li><li>Wachstumskurven fachsprachlich auswerten</li></ul>
+  </section>
+  <section class="content">
+    <h3>Population und Populationsdichte</h3>
+<p>Eine Population umfasst alle Individuen einer Art in einem abgegrenzten Gebiet, die potenziell miteinander Fortpflanzungsgemeinschaften bilden. Die Populationsdichte gibt die Individuenzahl pro Fläche oder Volumen an.</p>
+<h3>Exponentielles Wachstum</h3>
+<p>Exponentielles Wachstum tritt auf, wenn Ressourcen nicht limitierend wirken und die Wachstumsrate proportional zur Populationsgröße ist. Die Kurve ist J-förmig. In realen Ökosystemen ist exponentielles Wachstum meist nur vorübergehend.</p>
+<h3>Logistisches Wachstum</h3>
+<p>Logistisches Wachstum berücksichtigt begrenzte Ressourcen und eine Kapazitätsgrenze des Lebensraums. Die Kurve ist S-förmig und nähert sich der Umweltkapazität an. Typische Abschnitte sind Anlaufphase, exponentielle Phase, Verzögerungsphase und stationäre Phase.</p>
+<div class="exam"><strong>Materialtraining:</strong> Nennen Sie bei Wachstumskurven nicht nur die Kurvenform. Erklären Sie Ressourcen, Geburtenrate, Sterberate, dichteabhängige Faktoren und Umweltkapazität.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist exponentielles Wachstum langfristig unrealistisch?</summary>
+          <p>Weil Ressourcen, Raum, Nahrung, Krankheiten, Konkurrenz und andere Faktoren begrenzend wirken.</p>
+        </details>
+        <details class="qa">
+          <summary>Was bedeutet Umweltkapazität?</summary>
+          <p>Die Umweltkapazität ist die Populationsgröße, die ein Lebensraum unter gegebenen Bedingungen langfristig tragen kann.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="regulation" class="page" data-title="16. Dichteabhängige und dichteunabhängige Faktoren">
+  <div class="pagehead">
+    <span class="kicker">Steuerung und Regelung</span>
+    <h2>16. Dichteabhängige und dichteunabhängige Faktoren</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="regulation"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>dichteabhängige und dichteunabhängige Faktoren unterscheiden</li><li>Regulation von Populationsentwicklungen erklären</li><li>K- und r-Strategien einordnen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Dichteabhängig</h3>
+<p>Dichteabhängige Faktoren werden stärker, wenn die Populationsdichte steigt. Dazu gehören Konkurrenz, Nahrungsknappheit, Ausbreitung von Parasiten und Krankheiten sowie erhöhter Stress. Sie können stabilisierend wirken, weil sie bei hoher Dichte Wachstum bremsen.</p>
+<h3>Dichteunabhängig</h3>
+<p>Dichteunabhängige Faktoren wirken weitgehend unabhängig von der Populationsdichte, etwa Frost, Dürre, Überschwemmungen, Feuer oder extreme Wetterereignisse. Sie können Populationen stark verändern, ohne dass vorher hohe Dichte vorlag.</p>
+<h3>K- und r-Strategien</h3>
+<table>
+  <thead><tr><th>r-Strategie</th><th>K-Strategie</th></tr></thead>
+  <tbody>
+    <tr><td>viele Nachkommen, geringe Investition pro Nachkomme</td><td>wenige Nachkommen, hohe Investition pro Nachkomme</td></tr>
+    <tr><td>rasche Besiedlung wechselhafter Lebensräume</td><td>Konkurrenzstärke in relativ stabilen Lebensräumen</td></tr>
+    <tr><td>starke Populationsschwankungen möglich</td><td>Population oft nahe der Umweltkapazität</td></tr>
+  </tbody>
+</table>
+<p>Das Konzept ist idealisiert. Viele Arten liegen zwischen den Extremen.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum sind Krankheiten oft dichteabhängig?</summary>
+          <p>Bei hoher Dichte haben Krankheitserreger mehr Übertragungsmöglichkeiten.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist das r/K-Schema nur ein Modell?</summary>
+          <p>Weil reale Arten Mischformen zeigen und Fortpflanzungsstrategien von vielen ökologischen und evolutiven Faktoren abhängen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="lotka" class="page" data-title="17. Räuber-Beute-Beziehungen und Lotka-Volterra-Regeln">
+  <div class="pagehead">
+    <span class="kicker">Modellbildung</span>
+    <h2>17. Räuber-Beute-Beziehungen und Lotka-Volterra-Regeln</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="lotka"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Räuber-Beute-Kurven auswerten</li><li>Lotka-Volterra-Regeln als Modell beschreiben</li><li>Modellgrenzen kritisch beurteilen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Die Modellidee</h3>
+<p>Lotka-Volterra-Modelle beschreiben idealisierte Wechselwirkungen zwischen einer Räuber- und einer Beutepopulation. Typisch sind gekoppelte Schwankungen: Zunächst nimmt die Beutepopulation zu, danach zeitverzögert die Räuberpopulation.</p>
+<ol class="steps">
+  <li><strong>Periodische Schwankung:</strong> Räuber- und Beutepopulation schwanken unter idealisierten Bedingungen periodisch.</li>
+  <li><strong>Konstante Mittelwerte:</strong> Bei gleichbleibenden Bedingungen bleiben langfristige Mittelwerte idealisiert konstant.</li>
+  <li><strong>Störung:</strong> Werden beide Populationen gleich stark dezimiert, erholt sich die Beutepopulation meist schneller.</li>
+</ol>
+<h3>Grenzen des Modells</h3>
+<p>Reale Ökosysteme enthalten mehrere Beutearten, alternative Nahrungsquellen, Krankheiten, Altersstrukturen, Migration, Klimaeinflüsse, menschliche Eingriffe und räumliche Heterogenität. Deshalb sind Lotka-Volterra-Regeln nützliche Denkhilfen, aber keine vollständige Beschreibung realer Ökosysteme.</p>
+<div class="exam"><strong>Bewerten statt nur wiedergeben:</strong> Prüfen Sie, ob Materialdaten zeitverzögerte Maxima, gekoppelte Schwankungen und plausible ökologische Ursachen zeigen. Sagen Sie ausdrücklich, wenn das Modell nur teilweise passt.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum folgt das Maximum der Räuberpopulation oft zeitverzögert auf das Beutemaximum?</summary>
+          <p>Mehr Beute verbessert zunächst Ernährung und Fortpflanzung der Räuber; bis sich dies in der Populationsgröße zeigt, vergeht Zeit.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum passen Lotka-Volterra-Regeln selten perfekt zu Freilanddaten?</summary>
+          <p>Weil reale Ökosysteme komplexer sind als das Zwei-Arten-Modell und viele zusätzliche Faktoren wirken.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="nahrungsnetz" class="page" data-title="18. Nahrungsnetz, Energiefluss und Kohlenstoffkreislauf">
+  <div class="pagehead">
+    <span class="kicker">Ökosystemzusammenhänge</span>
+    <h2>18. Nahrungsnetz, Energiefluss und Kohlenstoffkreislauf</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="nahrungsnetz"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Nahrungskette und Nahrungsnetz unterscheiden</li><li>Energiefluss und Stoffkreislauf erklären</li><li>den Kohlenstoffkreislauf ökologisch deuten</li></ul>
+  </section>
+  <section class="content">
+    <h3>Nahrungskette und Nahrungsnetz</h3>
+<p>Eine Nahrungskette ist eine vereinfachte lineare Darstellung. Ein Nahrungsnetz zeigt realistischer, dass Organismen mehrere Nahrungsquellen besitzen und selbst von mehreren Arten gefressen werden können.</p>
+<div class="grid2">
+  <div class="card"><h4>Produzenten</h4><p>bauen organische Stoffe aus anorganischen Stoffen auf, meist durch Fotosynthese.</p></div>
+  <div class="card"><h4>Konsumenten</h4><p>nutzen organische Stoffe anderer Lebewesen; Konsumenten erster, zweiter und höherer Ordnung.</p></div>
+  <div class="card"><h4>Destruenten</h4><p>bauen tote organische Substanz und Ausscheidungen ab und mineralisieren Stoffe.</p></div>
+  <div class="card"><h4>Trophische Ebene</h4><p>Position im Nahrungsnetz bezogen auf Energie- und Stoffaufnahme.</p></div>
+</div>
+<h3>Energiefluss</h3>
+<p>Energie wird von Produzenten aufgenommen und über trophische Ebenen weitergegeben. Bei jeder Umwandlung geht nutzbare Energie als Wärme verloren. Deshalb nimmt die verfügbare Energie zu höheren trophischen Ebenen stark ab.</p>
+<h3>Kohlenstoffkreislauf</h3>
+<p>Fotosynthese bindet CO₂ in organischen Stoffen. Zellatmung, Zersetzung, Verbrennung und geologische Prozesse setzen CO₂ wieder frei. Menschliche Eingriffe können Flüsse und Speicher im Kohlenstoffkreislauf verschieben.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist ein Nahrungsnetz realistischer als eine Nahrungskette?</summary>
+          <p>Weil Organismen meist mehrere Nahrungsquellen und mehrere Fressfeinde haben.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum nimmt Biomasse zu höheren trophischen Ebenen meist ab?</summary>
+          <p>Weil Energie für Stoffwechsel, Bewegung, Wärmeabgabe und nicht verwertbare Biomasse verloren geht.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="stickstoff" class="page" data-title="19. Stickstoffkreislauf">
+  <div class="pagehead">
+    <span class="kicker">Stoffkreislauf</span>
+    <h2>19. Stickstoffkreislauf</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="stickstoff"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>zentrale Prozesse des Stickstoffkreislaufs beschreiben</li><li>Rolle von Mikroorganismen erklären</li><li>menschliche Eingriffe in den Stickstoffkreislauf beurteilen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Warum Stickstoff wichtig ist</h3>
+<p>Stickstoff ist Bestandteil von Aminosäuren, Proteinen, Nukleinsäuren und vielen weiteren Biomolekülen. Elementarer Stickstoff aus der Luft ist für die meisten Organismen jedoch nicht direkt nutzbar.</p>
+<h3>Zentrale Prozesse</h3>
+<table>
+  <thead><tr><th>Prozess</th><th>Vereinfachte Bedeutung</th></tr></thead>
+  <tbody>
+    <tr><td>Stickstofffixierung</td><td>N₂ wird durch bestimmte Bakterien in biologisch nutzbare Formen überführt.</td></tr>
+    <tr><td>Ammonifikation</td><td>Organischer Stickstoff aus toter Biomasse oder Ausscheidungen wird zu Ammonium umgesetzt.</td></tr>
+    <tr><td>Nitrifikation</td><td>Ammonium wird über Nitrit zu Nitrat oxidiert.</td></tr>
+    <tr><td>Assimilation</td><td>Pflanzen nehmen Ammonium oder Nitrat auf und bauen organische Stickstoffverbindungen auf.</td></tr>
+    <tr><td>Denitrifikation</td><td>Nitrat wird unter bestimmten Bedingungen zu gasförmigen Stickstoffverbindungen reduziert.</td></tr>
+  </tbody>
+</table>
+<h3>Menschlicher Einfluss</h3>
+<p>Düngung, Landwirtschaft, Verbrennungsprozesse und industrielle Stickstofffixierung verändern Stickstoffflüsse. Folgen können Eutrophierung, Sauerstoffmangel, Artenverschiebungen und Treibhausgasemissionen sein.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum können Pflanzen Luftstickstoff meist nicht direkt nutzen?</summary>
+          <p>N₂ ist sehr reaktionsträge; die Dreifachbindung macht elementaren Stickstoff biologisch schwer verfügbar.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum kann übermäßige Düngung Gewässer schädigen?</summary>
+          <p>Mehr Nährstoffe fördern Algenwachstum; deren Abbau kann Sauerstoff verbrauchen und Lebensgemeinschaften verändern.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="methoden" class="page" data-title="20. Ökologische Untersuchungsmethoden">
+  <div class="pagehead">
+    <span class="kicker">Erkenntnisgewinnung</span>
+    <h2>20. Ökologische Untersuchungsmethoden</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="methoden"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>qualitative und quantitative Datenerhebung unterscheiden</li><li>ökologische Faktoren sachgerecht erfassen</li><li>Methodenfehler und Aussagegrenzen erkennen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Qualitativ und quantitativ</h3>
+<p><strong>Qualitative Daten</strong> beantworten vor allem die Frage, welche Arten oder Zustände vorkommen. <strong>Quantitative Daten</strong> beantworten, wie häufig, wie dicht oder in welcher Ausprägung etwas vorkommt.</p>
+<div class="grid2">
+  <div class="card"><h4>Qualitative Erfassung</h4><p>Artenliste, Vorkommen/Nichtvorkommen, Beschreibung von Habitatmerkmalen.</p></div>
+  <div class="card"><h4>Quantitative Erfassung</h4><p>Individuenzahlen, Deckungsgrad, Transekterhebung, Quadratmethode, Populationsdichte, Messwerte abiotischer Faktoren.</p></div>
+</div>
+<h3>Variablen und Vergleichbarkeit</h3>
+<p>Ökologische Freilanddaten sind oft variabel. Deshalb müssen Messzeitpunkt, Fläche, Methode, Wetter, Stichprobengröße und Beobachtereffekte kontrolliert oder zumindest dokumentiert werden.</p>
+<h3>Digitale Auswertung</h3>
+<p>Digitale Erfassung kann Daten strukturieren, Karten erzeugen und Muster sichtbar machen. Sie ersetzt aber nicht die kritische Prüfung von Stichprobe, Messgenauigkeit und biologischer Deutung.</p>
+<div class="exam"><strong>Methodenbewertung:</strong> Fragen Sie immer: Passt die Methode zur Fragestellung? Ist die Stichprobe groß genug? Gibt es Störfaktoren? Welche Aussagen sind gedeckt, welche nicht?</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum reicht eine Artenliste für viele ökologische Fragen nicht aus?</summary>
+          <p>Weil sie keine Häufigkeiten, Dichten, Verteilungen oder Veränderungen über die Zeit zeigt.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist Standardisierung im Freiland wichtig?</summary>
+          <p>Nur vergleichbare Erhebungsbedingungen erlauben belastbare Vergleiche zwischen Flächen oder Zeitpunkten.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="biodiversitaet" class="page" data-title="21. Biodiversität, Stabilität und Ökosystemmanagement">
+  <div class="pagehead">
+    <span class="kicker">Bewertung</span>
+    <h2>21. Biodiversität, Stabilität und Ökosystemmanagement</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="biodiversitaet"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Biodiversität auf mehreren Ebenen erklären</li><li>Bedeutung von Biodiversität fachlich begründen</li><li>Renaturierungs- und Managementmaßnahmen bewerten</li></ul>
+  </section>
+  <section class="content">
+    <h3>Ebenen der Biodiversität</h3>
+<ul>
+  <li><strong>genetische Vielfalt:</strong> Variation innerhalb einer Art oder Population.</li>
+  <li><strong>Artenvielfalt:</strong> Vielfalt der Arten in einem Gebiet.</li>
+  <li><strong>Ökosystemvielfalt:</strong> Vielfalt unterschiedlicher Lebensräume und ökologischer Systeme.</li>
+</ul>
+<h3>Warum Biodiversität wichtig ist</h3>
+<p>Biodiversität kann Funktionen wie Bestäubung, Stoffkreisläufe, Bodenbildung, Klimaregulation, Resilienz und Nahrungsgrundlagen stützen. Sie hat außerdem ethische, kulturelle, ästhetische und ökonomische Bedeutung.</p>
+<h3>Ökosystemmanagement</h3>
+<p>Management umfasst Maßnahmen zum Erhalt, zur nachhaltigen Nutzung oder zur Wiederherstellung von Ökosystemen. Dazu gehören Schutzgebiete, Biotopverbund, Renaturierung, Wiedervernässung, extensive Nutzung, invasive-Arten-Management und Monitoring.</p>
+<div class="exam"><strong>Bewertungskompetenz:</strong> Eine Bewertung braucht Kriterien. Geeignete Kriterien sind ökologische Wirksamkeit, Nachhaltigkeit, Kosten, soziale Folgen, politische Umsetzbarkeit, Zeitmaßstab und Unsicherheiten.</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist Artenzahl allein kein vollständiges Maß für Biodiversität?</summary>
+          <p>Weil genetische Vielfalt, Häufigkeiten, funktionelle Rollen, Lebensraumvielfalt und Vernetzung ebenfalls wichtig sind.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum muss Renaturierung aus mehreren Perspektiven bewertet werden?</summary>
+          <p>Weil ökologische, ökonomische, soziale und politische Folgen miteinander abgewogen werden müssen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="klimawandel" class="page" data-title="22. Anthropogener Treibhauseffekt und Ökosysteme">
+  <div class="pagehead">
+    <span class="kicker">Mensch und Umwelt</span>
+    <h2>22. Anthropogener Treibhauseffekt und Ökosysteme</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="klimawandel"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>den anthropogenen Treibhauseffekt biologisch einordnen</li><li>Folgen für Arten und Ökosysteme erklären</li><li>evidenzbasiert argumentieren</li></ul>
+  </section>
+  <section class="content">
+    <h3>Vom physikalischen Prozess zur ökologischen Folge</h3>
+<p>Der verstärkte Treibhauseffekt verändert Temperatur, Niederschlag, Extremereignisse, Vegetationsperioden, Wasserverfügbarkeit und Meeresbedingungen. Biologisch relevant sind nicht nur Mittelwerte, sondern besonders Extremereignisse, Jahreszeitenverschiebungen und die Geschwindigkeit der Veränderung.</p>
+<h3>Mögliche Folgen</h3>
+<ul>
+  <li>Verschiebung von Verbreitungsgebieten und Höhenstufen</li>
+  <li>Phänologische Veränderungen, etwa frühere Blüte oder veränderte Zugzeiten</li>
+  <li>Mismatch zwischen interagierenden Arten, etwa Pflanzen und Bestäubern</li>
+  <li>Hitzestress, Dürrestress, Waldschäden, erhöhte Brandgefahr</li>
+  <li>Veränderung von Konkurrenzverhältnissen und Ausbreitung invasiver Arten</li>
+</ul>
+<h3>Evidenzbasiert argumentieren</h3>
+<p>Eine gute Argumentation trennt Beobachtung, Erklärung und Bewertung. Sie nutzt Daten, benennt Unsicherheiten und vermeidet Übertreibungen ebenso wie unbegründete Verharmlosungen.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum sind Extremereignisse ökologisch besonders bedeutsam?</summary>
+          <p>Weil kurze, starke Belastungen Überleben, Fortpflanzung und Populationsgrößen stärker beeinflussen können als Durchschnittswerte.</p>
+        </details>
+        <details class="qa">
+          <summary>Was bedeutet phänologische Verschiebung?</summary>
+          <p>Zeitliche Abläufe im Jahreszyklus von Organismen verändern sich, etwa Blüte, Laubentfaltung, Fortpflanzung oder Migration.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="nachhaltigkeit" class="page" data-title="23. Nachhaltigkeit, ökologischer Fußabdruck und hormonartig wirkende Stoffe">
+  <div class="pagehead">
+    <span class="kicker">Angewandte Ökologie</span>
+    <h2>23. Nachhaltigkeit, ökologischer Fußabdruck und hormonartig wirkende Stoffe</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="nachhaltigkeit"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>ökologischen Fußabdruck als Modell einordnen</li><li>Nachhaltigkeit mehrperspektivisch bewerten</li><li>hormonartig wirkende Substanzen in der Umwelt erklären</li></ul>
+  </section>
+  <section class="content">
+    <h3>Ökologischer Fußabdruck</h3>
+<p>Der ökologische Fußabdruck ist ein Modell, das Ressourcenverbrauch und Flächenbedarf menschlichen Handelns veranschaulicht. Er eignet sich zur Reflexion, ist aber eine Vereinfachung: Nicht alle Umweltwirkungen werden vollständig oder gleich differenziert abgebildet.</p>
+<h3>Nachhaltigkeit</h3>
+<p>Nachhaltigkeit bedeutet, ökologische Tragfähigkeit, soziale Gerechtigkeit und ökonomische Handlungsfähigkeit so zu verbinden, dass heutige Bedürfnisse nicht auf Kosten zukünftiger Generationen erfüllt werden.</p>
+<h3>Hormonartig wirkende Substanzen</h3>
+<p>Einige Umweltstoffe können hormonähnlich wirken, indem sie an Rezeptoren binden, Signalwege beeinflussen oder Hormonhaushalte stören. Ökologisch relevant sind mögliche Effekte auf Fortpflanzung, Entwicklung, Verhalten und Populationsdynamik von Organismen.</p>
+<div class="callout"><p><strong>Bewertungsfalle:</strong> „Natürlich“ ist nicht automatisch ungefährlich und „synthetisch“ nicht automatisch gefährlich. Entscheidend sind Stoffeigenschaften, Konzentration, Exposition, Abbaubarkeit, Wirkmechanismus und Risiko.</p></div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist der ökologische Fußabdruck ein Modell?</summary>
+          <p>Er vereinfacht komplexe Umweltwirkungen zu einer vergleichbaren Kenngröße und hat dadurch Aussagekraft, aber auch Grenzen.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum können hormonartig wirkende Stoffe schon in geringen Konzentrationen relevant sein?</summary>
+          <p>Hormonsysteme arbeiten mit Signalwirkungen; kleine Mengen können unter bestimmten Bedingungen biologische Prozesse beeinflussen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="tarnen" class="page" data-title="24. Tarnen, Täuschen, Mimikry und Mimese">
+  <div class="pagehead">
+    <span class="kicker">Information und Kommunikation</span>
+    <h2>24. Tarnen, Täuschen, Mimikry und Mimese</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="tarnen"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>Mimikry und Mimese unterscheiden</li><li>Schutz- und Täuschungsstrategien funktional erklären</li><li>Angepasstheiten evolutionsbiologisch einordnen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Mimese</h3>
+<p>Bei der Mimese ähnelt ein Organismus einem unbelebten oder für andere Organismen uninteressanten Objekt seiner Umgebung. Beispiele sind blattähnliche oder astähnliche Körperformen. Die Funktion besteht häufig darin, von Räubern nicht erkannt zu werden.</p>
+<h3>Mimikry</h3>
+<p>Bei der Mimikry ähnelt ein Organismus einem anderen Organismus oder einem Signal. Häufig wird ein Warnsignal imitiert. Dadurch kann ein eigentlich ungefährlicher Organismus von der Erfahrung eines Räubers mit einem wehrhaften oder giftigen Modell profitieren.</p>
+<div class="grid2">
+  <div class="card"><h4>Bates'sche Mimikry</h4><p>Eine harmlose Art imitiert eine wehrhafte oder ungenießbare Art.</p></div>
+  <div class="card"><h4>Müller'sche Mimikry</h4><p>Mehrere wehrhafte oder ungenießbare Arten ähneln einander und verstärken gemeinsam ein Warnsignal.</p></div>
+</div>
+<h3>LK-Deutung</h3>
+<p>Beschreiben Sie Tarnung nicht nur als „sieht ähnlich aus“. Erklären Sie Selektionsdruck, Signalwirkung, Wahrnehmung des Empfängers und den Vorteil für Überleben oder Fortpflanzung.</p>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen Mimikry und Mimese?</summary>
+          <p>Mimikry imitiert ein biologisch relevantes Signal oder eine andere Art; Mimese imitiert eher Umgebung oder unbelebte Objekte.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist die Wahrnehmung des Räubers entscheidend?</summary>
+          <p>Täuschung wirkt nur, wenn der Empfänger das Signal entsprechend wahrnimmt und sein Verhalten ändert.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="klausurtraining" class="page" data-title="25. Klausurtraining: Operatoren und typische Aufgabenformate">
+  <div class="pagehead">
+    <span class="kicker">Anwendung</span>
+    <h2>25. Klausurtraining: Operatoren und typische Aufgabenformate</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="klausurtraining"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>typische Aufgabenformate erkennen</li><li>Operatoren fachgerecht umsetzen</li><li>Materialdaten in Erklärungen und Bewertungen überführen</li></ul>
+  </section>
+  <section class="content">
+    <h3>Typische Q2-Aufgaben</h3>
+<ul>
+  <li>Diagramme zu Toleranz, Fotosyntheserate, Populationsentwicklung oder Stoffflüssen auswerten.</li>
+  <li>Blattquerschnitte, Chloroplastenmodelle oder Nahrungsnetze erklären.</li>
+  <li>Experimente zu Fotosynthese, Pigmenten oder Arealerfassungen planen und beurteilen.</li>
+  <li>Folgen menschlicher Eingriffe in Ökosysteme analysieren und bewerten.</li>
+</ul>
+<h3>Operatoren</h3>
+<table>
+  <thead><tr><th>Operator</th><th>Was erwartet wird</th></tr></thead>
+  <tbody>
+    <tr><td>beschreiben</td><td>Strukturiert wiedergeben, was im Material oder Sachverhalt erkennbar ist.</td></tr>
+    <tr><td>erklären/erläutern</td><td>Ursachen, Mechanismen und Zusammenhänge fachlich begründen.</td></tr>
+    <tr><td>analysieren</td><td>Material gezielt untersuchen, Teilaspekte herausarbeiten und zusammenführen.</td></tr>
+    <tr><td>beurteilen/bewerten</td><td>Kriterien verwenden, abwägen und zu einem begründeten Urteil kommen.</td></tr>
+  </tbody>
+</table>
+<h3>Drei-Satz-Technik für Materialauswertung</h3>
+<ol class="steps">
+  <li><strong>Materialbefund:</strong> Was zeigt das Material konkret?</li>
+  <li><strong>Fachliche Erklärung:</strong> Welcher biologische Mechanismus erklärt den Befund?</li>
+  <li><strong>Folgerung:</strong> Was bedeutet das für Population, Organismus, Ökosystem oder Bewertung?</li>
+</ol>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was ist der häufigste Fehler bei Diagrammaufgaben?</summary>
+          <p>Nur Trends zu beschreiben, ohne Achsen, Zahlen, Wendepunkte, Fachbegriffe und biologische Ursachen einzubeziehen.</p>
+        </details>
+        <details class="qa">
+          <summary>Was braucht eine Bewertung?</summary>
+          <p>Klare Kriterien, fachliche Belege, Abwägung verschiedener Perspektiven und ein begründetes Urteil.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+
+<article id="glossar" class="page" data-title="26. Glossar und Abschluss-Selbstcheck">
+  <div class="pagehead">
+    <span class="kicker">Abschluss</span>
+    <h2>26. Glossar und Abschluss-Selbstcheck</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="glossar"> Seite erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Lernziele</h3>
+    <ul><li>zentrale Fachbegriffe wiederholen</li><li>eigene Lücken diagnostizieren</li><li>das Themenfeld vernetzt erklären</li></ul>
+  </section>
+  <section class="content">
+    <h3>Fachbegriffe, die Sie sicher beherrschen sollten</h3>
+<div class="checklist">
+  <label><input type="checkbox"> Ökosystem, Biotop, Biozönose</label>
+  <label><input type="checkbox"> abiotische und biotische Faktoren</label>
+  <label><input type="checkbox"> Toleranzkurve, Optimum, Präferendum, Pessimum</label>
+  <label><input type="checkbox"> stenök, euryök, ökologische Potenz</label>
+  <label><input type="checkbox"> homoiotherm, poikilotherm, RGT-Regel</label>
+  <label><input type="checkbox"> Hydro-, Hygro-, Meso- und Xerophyten</label>
+  <label><input type="checkbox"> Chloroplast, Thylakoid, Stroma, Lichtsammelkomplex</label>
+  <label><input type="checkbox"> Absorptionsspektrum, Wirkungsspektrum, Chromatografie</label>
+  <label><input type="checkbox"> Lichtreaktionen, ATP, NADPH, Protonengradient</label>
+  <label><input type="checkbox"> Calvin-Zyklus: Fixierung, Reduktion, Regeneration</label>
+  <label><input type="checkbox"> C3-Pflanzen, C4-Pflanzen, Photorespiration</label>
+  <label><input type="checkbox"> Assimilation, Dissimilation, autotroph, heterotroph</label>
+  <label><input type="checkbox"> Konkurrenz, Parasitismus, Symbiose, Räuber-Beute-Beziehung</label>
+  <label><input type="checkbox"> ökologische Nische, Konkurrenzausschluss, Konkurrenzvermeidung</label>
+  <label><input type="checkbox"> Populationsdichte, exponentielles und logistisches Wachstum</label>
+  <label><input type="checkbox"> dichteabhängige und dichteunabhängige Faktoren</label>
+  <label><input type="checkbox"> K-Strategie, r-Strategie, Lotka-Volterra-Regeln</label>
+  <label><input type="checkbox"> Nahrungsnetz, trophische Ebene, Energiefluss</label>
+  <label><input type="checkbox"> Kohlenstoffkreislauf, Stickstoffkreislauf</label>
+  <label><input type="checkbox"> Biodiversität, Renaturierung, Ökosystemmanagement</label>
+  <label><input type="checkbox"> anthropogener Treibhauseffekt, ökologischer Fußabdruck</label>
+  <label><input type="checkbox"> hormonartig wirkende Substanzen, Mimikry, Mimese</label>
+</div>
+<div class="exam">
+  <strong>Letzter Test:</strong> Erklären Sie das Themenfeld in fünf Minuten mündlich: Ökosystem → Umweltfaktoren → Fotosynthese → Angepasstheit → Wechselbeziehungen → Populationen → Stoffkreisläufe → menschlicher Einfluss → Nachhaltigkeit. Wenn Sie die Übergänge sauber formulieren können, ist Ihre Wiederholung gut vernetzt.
+</div>
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Welche drei Themen würden Sie zuerst wiederholen, wenn Sie morgen Klausur hätten?</summary>
+          <p>Priorisieren Sie die Themen, bei denen Sie Diagramme nicht sicher auswerten oder Fachbegriffe nicht präzise anwenden können.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist das wichtigste Qualitätsmerkmal einer sehr guten LK-Antwort in Q2?</summary>
+          <p>Sie verbindet Materialbezug, Fachsprache, Systemdenken, kausale Erklärung, Basiskonzepte und eine begründete Bewertung, wenn der Operator dies verlangt.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+    </main>
+  </div>
+
+  <footer>
+    <p>Hinweis für die manuelle Weiterbearbeitung: Jede Seite endet mit „Siehe auch ...“. Dort können Links auf konkrete Arbeitsblätter, Hefteinträge, Präsentationen, Versuchsprotokolle, Freilandprotokolle oder Klausurhinweise ergänzt werden.</p>
+  </footer>
+
+  <script>
+    const pages = ["start", "ueberblick", "oekosystem", "abiotische_faktoren", "temperatur", "licht_wasser", "blatt_chloroplast", "pigmente", "lichtreaktionen", "calvin", "fotosynthese_faktoren", "c4", "assimilation_dissimilation", "wechselbeziehungen", "konkurrenz_nische", "populationen", "regulation", "lotka", "nahrungsnetz", "stickstoff", "methoden", "biodiversitaet", "klimawandel", "nachhaltigkeit", "tarnen", "klausurtraining", "glossar"];
+    const buttons = Array.from(document.querySelectorAll('.navbtn'));
+    const pageEls = Array.from(document.querySelectorAll('.page'));
+    const boxes = Array.from(document.querySelectorAll('.donebox'));
+    const progressFill = document.getElementById('progressfill');
+    const progressText = document.getElementById('progresstext');
+    let current = pages[0];
+
+    function storageKey(id) { return 'bio-q2-lk-lernpfad-' + id; }
+
+    function updateProgress() {
+      let done = 0;
+      boxes.forEach(box => {
+        const checked = localStorage.getItem(storageKey(box.dataset.page)) === '1';
+        box.checked = checked;
+        if (checked) done++;
+      });
+      buttons.forEach(btn => {
+        const id = btn.dataset.target;
+        btn.classList.toggle('done', localStorage.getItem(storageKey(id)) === '1');
+      });
+      const pct = Math.round(done / pages.length * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `${done} von ${pages.length} Seiten erledigt · ${pct} %`;
+    }
+
+    function showPage(id, push=true) {
+      if (!pages.includes(id)) id = pages[0];
+      current = id;
+      pageEls.forEach(p => p.classList.toggle('active', p.id === id));
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+      const idx = pages.indexOf(id);
+      document.getElementById('prevBtn').disabled = idx === 0;
+      document.getElementById('nextBtn').disabled = idx === pages.length - 1;
+      if (push) history.replaceState(null, '', '#' + id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.target)));
+    boxes.forEach(box => box.addEventListener('change', () => {
+      localStorage.setItem(storageKey(box.dataset.page), box.checked ? '1' : '0');
+      updateProgress();
+    }));
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx > 0) showPage(pages[idx - 1]);
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx < pages.length - 1) showPage(pages[idx + 1]);
+    });
+
+    updateProgress();
+    showPage(location.hash ? location.hash.substring(1) : pages[0], false);
+  </script>
+</body>
+</html>
