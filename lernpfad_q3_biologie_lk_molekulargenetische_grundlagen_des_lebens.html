@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernpfad Q3 Biologie LK – Molekulargenetische Grundlagen des Lebens</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #18202b;
+      --muted: #5b6677;
+      --line: #d9e1ec;
+      --accent: #315a8c;
+      --accent2: #5c7fa9;
+      --soft: #eaf1f9;
+      --good: #2f6f4e;
+      --warn: #8a5a00;
+      --danger: #8a2d2d;
+      --shadow: 0 12px 30px rgba(24, 32, 43, .10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; }
+    header { padding: 2.2rem clamp(1rem, 3vw, 2.5rem); background: linear-gradient(135deg, #203a5d, #315a8c 58%, #7a99b8); color: white; }
+    header h1 { max-width: 1100px; margin: 0 auto .6rem; font-size: clamp(1.7rem, 3.4vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; }
+    header p { max-width: 1100px; margin: 0 auto; font-size: clamp(1rem, 1.7vw, 1.2rem); opacity: .94; }
+    .meta { max-width: 1100px; margin: 1rem auto 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+    .pill { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .65rem; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; background: rgba(255,255,255,.12); font-size: .9rem; }
+    .layout { display: grid; grid-template-columns: minmax(260px, 330px) 1fr; gap: 1.2rem; max-width: 1400px; margin: 0 auto; padding: 1.2rem; }
+    aside { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto; padding: 1rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .progresswrap { margin-bottom: 1rem; padding-bottom: .85rem; border-bottom: 1px solid var(--line); }
+    .progressbar { height: .7rem; background: #edf1f7; border-radius: 99px; overflow: hidden; border: 1px solid var(--line); }
+    .progressbar > div { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .25s ease; }
+    #progresstext { margin: .4rem 0 0; color: var(--muted); font-size: .92rem; }
+    .navlist { display: grid; gap: .35rem; }
+    .navbtn { width: 100%; text-align: left; border: 1px solid transparent; border-radius: 12px; padding: .58rem .65rem; background: transparent; color: var(--ink); cursor: pointer; display: grid; grid-template-columns: 2.4rem 1fr; gap: .25rem; align-items: center; font: inherit; line-height: 1.25; }
+    .navbtn:hover { background: var(--soft); }
+    .navbtn.active { background: var(--soft); border-color: #b9cbe0; color: #173d68; font-weight: 700; }
+    .navbtn.done .num { background: #dcefe6; color: var(--good); border-color: #b2d7c6; }
+    .num { display: inline-flex; justify-content: center; align-items: center; width: 2rem; height: 2rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-size: .82rem; font-weight: 700; }
+    main { min-width: 0; }
+    .toolbar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; gap: .8rem; align-items: center; padding: .8rem 0; background: linear-gradient(var(--bg), rgba(245,247,251,.92)); backdrop-filter: blur(6px); }
+    .toolbar button, .printbtn { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: .6rem .9rem; cursor: pointer; color: var(--ink); box-shadow: 0 3px 10px rgba(24,32,43,.05); font: inherit; }
+    .toolbar button:hover, .printbtn:hover { border-color: #aac0d8; color: var(--accent); }
+    .toolbar button:disabled { opacity: .45; cursor: not-allowed; }
+    .page { display: none; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1rem, 2.4vw, 2rem); box-shadow: var(--shadow); margin-bottom: 1.2rem; }
+    .page.active { display: block; animation: fade .18s ease-out; }
+    @keyframes fade { from { opacity: .35; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .pagehead { display: grid; grid-template-columns: 1fr auto; gap: .6rem; align-items: start; border-bottom: 1px solid var(--line); padding-bottom: 1rem; margin-bottom: 1rem; }
+    .kicker { grid-column: 1 / -1; color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 800; }
+    h2 { margin: 0; font-size: clamp(1.5rem, 2.6vw, 2.35rem); line-height: 1.12; }
+    h3 { margin-top: 1.4rem; margin-bottom: .45rem; color: #213b5a; }
+    h4 { margin: 0 0 .35rem; color: #23384f; }
+    .done { white-space: nowrap; align-self: center; padding: .45rem .65rem; border-radius: 999px; background: #f1f5fa; border: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
+    .goals { background: #f7f9fc; border: 1px solid var(--line); border-radius: 14px; padding: .8rem 1rem; }
+    .goals h3 { margin-top: 0; }
+    .goals ul { margin-bottom: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; font-size: .96rem; }
+    th, td { border: 1px solid var(--line); padding: .7rem; vertical-align: top; }
+    th { background: #edf3fa; text-align: left; color: #223b59; }
+    .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1rem 0; }
+    .card { background: #f8fafc; border: 1px solid var(--line); border-radius: 14px; padding: .9rem; }
+    .card p:last-child { margin-bottom: 0; }
+    .callout, .note, .exam, .task, .warning { margin: 1rem 0; padding: .9rem 1rem; border-radius: 14px; border: 1px solid var(--line); }
+    .callout { background: #eef5ff; border-color: #cfe0f5; }
+    .note { background: #f4faf6; border-color: #c5e4d3; }
+    .exam { background: #f7f2e7; border-color: #e6d3a4; }
+    .task { background: #f8f1fb; border-color: #dec5ec; }
+    .warning { background: #fff0f0; border-color: #efc2c2; }
+    .steps { padding-left: 1.25rem; }
+    .steps li { margin: .35rem 0; }
+    .selfcheck { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+    .qa { margin: .55rem 0; border: 1px solid var(--line); border-radius: 12px; background: #fbfcfe; overflow: hidden; }
+    .qa summary { cursor: pointer; padding: .75rem .9rem; font-weight: 700; color: #223b59; }
+    .qa p { padding: 0 .9rem .85rem; margin: 0; }
+    .seealso { margin-top: 1.4rem; padding-top: 1rem; border-top: 2px dashed #c9d4e2; color: var(--muted); min-height: 3.5rem; }
+    .columns { columns: 3 16rem; column-gap: 2rem; }
+    .columns ul { margin-top: 0; break-inside: avoid; }
+    .checkgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; margin: 1rem 0; }
+    .checkgrid label { display: block; padding: .65rem .75rem; background: #f8fafc; border: 1px solid var(--line); border-radius: 12px; }
+    footer { max-width: 1400px; margin: 0 auto 2rem; padding: 0 1.2rem; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } aside { position: relative; max-height: none; } .grid2 { grid-template-columns: 1fr; } .checkgrid { grid-template-columns: 1fr; } .pagehead { grid-template-columns: 1fr; } .done { justify-self: start; } }
+    @media print { body { background: white; } header, aside, .toolbar { display: none !important; } .layout { display: block; padding: 0; } .page { display: block !important; box-shadow: none; border: 0; page-break-after: always; } .qa p { display: block; } details > summary { list-style: none; } .seealso { min-height: 2.5rem; } }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lernpfad Q3 Biologie LK: Molekulargenetische Grundlagen des Lebens</h1>
+    <p>Ein klickbarer Wiederholungspfad für Schülerinnen und Schüler der Klasse 12 im Leistungskurs Biologie. Bearbeiten Sie die Seiten selbstständig, prüfen Sie Ihr Verständnis mit den Selbstchecks und ergänzen Sie später Ihre Unterrichtsmaterialien unter „Siehe auch ...“.</p>
+    <div class="meta">
+      <span class="pill">Q3 · Biologie · Leistungskurs</span>
+      <span class="pill">Berlin · gymnasiale Oberstufe</span>
+      <span class="pill">Stand: 05.07.2026</span>
+      <span class="pill">selbstständige Wiederholung</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside aria-label="Navigation">
+      <div class="progresswrap">
+        <strong>Fortschritt</strong>
+        <div class="progressbar" aria-hidden="true"><div id="progressfill"></div></div>
+        <p id="progresstext">0 von 25 Seiten erledigt</p>
+      </div>
+      <nav class="navlist" aria-label="Seiten des Lernpfads">
+        <button class="navbtn" data-target="start"><span class="num">01</span><span>So arbeiten Sie mit diesem Lernpfad</span></button>
+        <button class="navbtn" data-target="ueberblick"><span class="num">02</span><span>Das Themenfeld Q3 im Zusammenhang</span></button>
+        <button class="navbtn" data-target="dna_rna"><span class="num">03</span><span>DNA und RNA: Bau und Funktion</span></button>
+        <button class="navbtn" data-target="gen_chromosom_genom"><span class="num">04</span><span>Gen, Chromosom, Genom</span></button>
+        <button class="navbtn" data-target="replikation"><span class="num">05</span><span>Semikonservative Replikation</span></button>
+        <button class="navbtn" data-target="transkription"><span class="num">06</span><span>Transkription: von DNA zu RNA</span></button>
+        <button class="navbtn" data-target="rna_prozessierung"><span class="num">07</span><span>RNA-Prozessierung</span></button>
+        <button class="navbtn" data-target="translation"><span class="num">08</span><span>Translation und genetischer Code</span></button>
+        <button class="navbtn" data-target="mutationen"><span class="num">09</span><span>Genmutationen und ihre Folgen</span></button>
+        <button class="navbtn" data-target="pcr"><span class="num">10</span><span>PCR: gezielte Vervielfältigung von DNA</span></button>
+        <button class="navbtn" data-target="gelelektrophorese"><span class="num">11</span><span>Gelelektrophorese: DNA-Fragmente trennen</span></button>
+        <button class="navbtn" data-target="regulation_eukaryoten"><span class="num">12</span><span>Genaktivität bei Eukaryoten regulieren</span></button>
+        <button class="navbtn" data-target="methylierung"><span class="num">13</span><span>Epigenetik und DNA-Methylierung</span></button>
+        <button class="navbtn" data-target="histonmodifikation"><span class="num">14</span><span>Histonmodifikation und Chromatinzugänglichkeit</span></button>
+        <button class="navbtn" data-target="rna_interferenz"><span class="num">15</span><span>RNA-Interferenz</span></button>
+        <button class="navbtn" data-target="krebs"><span class="num">16</span><span>Krebs: Onkogene und Anti-Onkogene</span></button>
+        <button class="navbtn" data-target="stammbaeume"><span class="num">17</span><span>Familienstammbäume auswerten</span></button>
+        <button class="navbtn" data-target="gentest_beratung"><span class="num">18</span><span>Gentest und humangenetische Beratung</span></button>
+        <button class="navbtn" data-target="gentechnik"><span class="num">19</span><span>Plasmide, Restriktionsenzyme und rekombinante DNA</span></button>
+        <button class="navbtn" data-target="geneditierung"><span class="num">20</span><span>Geneditierung mit CRISPR/Cas9</span></button>
+        <button class="navbtn" data-target="gentherapie"><span class="num">21</span><span>Gentherapie und personalisierte Medizin</span></button>
+        <button class="navbtn" data-target="bioethik"><span class="num">22</span><span>Ethische und juristische Aspekte gentechnischer Verfahren</span></button>
+        <button class="navbtn" data-target="chromosomen_mikroskopie"><span class="num">23</span><span>Chromosomen mikroskopieren und DNA extrahieren</span></button>
+        <button class="navbtn" data-target="materialauswertung"><span class="num">24</span><span>Molekulargenetische Materialien auswerten</span></button>
+        <button class="navbtn" data-target="glossar"><span class="num">25</span><span>Glossar und letzter Selbstcheck</span></button>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="toolbar">
+        <button id="prevBtn">← Zurück</button>
+        <button class="printbtn" onclick="window.print()">Drucken / als PDF sichern</button>
+        <button id="nextBtn">Weiter →</button>
+      </div>
+
+      <article class="page" id="start">
+  <div class="pagehead">
+    <div class="kicker">Start</div>
+    <h2>01. So arbeiten Sie mit diesem Lernpfad</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="start"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie überblicken, welche Teilgebiete im Themenfeld Q3 zusammengehören.</li><li>Sie planen Ihre Wiederholung so, dass Sie nicht nur Begriffe lernen, sondern Mechanismen erklären können.</li><li>Sie nutzen die Selbstchecks, um Lücken gezielt zu finden.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Dieser Lernpfad dient der eigenständigen Wiederholung des Themenfeldes <strong>„Molekulargenetische Grundlagen des Lebens“</strong> im Leistungskurs Biologie. Der Schwerpunkt liegt nicht auf dem Auswendiglernen einzelner Definitionen, sondern auf dem Verstehen von Zusammenhängen: Wie wird genetische Information gespeichert, vervielfältigt, abgelesen, reguliert, verändert, untersucht und technisch genutzt?</p>
+<div class="callout"><strong>Arbeitsweise:</strong> Bearbeiten Sie die Seiten nacheinander oder wählen Sie gezielt die Seiten aus, bei denen Sie Wiederholungsbedarf haben. Markieren Sie eine Seite erst dann als erledigt, wenn Sie die zentralen Mechanismen ohne Vorlage erklären können.</div>
+<h3>Was im Leistungskurs besonders wichtig ist</h3>
+<p>Im Leistungskurs müssen Sie biologische Sachverhalte nicht nur reproduzieren, sondern auf Material anwenden, Modellgrenzen erkennen und biologische sowie ethische Aspekte begründet bewerten. Achten Sie daher besonders auf kausale Erklärungen: <em>Welche Struktur ermöglicht welche Funktion? Welche molekulare Veränderung führt zu welcher Folge auf Zell-, Organismus- oder Populationsebene?</em></p>
+<div class="grid2"><div class="card"><h4>Fachliche Leitfrage</h4><p>Wie führt die Abfolge von Nukleotiden über regulierte Genexpression zu Zellfunktionen, Merkmalen und Erkrankungsrisiken?</p></div><div class="card"><h4>Methodische Leitfrage</h4><p>Wie lassen sich DNA, RNA und Proteine experimentell untersuchen, verändern und diagnostisch nutzen?</p></div></div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Wann sollten Sie eine Seite als erledigt markieren?</summary>
+          <p>Erst dann, wenn Sie den zentralen Mechanismus frei, fachsprachlich und anhand eines einfachen Beispiels erklären können.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum reicht es nicht, nur Begriffe zu lernen?</summary>
+          <p>Weil Klausuraufgaben im LK typischerweise Materialien enthalten, die eine Anwendung und Verknüpfung der Begriffe verlangen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="ueberblick">
+  <div class="pagehead">
+    <div class="kicker">Orientierung</div>
+    <h2>02. Das Themenfeld Q3 im Zusammenhang</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="ueberblick"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie ordnen die Inhalte des Themenfeldes in eine sinnvolle Lernstruktur ein.</li><li>Sie unterscheiden Speicher-, Realisierungs-, Regulations-, Diagnose- und Anwendungsebene.</li><li>Sie erkennen die Basiskonzepte, die immer wieder verwendet werden.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Das Themenfeld lässt sich in fünf große Ebenen gliedern. Diese Ebenen tauchen in Klausuren oft gemeinsam auf.</p>
+<table><tr><th>Ebene</th><th>Zentrale Frage</th><th>Typische Inhalte</th></tr>
+<tr><td>Speicherung</td><td>Wie ist genetische Information in Molekülen organisiert?</td><td>DNA, RNA, Chromosomen, Genome, Gene, Allele</td></tr>
+<tr><td>Realisierung</td><td>Wie wird aus Information ein Genprodukt?</td><td>Replikation, Transkription, RNA-Prozessierung, Translation, genetischer Code</td></tr>
+<tr><td>Veränderung</td><td>Wie entstehen neue Varianten?</td><td>Genmutationen, Mutagene, Auswirkungen auf Proteine und Merkmale</td></tr>
+<tr><td>Regulation</td><td>Warum wird nicht jedes Gen in jeder Zelle gleich genutzt?</td><td>Transkriptionsfaktoren, Epigenetik, Methylierung, Histonmodifikation, RNA-Interferenz, Krebs</td></tr>
+<tr><td>Untersuchung und Anwendung</td><td>Wie nutzt man molekulargenetisches Wissen?</td><td>PCR, Gelelektrophorese, Stammbäume, Gentests, Gentechnik, CRISPR/Cas9, Gentherapie, personalisierte Medizin</td></tr></table>
+<h3>Basiskonzepte als roter Faden</h3>
+<div class="grid2"><div class="card"><h4>Struktur und Funktion</h4><p>Basenpaarung, Enzym-Substrat-Erkennung, Proteinstruktur und molekularbiologische Verfahren beruhen darauf, dass bestimmte Strukturen bestimmte Funktionen ermöglichen.</p></div><div class="card"><h4>Information und Kommunikation</h4><p>DNA-Sequenzen codieren Information; Zellen decodieren sie, regulieren sie und reagieren auf innere und äußere Signale.</p></div><div class="card"><h4>Steuerung und Regelung</h4><p>Genaktivität wird reguliert. Fehlregulation kann zur Krebsentstehung beitragen.</p></div><div class="card"><h4>Individuelle und evolutive Entwicklung</h4><p>Vererbung, Mutation und genetische Variation sind Grundlagen individueller Merkmale und evolutionärer Veränderung.</p></div></div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Welche Ebene ist betroffen, wenn eine Punktmutation ein Protein verändert?</summary>
+          <p>Zunächst die Veränderungsebene; die Folgen zeigen sich aber über die Realisierungsebene, weil die veränderte DNA-Sequenz über mRNA zu einem veränderten Protein führen kann.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist Regulation der Genexpression für Vielzeller unverzichtbar?</summary>
+          <p>Weil Zellen eines Organismus weitgehend dieselbe DNA besitzen, aber unterschiedliche Zelltypen durch unterschiedliche Genaktivität entstehen und erhalten werden.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="dna_rna">
+  <div class="pagehead">
+    <div class="kicker">Speicherung genetischer Information</div>
+    <h2>03. DNA und RNA: Bau und Funktion</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="dna_rna"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie beschreiben den Bau von DNA und RNA fachsprachlich.</li><li>Sie erklären, warum die DNA als Informationsspeicher geeignet ist.</li><li>Sie vergleichen DNA und RNA funktional.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>DNA und RNA sind <strong>Nukleinsäuren</strong>. Ihre Grundbausteine sind <strong>Nukleotide</strong>. Ein Nukleotid besteht aus einem Zucker, einer Phosphatgruppe und einer organischen Base. Bei der DNA ist der Zucker Desoxyribose, bei der RNA Ribose.</p>
+<table><tr><th>Merkmal</th><th>DNA</th><th>RNA</th></tr><tr><td>Zucker</td><td>Desoxyribose</td><td>Ribose</td></tr><tr><td>Basen</td><td>Adenin, Thymin, Guanin, Cytosin</td><td>Adenin, Uracil, Guanin, Cytosin</td></tr><tr><td>typische Struktur</td><td>Doppelstrang, antiparallel, Doppelhelix</td><td>meist Einzelstrang, kann Sekundärstrukturen bilden</td></tr><tr><td>Funktion</td><td>langfristige Speicherung genetischer Information</td><td>Informationsübertragung, Regulation, Beteiligung an der Proteinbiosynthese</td></tr></table>
+<h3>Warum ist DNA ein geeigneter Informationsspeicher?</h3>
+<ul><li>Die Reihenfolge der Basen kann große Informationsmengen codieren.</li><li>Komplementäre Basenpaarung ermöglicht eine präzise Kopie.</li><li>Der Doppelstrang macht Reparatur möglich, weil ein Strang als Vorlage dienen kann.</li><li>Die chemische Stabilität der DNA unterstützt langfristige Speicherung.</li></ul>
+<div class="note"><strong>Fachsprachlicher Kern:</strong> Die Information liegt nicht in den einzelnen Basen allein, sondern in ihrer <strong>Sequenz</strong>. Die Basenpaarung A–T beziehungsweise G–C erklärt, warum aus einem Einzelstrang die Sequenz des komplementären Strangs abgeleitet werden kann.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was bedeutet „antiparallel“?</summary>
+          <p>Die beiden DNA-Stränge verlaufen in entgegengesetzter Richtung: ein Strang in 5′→3′-, der andere in 3′→5′-Richtung.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist die Basenpaarung für Replikation und PCR wichtig?</summary>
+          <p>Weil neue Stränge durch komplementäre Anlagerung von Nukleotiden an eine Vorlage entstehen können.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="gen_chromosom_genom">
+  <div class="pagehead">
+    <div class="kicker">Organisation genetischer Information</div>
+    <h2>04. Gen, Chromosom, Genom</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="gen_chromosom_genom"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie unterscheiden Gen, Allel, Chromosom und Genom.</li><li>Sie erklären, wie DNA im Zellkern organisiert wird.</li><li>Sie verwenden die Begriffe Autosom und Gonosom korrekt.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Ein <strong>Genom</strong> ist die Gesamtheit der genetischen Information einer Zelle oder eines Organismus. Bei Eukaryoten liegt der größte Teil dieser Information im Zellkern in Form linearer Chromosomen vor. Zusätzlich besitzen Mitochondrien eigene DNA.</p>
+<div class="grid2"><div class="card"><h4>Gen</h4><p>Ein Gen ist ein DNA-Abschnitt, dessen Information zur Bildung eines funktionellen Produkts beiträgt, zum Beispiel eines Proteins oder einer funktionellen RNA.</p></div><div class="card"><h4>Allel</h4><p>Ein Allel ist eine Variante eines Gens. Unterschiedliche Allele können zu unterschiedlichen Ausprägungen eines Merkmals beitragen.</p></div><div class="card"><h4>Chromosom</h4><p>Ein Chromosom ist eine aus DNA und Proteinen aufgebaute Struktur, die genetische Information verpackt und bei Zellteilungen verteilt.</p></div><div class="card"><h4>Autosom und Gonosom</h4><p>Autosomen sind nicht geschlechtsbestimmende Chromosomen. Gonosomen sind Geschlechtschromosomen.</p></div></div>
+<h3>Vom DNA-Faden zum Chromosom</h3>
+<p>DNA wird um Histonproteine gewickelt und bildet Chromatin. Vor Zellteilungen wird Chromatin stärker kondensiert; dadurch werden Chromosomen mikroskopisch sichtbar. Diese Verpackung ist nicht nur mechanisch wichtig, sondern beeinflusst auch die Zugänglichkeit von Genen.</p>
+<div class="task"><strong>Übungsimpuls:</strong> Formulieren Sie in einem Satz den Unterschied zwischen „Die Zelle besitzt ein Genom“ und „Ein Chromosom enthält viele Gene“.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist Chromatinverpackung auch für Genregulation relevant?</summary>
+          <p>Weil dicht verpackte DNA schlechter zugänglich für Transkriptionsapparat und Regulationsproteine ist als locker verpackte DNA.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen einem Gen und einem Allel?</summary>
+          <p>Ein Gen ist ein funktioneller DNA-Abschnitt; ein Allel ist eine konkrete Variante dieses Gens.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="replikation">
+  <div class="pagehead">
+    <div class="kicker">Weitergabe genetischer Information</div>
+    <h2>05. Semikonservative Replikation</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="replikation"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erläutern den semikonservativen Mechanismus der DNA-Replikation.</li><li>Sie erklären die Rolle von Primer, DNA-Polymerase und Okazaki-Fragmenten.</li><li>Sie begründen, warum Leit- und Folgestrang unterschiedlich entstehen.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Vor einer Zellteilung muss die DNA verdoppelt werden. Die Replikation ist <strong>semikonservativ</strong>: Jedes Tochter-DNA-Molekül enthält einen alten und einen neu synthetisierten Strang.</p>
+<ol class="steps"><li>Die Doppelhelix wird geöffnet; die beiden Einzelstränge dienen als Vorlagen.</li><li>Primer liefern einen Startpunkt mit freier 3′-OH-Gruppe.</li><li>DNA-Polymerasen verlängern neue DNA-Stränge ausschließlich in 5′→3′-Richtung.</li><li>Am Leitstrang kann kontinuierlich synthetisiert werden.</li><li>Am Folgestrang entstehen diskontinuierlich <strong>Okazaki-Fragmente</strong>, die anschließend verbunden werden.</li></ol>
+<div class="exam"><strong>Typischer Klausurfehler:</strong> Nicht schreiben, die DNA-Polymerase „liest in beide Richtungen“. Präziser ist: Sie liest die Vorlage in 3′→5′-Richtung und synthetisiert den neuen Strang in 5′→3′-Richtung.</div>
+<h3>Warum ist der Mechanismus plausibel?</h3>
+<p>Die komplementäre Basenpaarung erklärt, wie die Sequenz des neuen Strangs festgelegt wird. Der semikonservative Mechanismus erklärt außerdem, wie genetische Information zuverlässig an Tochterzellen weitergegeben werden kann.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was bedeutet semikonservativ?</summary>
+          <p>Jedes neu entstandene DNA-Molekül enthält einen alten Vorlagenstrang und einen neu synthetisierten Strang.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum entstehen Okazaki-Fragmente?</summary>
+          <p>Weil DNA-Polymerasen nur in 5′→3′-Richtung synthetisieren können, die beiden Vorlagenstränge aber antiparallel verlaufen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="transkription">
+  <div class="pagehead">
+    <div class="kicker">Realisierung genetischer Information I</div>
+    <h2>06. Transkription: von DNA zu RNA</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="transkription"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie beschreiben die Schritte der Transkription.</li><li>Sie erklären die Funktion eines Promotors.</li><li>Sie unterscheiden codierenden Strang, Matrizenstrang und RNA-Sequenz.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Bei der <strong>Transkription</strong> wird die Information eines DNA-Abschnitts in eine RNA-Kopie übertragen. Bei proteincodierenden Genen entsteht zunächst eine prä-mRNA, die bei Eukaryoten weiterverarbeitet wird.</p>
+<table><tr><th>Phase</th><th>Was geschieht?</th></tr><tr><td>Initiation</td><td>RNA-Polymerase und Hilfsproteine binden am Promotor. Der Promotor legt fest, wo Transkription beginnt und welcher DNA-Strang als Vorlage dient.</td></tr><tr><td>Elongation</td><td>Die RNA-Polymerase synthetisiert RNA komplementär zum Matrizenstrang in 5′→3′-Richtung.</td></tr><tr><td>Termination</td><td>Die Transkription endet; RNA und Polymerase lösen sich.</td></tr></table>
+<h3>Strangbegriffe sauber verwenden</h3>
+<ul><li>Der <strong>Matrizenstrang</strong> wird abgelesen.</li><li>Die RNA ist komplementär zum Matrizenstrang.</li><li>Der <strong>codierende Strang</strong> hat im Wesentlichen dieselbe Basenfolge wie die RNA, nur mit Thymin statt Uracil.</li></ul>
+<div class="warning"><strong>Achten Sie auf Richtung und Komplementarität:</strong> Viele Fehler in Materialaufgaben entstehen dadurch, dass DNA- und mRNA-Sequenzen nicht korrekt zugeordnet werden.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Welche Funktion hat der Promotor?</summary>
+          <p>Er ist eine regulatorisch wichtige DNA-Sequenz, an der Transkriptionsapparat und Regulationsproteine ansetzen; er bestimmt den Startbereich der Transkription.</p>
+        </details>
+        <details class="qa">
+          <summary>Ist mRNA identisch mit dem Matrizenstrang?</summary>
+          <p>Nein. Sie ist komplementär zum Matrizenstrang und entspricht weitgehend dem codierenden Strang, wobei Uracil anstelle von Thymin steht.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="rna_prozessierung">
+  <div class="pagehead">
+    <div class="kicker">Eukaryotische Genexpression</div>
+    <h2>07. RNA-Prozessierung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="rna_prozessierung"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären, warum eukaryotische prä-mRNA prozessiert wird.</li><li>Sie beschreiben Capping, Polyadenylierung und Spleißen funktional.</li><li>Sie ordnen alternative Spleißprozesse als Quelle molekularer Vielfalt ein.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Bei Eukaryoten ist die zunächst entstehende prä-mRNA noch nicht die fertige mRNA. Vor der Translation wird sie prozessiert.</p>
+<div class="grid2"><div class="card"><h4>5′-Cap</h4><p>Eine modifizierte Struktur am 5′-Ende schützt die RNA und unterstützt Export und Translation.</p></div><div class="card"><h4>Poly-A-Schwanz</h4><p>Eine Adeninreiche Sequenz am 3′-Ende erhöht Stabilität und beeinflusst die Nutzung der mRNA.</p></div><div class="card"><h4>Spleißen</h4><p>Introns werden entfernt, Exons werden verbunden. Dadurch entsteht eine kontinuierlich lesbare mRNA.</p></div><div class="card"><h4>Alternatives Spleißen</h4><p>Aus derselben prä-mRNA können unterschiedliche mRNAs und damit unterschiedliche Proteinvarianten entstehen.</p></div></div>
+<div class="note"><strong>Leistungskurs-Relevanz:</strong> RNA-Prozessierung zeigt, warum „ein Gen – ein Protein“ als einfache Formel nicht ausreicht. Genexpression ist mehrstufig regulierbar.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist Prozessierung bei Eukaryoten besonders relevant?</summary>
+          <p>Weil Transkription und Translation räumlich getrennt sind und prä-mRNA vor Export und Translation verändert werden muss.</p>
+        </details>
+        <details class="qa">
+          <summary>Was kann alternatives Spleißen bewirken?</summary>
+          <p>Es kann aus derselben genetischen Information unterschiedliche mRNA- und Proteinvarianten erzeugen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="translation">
+  <div class="pagehead">
+    <div class="kicker">Realisierung genetischer Information II</div>
+    <h2>08. Translation und genetischer Code</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="translation"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären, wie mRNA in eine Aminosäuresequenz übersetzt wird.</li><li>Sie verwenden Codon und Anticodon korrekt.</li><li>Sie beschreiben wichtige Eigenschaften des genetischen Codes.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Bei der <strong>Translation</strong> wird die Basensequenz einer mRNA in die Aminosäuresequenz eines Proteins übersetzt. Die Zuordnung erfolgt über den <strong>genetischen Code</strong>: Je drei Basen der mRNA bilden ein <strong>Codon</strong>.</p>
+<ol class="steps"><li>Das Ribosom bindet an die mRNA und startet an einem Startcodon.</li><li>tRNA-Moleküle bringen passende Aminosäuren. Ihr <strong>Anticodon</strong> paart mit dem Codon der mRNA.</li><li>Zwischen den Aminosäuren werden Peptidbindungen gebildet.</li><li>Bei einem Stoppcodon endet die Translation; die Polypeptidkette wird freigesetzt und faltet sich weiter.</li></ol>
+<h3>Eigenschaften des genetischen Codes</h3>
+<ul><li>Der Code ist ein Triplettcode: Drei Basen codieren eine Aminosäure.</li><li>Er ist degeneriert: Mehrere Codons können dieselbe Aminosäure codieren.</li><li>Er ist kommafrei und nicht überlappend lesbar.</li><li>Er ist nahezu universell, aber nicht in jedem biologischen System vollständig identisch.</li></ul>
+<div class="exam"><strong>Materialaufgaben:</strong> Arbeiten Sie immer in Dreierschritten ab dem korrekten Leseraster. Eine einzelne eingefügte oder entfernte Base kann das Leseraster verschieben.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen Codon und Anticodon?</summary>
+          <p>Ein Codon ist ein Basentriplett auf der mRNA; ein Anticodon ist die komplementäre Sequenz auf der tRNA.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum kann eine stille Mutation ohne Auswirkung auf die Aminosäuresequenz bleiben?</summary>
+          <p>Weil der genetische Code degeneriert ist: Verschiedene Codons können dieselbe Aminosäure codieren.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="mutationen">
+  <div class="pagehead">
+    <div class="kicker">Veränderung genetischer Information</div>
+    <h2>09. Genmutationen und ihre Folgen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="mutationen"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie unterscheiden verschiedene Arten von Genmutationen.</li><li>Sie erklären mögliche Auswirkungen auf Proteinstruktur und Funktion.</li><li>Sie beziehen Mutagene als Ursachen genetischer Veränderung ein.</li></ul>
+  </section>
+  <section class="content">
+    
+<p><strong>Genmutationen</strong> verändern die Basensequenz eines Gens. Ihre Auswirkungen reichen von folgenlos bis schwerwiegend. Entscheidend ist, ob und wie sich die Mutation auf mRNA, Aminosäuresequenz, Proteinstruktur und Zellfunktion auswirkt.</p>
+<table><tr><th>Mutationstyp</th><th>Mögliche Folge</th></tr><tr><td>Substitution</td><td>Austausch einer Base; kann still, missense oder nonsense wirken.</td></tr><tr><td>Insertion</td><td>Einfügen einer oder mehrerer Basen; bei nicht durch drei teilbarer Anzahl oft Leserasterverschiebung.</td></tr><tr><td>Deletion</td><td>Verlust einer oder mehrerer Basen; ebenfalls oft Leserasterverschiebung.</td></tr></table>
+<h3>Vom Gen zur Merkmalsänderung</h3>
+<p>Eine Mutation kann die Aminosäuresequenz verändern. Dadurch können Ladungsverteilung, räumliche Faltung, Stabilität, aktives Zentrum oder Bindungsstellen eines Proteins verändert werden. Das kann die Zellfunktion beeinflussen und schließlich ein Merkmal oder Erkrankungsrisiko verändern.</p>
+<div class="warning"><strong>Nicht jede Mutation ist schädlich.</strong> Mutationen können neutral, nachteilig oder in bestimmten Umgebungen vorteilhaft sein. Für Evolutionsprozesse sind sie eine Quelle genetischer Variation.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum sind Leserastermutationen oft besonders schwerwiegend?</summary>
+          <p>Weil ab der Mutation alle folgenden Codons verändert gelesen werden können, wodurch eine stark veränderte Aminosäuresequenz entsteht.</p>
+        </details>
+        <details class="qa">
+          <summary>Was sind Mutagene?</summary>
+          <p>Mutagene sind Einflüsse, die die Mutationsrate erhöhen können, zum Beispiel bestimmte Strahlung oder chemische Stoffe.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="pcr">
+  <div class="pagehead">
+    <div class="kicker">Molekularbiologisches Verfahren I</div>
+    <h2>10. PCR: gezielte Vervielfältigung von DNA</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="pcr"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären das Prinzip der Polymerase-Kettenreaktion.</li><li>Sie beschreiben die Funktion von Primern.</li><li>Sie verknüpfen PCR mit komplementärer Basenpaarung und DNA-Replikation.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die <strong>PCR</strong> dient dazu, einen ausgewählten DNA-Abschnitt stark zu vervielfältigen. Sie nutzt Grundprinzipien der DNA-Replikation in einem technischen Verfahren.</p>
+<ol class="steps"><li><strong>Denaturierung:</strong> Durch Erhitzen werden die DNA-Stränge getrennt.</li><li><strong>Annealing:</strong> Primer lagern sich komplementär an die Zielsequenz an.</li><li><strong>Elongation:</strong> Eine hitzestabile DNA-Polymerase verlängert die Primer und synthetisiert neue DNA-Stränge.</li></ol>
+<p>Diese Schritte werden zyklisch wiederholt. Dadurch nimmt die Zahl der Zielsequenzen stark zu.</p>
+<div class="grid2"><div class="card"><h4>Primer</h4><p>Kurze DNA-Stücke, die den zu vervielfältigenden Bereich begrenzen und Startpunkte für die Polymerase liefern.</p></div><div class="card"><h4>Spezifität</h4><p>Die Primersequenzen entscheiden, welcher DNA-Abschnitt vervielfältigt wird.</p></div></div>
+<div class="exam"><strong>Klausurtipp:</strong> Wenn Primer in einem Material dargestellt sind, prüfen Sie Richtung, Komplementarität und Lage zum Zielabschnitt.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum braucht PCR Primer?</summary>
+          <p>DNA-Polymerasen können nicht völlig neu beginnen; sie benötigen einen vorhandenen Startpunkt mit freier 3′-OH-Gruppe.</p>
+        </details>
+        <details class="qa">
+          <summary>Welche biologische Grundregel nutzt PCR aus?</summary>
+          <p>Die komplementäre Basenpaarung der DNA und die enzymatische Synthese neuer DNA-Stränge.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="gelelektrophorese">
+  <div class="pagehead">
+    <div class="kicker">Molekularbiologisches Verfahren II</div>
+    <h2>11. Gelelektrophorese: DNA-Fragmente trennen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="gelelektrophorese"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären, warum DNA-Fragmente im elektrischen Feld wandern.</li><li>Sie beschreiben, wie Fragmentlängen verglichen werden.</li><li>Sie werten einfache Bandenmuster aus.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Bei der <strong>Gelelektrophorese</strong> werden DNA-Fragmente nach ihrer Länge getrennt. DNA ist aufgrund ihrer Phosphatgruppen negativ geladen und wandert im elektrischen Feld zur positiven Elektrode.</p>
+<h3>Prinzip</h3>
+<ul><li>Kürzere Fragmente bewegen sich leichter durch die Poren des Gels und wandern weiter.</li><li>Längere Fragmente werden stärker zurückgehalten und bleiben näher an der Starttasche.</li><li>Ein Größenstandard ermöglicht die Abschätzung der Fragmentlänge.</li></ul>
+<div class="callout"><strong>Interpretation:</strong> Eine Bande zeigt, dass DNA-Fragmente ähnlicher Länge an dieser Position vorliegen. Die Helligkeit kann Hinweise auf die Menge geben, ist aber ohne weitere Angaben vorsichtig zu deuten.</div>
+<h3>Typische Anwendungen</h3>
+<p>Gelelektrophorese kann genutzt werden, um PCR-Produkte zu prüfen, Restriktionsfragmente zu vergleichen, genetische Varianten nachzuweisen oder Verwandtschafts- und Identitätsfragen zu untersuchen.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum wandert DNA zur positiven Elektrode?</summary>
+          <p>Weil DNA durch die Phosphatgruppen des Zucker-Phosphat-Rückgrats negativ geladen ist.</p>
+        </details>
+        <details class="qa">
+          <summary>Welche Fragmente wandern im Gel weiter: große oder kleine?</summary>
+          <p>Kleine Fragmente wandern weiter, weil sie leichter durch die Gelmatrix gelangen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="regulation_eukaryoten">
+  <div class="pagehead">
+    <div class="kicker">Regulation der Genexpression I</div>
+    <h2>12. Genaktivität bei Eukaryoten regulieren</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="regulation_eukaryoten"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären, warum Genexpression reguliert werden muss.</li><li>Sie beschreiben die Rolle von Transkriptionsfaktoren.</li><li>Sie ordnen Regulation auf mehreren Ebenen ein.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Verschiedene Zelltypen eines Organismus besitzen in der Regel dieselbe DNA, unterscheiden sich aber in ihrer <strong>Genexpression</strong>. Das bedeutet: Nicht alle Gene sind in jeder Zelle gleich aktiv.</p>
+<h3>Regulationsebenen</h3>
+<table><tr><th>Ebene</th><th>Beispiel</th><th>Wirkung</th></tr><tr><td>Chromatinstruktur</td><td>Methylierung, Histonmodifikation</td><td>Zugänglichkeit der DNA verändert sich.</td></tr><tr><td>Transkription</td><td>Transkriptionsfaktoren binden an regulatorische DNA-Sequenzen.</td><td>RNA-Synthese wird verstärkt oder gehemmt.</td></tr><tr><td>RNA-Ebene</td><td>Prozessierung, Stabilität, RNA-Interferenz</td><td>Menge und Nutzbarkeit der mRNA verändern sich.</td></tr><tr><td>Protein-Ebene</td><td>Faltung, Modifikation, Abbau</td><td>Aktivität und Lebensdauer des Proteins verändern sich.</td></tr></table>
+<div class="note"><strong>Transkriptionsfaktoren</strong> sind Proteine, die an DNA binden und die Transkription beeinflussen. Sie verknüpfen innere oder äußere Signale mit der Aktivität bestimmter Gene.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum können Muskel- und Nervenzellen trotz gleicher DNA sehr verschieden sein?</summary>
+          <p>Weil in ihnen unterschiedliche Gene aktiv sind und unterschiedliche Proteine gebildet werden.</p>
+        </details>
+        <details class="qa">
+          <summary>Was leisten Transkriptionsfaktoren?</summary>
+          <p>Sie beeinflussen die Transkription bestimmter Gene, indem sie an regulatorische DNA-Sequenzen binden und den Transkriptionsapparat fördern oder hemmen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="methylierung">
+  <div class="pagehead">
+    <div class="kicker">Regulation der Genexpression II</div>
+    <h2>13. Epigenetik und DNA-Methylierung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="methylierung"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären den Begriff Epigenetik auf molekularer Ebene.</li><li>Sie beschreiben DNA-Methylierung als Modifikation des Epigenoms.</li><li>Sie unterscheiden DNA-Sequenzänderung und epigenetische Veränderung.</li></ul>
+  </section>
+  <section class="content">
+    
+<p><strong>Epigenetische Modifikationen</strong> verändern die Nutzung genetischer Information, ohne die Basensequenz der DNA zu verändern. Sie können beeinflussen, ob Gene eher aktiv oder inaktiv sind.</p>
+<h3>DNA-Methylierung</h3>
+<p>Bei der DNA-Methylierung werden Methylgruppen an bestimmte DNA-Basen angefügt. In vielen Fällen ist starke Methylierung regulatorischer Bereiche mit geringerer Genaktivität verbunden, weil die Bindung von Transkriptionsfaktoren oder die Chromatinstruktur beeinflusst wird.</p>
+<div class="grid2"><div class="card"><h4>Sequenz</h4><p>Die Reihenfolge der Basen bleibt unverändert.</p></div><div class="card"><h4>Nutzung</h4><p>Die Zugänglichkeit und Aktivität von Genen kann verändert sein.</p></div></div>
+<div class="exam"><strong>Materialbezug:</strong> Bei Aufgaben zu eineiigen Zwillingen ist oft entscheidend, dass gleiche DNA-Sequenz nicht automatisch identische Genexpression bedeutet.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was bedeutet epigenetisch?</summary>
+          <p>Die Regulation betrifft die Nutzung genetischer Information, ohne die DNA-Basensequenz selbst zu verändern.</p>
+        </details>
+        <details class="qa">
+          <summary>Kann DNA-Methylierung vererbbar sein?</summary>
+          <p>Bestimmte epigenetische Muster können bei Zellteilungen weitergegeben werden; die genaue Stabilität hängt vom biologischen Kontext ab.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="histonmodifikation">
+  <div class="pagehead">
+    <div class="kicker">Regulation der Genexpression III</div>
+    <h2>14. Histonmodifikation und Chromatinzugänglichkeit</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="histonmodifikation"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären, wie Histone die Verpackung von DNA beeinflussen.</li><li>Sie ordnen Histonmodifikationen als LK-Erweiterung zur Genregulation ein.</li><li>Sie verknüpfen Chromatinzustand mit Transkriptionswahrscheinlichkeit.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>DNA ist bei Eukaryoten um Histonproteine gewickelt. Die Art der Verpackung beeinflusst, ob regulatorische Proteine und RNA-Polymerase DNA-Abschnitte erreichen können.</p>
+<div class="grid2"><div class="card"><h4>Locker zugängliches Chromatin</h4><p>Gene sind tendenziell leichter ablesbar, weil der Transkriptionsapparat Zugang erhält.</p></div><div class="card"><h4>Dicht gepacktes Chromatin</h4><p>Gene sind tendenziell weniger aktiv, weil DNA-Abschnitte schlechter zugänglich sind.</p></div></div>
+<p><strong>Histonmodifikationen</strong> sind chemische Veränderungen an Histonproteinen. Sie können Chromatinstruktur und Proteinbindung verändern und damit Genexpression beeinflussen.</p>
+<div class="note"><strong>Zusammenhang Struktur–Funktion:</strong> Nicht nur die Sequenz eines Gens, sondern auch seine räumliche Verpackung entscheidet darüber, ob es abgelesen werden kann.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum kann Histonmodifikation Genaktivität beeinflussen?</summary>
+          <p>Weil sie die Verpackung und Zugänglichkeit der DNA sowie die Bindung regulatorischer Proteine verändern kann.</p>
+        </details>
+        <details class="qa">
+          <summary>Ist Histonmodifikation dasselbe wie Genmutation?</summary>
+          <p>Nein. Histonmodifikationen verändern in der Regel nicht die Basensequenz der DNA.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="rna_interferenz">
+  <div class="pagehead">
+    <div class="kicker">Regulation der Genexpression IV</div>
+    <h2>15. RNA-Interferenz</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="rna_interferenz"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie beschreiben RNA-Interferenz als posttranskriptionelle Regulation.</li><li>Sie erklären, wie kleine RNA-Moleküle mRNA-Nutzung beeinflussen.</li><li>Sie verknüpfen RNA-Interferenz mit dem Basiskonzept Steuerung und Regelung.</li></ul>
+  </section>
+  <section class="content">
+    
+<p><strong>RNA-Interferenz</strong> ist ein Regulationsmechanismus, bei dem kleine RNA-Moleküle die Nutzung bestimmter mRNAs hemmen können. Dadurch wird die Bildung bestimmter Proteine verringert oder verhindert.</p>
+<ol class="steps"><li>Kleine regulatorische RNA-Moleküle werden in einen Proteinkomplex eingebunden.</li><li>Über komplementäre Basenpaarung wird eine passende Ziel-mRNA erkannt.</li><li>Die Ziel-mRNA wird abgebaut oder ihre Translation wird gehemmt.</li></ol>
+<div class="callout"><strong>Fachlicher Kern:</strong> RNA-Interferenz verändert nicht die DNA-Sequenz. Sie reguliert, ob eine vorhandene mRNA zur Proteinbildung genutzt werden kann.</div>
+<h3>Warum ist das biologisch bedeutsam?</h3>
+<p>RNA-Interferenz ermöglicht eine fein abgestufte Regulation der Genexpression. Sie kann an Entwicklung, Zellantworten und Krankheitsprozessen beteiligt sein und ist auch für biotechnologische Anwendungen interessant.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Auf welcher Ebene wirkt RNA-Interferenz?</summary>
+          <p>Nach der Transkription, auf Ebene der mRNA-Nutzung beziehungsweise mRNA-Stabilität.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist Komplementarität auch hier wichtig?</summary>
+          <p>Weil die regulatorische RNA über Basenpaarung bestimmte Ziel-mRNAs erkennt.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="krebs">
+  <div class="pagehead">
+    <div class="kicker">Fehlregulation</div>
+    <h2>16. Krebs: Onkogene und Anti-Onkogene</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="krebs"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären Krebs als Folge genetischer und regulatorischer Veränderungen.</li><li>Sie unterscheiden Onkogene und Anti-Onkogene beziehungsweise Tumorsuppressorgene.</li><li>Sie verknüpfen Zellzyklusregulation, Mutation und unkontrolliertes Wachstum.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Krebs entsteht nicht durch eine einzelne „Krebsursache“, sondern typischerweise durch die Ansammlung mehrerer Veränderungen, die Wachstum, Teilung, Reparatur und Zelltod betreffen.</p>
+<table><tr><th>Genklasse</th><th>Normale Funktion</th><th>Problem bei Veränderung</th></tr><tr><td>Proto-Onkogene</td><td>Fördern kontrolliert Zellwachstum und Zellteilung.</td><td>Durch aktivierende Veränderungen können Onkogene entstehen, die Wachstumssignale übermäßig fördern.</td></tr><tr><td>Anti-Onkogene / Tumorsuppressorgene</td><td>Bremsen Zellteilung, unterstützen DNA-Reparatur oder fördern programmierten Zelltod.</td><td>Durch Funktionsverlust fallen Kontrollmechanismen weg.</td></tr></table>
+<h3>Kausalkette formulieren</h3>
+<p>Eine sehr gute Erklärung verbindet molekulare, zelluläre und organismische Ebene: Mutation oder epigenetische Fehlregulation → veränderte Genexpression oder Proteinaktivität → gestörte Zellzykluskontrolle → klonale Vermehrung veränderter Zellen → Tumorentwicklung.</p>
+<div class="warning"><strong>Vorsicht:</strong> Krebszellen sind keine „stärkeren“ Zellen. Sie sind Zellen mit gestörter Regulation, die Kontrollsignale häufig nicht mehr angemessen verarbeiten.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum reicht oft nicht eine Mutation aus?</summary>
+          <p>Weil mehrere Kontrollmechanismen Zellteilung, Reparatur und Zelltod absichern; Krebsentwicklung beruht meist auf mehreren Veränderungen.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist ein Tumorsuppressorgen?</summary>
+          <p>Ein Gen, dessen Produkt normalerweise Zellteilung bremst, DNA-Reparatur unterstützt oder Zelltod fördert; sein Funktionsverlust kann Krebs begünstigen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="stammbaeume">
+  <div class="pagehead">
+    <div class="kicker">Humangenetik I</div>
+    <h2>17. Familienstammbäume auswerten</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="stammbaeume"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie leiten Erbgänge aus Stammbäumen begründet ab.</li><li>Sie unterscheiden autosomal und gonosomal sowie dominant und rezessiv.</li><li>Sie formulieren Wahrscheinlichkeiten nachvollziehbar.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Familienstammbäume sind fachspezifische Darstellungen, mit denen Erbgänge und Risiken rekonstruiert werden können. Entscheidend ist eine begründete Analyse, nicht bloß eine Behauptung.</p>
+<table><tr><th>Hinweis im Stammbaum</th><th>Mögliche Deutung</th></tr><tr><td>Merkmal tritt in jeder Generation auf</td><td>spricht häufig für dominant, ist aber kein Beweis ohne weitere Prüfung</td></tr><tr><td>Gesunde Eltern haben betroffenes Kind</td><td>spricht für rezessiv, wenn Neumutation und andere Sonderfälle nicht naheliegen</td></tr><tr><td>Fast nur Männer betroffen</td><td>kann auf X-chromosomal rezessiven Erbgang hinweisen</td></tr><tr><td>Vater gibt Merkmal nie an Söhne weiter, aber an alle Töchter</td><td>typischer Hinweis bei X-chromosomal dominant, falls Vater betroffen und Mutter unauffällig ist</td></tr></table>
+<div class="task"><strong>Vorgehen:</strong> Prüfen Sie zuerst dominant/rezessiv, dann autosomal/gonosomal. Widerlegen Sie Alternativen mit konkreten Personenpaaren aus dem Stammbaum.</div>
+<p>In Beratungs- oder Diagnosekontexten müssen Sie außerdem zwischen genetischem Risiko, sicherem Genotyp und tatsächlicher Merkmalsausprägung unterscheiden.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist „überspringt Generationen“ kein alleiniger Beweis?</summary>
+          <p>Weil unvollständige Informationen, kleine Stammbäume, Penetranz oder Zufall die Muster beeinflussen können; man braucht konkrete Belege.</p>
+        </details>
+        <details class="qa">
+          <summary>Was bedeutet autosomal?</summary>
+          <p>Das betreffende Gen liegt auf einem Autosom, also nicht auf einem Geschlechtschromosom.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="gentest_beratung">
+  <div class="pagehead">
+    <div class="kicker">Humangenetik II</div>
+    <h2>18. Gentest und humangenetische Beratung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="gentest_beratung"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie unterscheiden diagnostische, prädiktive und familiäre Fragestellungen.</li><li>Sie formulieren Chancen und Grenzen von Gentests.</li><li>Sie berücksichtigen biologische und ethische Bewertungskriterien.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Ein <strong>Gentest</strong> untersucht genetische Merkmale, zum Beispiel Varianten einzelner Gene oder größere Chromosomenveränderungen. Die Aussagekraft hängt von Fragestellung, Testmethode und biologischem Zusammenhang ab.</p>
+<div class="grid2"><div class="card"><h4>Chancen</h4><ul><li>Diagnosesicherung</li><li>Risikoeinschätzung</li><li>gezielte Vorsorge</li><li>Therapieentscheidung</li><li>Familienplanung</li></ul></div><div class="card"><h4>Grenzen und Risiken</h4><ul><li>unsichere Varianten</li><li>keine sichere Vorhersage bei komplexen Merkmalen</li><li>psychische Belastung</li><li>Datenschutzfragen</li><li>Auswirkungen auf Angehörige</li></ul></div></div>
+<h3>Humangenetische Beratung</h3>
+<p>Humangenetische Beratung soll Informationen verständlich machen, Entscheidungsoptionen klären und die Autonomie der betroffenen Person achten. Eine gute Bewertung berücksichtigt daher nicht nur biologische Daten, sondern auch ethische, soziale und rechtliche Aspekte.</p>
+<div class="exam"><strong>Bewertungssprache:</strong> Nennen Sie Kriterien ausdrücklich, zum Beispiel medizinischer Nutzen, Aussagekraft, Selbstbestimmung, Datenschutz, Belastung, Gerechtigkeit und Folgen für Angehörige.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum betrifft ein Gentest oft auch Angehörige?</summary>
+          <p>Weil genetische Varianten vererbbar sein können und damit Informationen über biologische Verwandte enthalten.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist ein positives Testergebnis nicht immer gleichbedeutend mit Erkrankung?</summary>
+          <p>Weil Penetranz, Umweltfaktoren, komplexe Vererbung und Variantenunsicherheit die Ausprägung beeinflussen können.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="gentechnik">
+  <div class="pagehead">
+    <div class="kicker">Gentechnische Verfahren I</div>
+    <h2>19. Plasmide, Restriktionsenzyme und rekombinante DNA</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="gentechnik"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären Grundprinzipien klassischer Gentechnik.</li><li>Sie beschreiben die Funktionen von Plasmiden und Restriktionsenzymen.</li><li>Sie erläutern, wie gentechnisch veränderte Organismen entstehen können.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Gentechnische Verfahren ermöglichen es, DNA gezielt zu verändern, zu übertragen oder in Organismen einzubauen. Ein klassisches Werkzeug sind <strong>Plasmide</strong>, kleine ringförmige DNA-Moleküle, die besonders bei Bakterien genutzt werden können.</p>
+<ol class="steps"><li>Ein gewünschtes Gen oder DNA-Fragment wird gewonnen.</li><li>Ein Plasmid wird als Vektor vorbereitet.</li><li><strong>Restriktionsenzyme</strong> schneiden DNA an bestimmten Sequenzen.</li><li>DNA-Fragmente werden verbunden; es entsteht rekombinante DNA.</li><li>Die rekombinante DNA wird in Zellen eingebracht.</li><li>Zellen mit erfolgreicher Aufnahme werden ausgewählt und vermehrt.</li></ol>
+<div class="grid2"><div class="card"><h4>Plasmid</h4><p>Vektor zur Aufnahme und Übertragung eines DNA-Abschnitts.</p></div><div class="card"><h4>Restriktionsenzym</h4><p>Schneidet DNA sequenzspezifisch und erzeugt passende Schnittstellen.</p></div></div>
+<div class="note"><strong>Struktur–Funktion:</strong> Auch gentechnische Verfahren beruhen auf molekularer Passung: Basenpaarung, Schnittstellen, Enzymspezifität und Vektorstruktur.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Welche Funktion hat ein Plasmid in der Gentechnik?</summary>
+          <p>Es kann als Vektor dienen, um DNA-Fragmente in Zellen einzuschleusen und dort zu vervielfältigen oder exprimieren zu lassen.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum sind Restriktionsenzyme nützlich?</summary>
+          <p>Weil sie DNA an spezifischen Sequenzen schneiden und damit gezielte Fragmentierung und Kombination von DNA ermöglichen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="geneditierung">
+  <div class="pagehead">
+    <div class="kicker">Gentechnische Verfahren II</div>
+    <h2>20. Geneditierung mit CRISPR/Cas9</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="geneditierung"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären das Grundprinzip der Geneditierung.</li><li>Sie beschreiben die Rollen von guide-RNA und Cas9.</li><li>Sie bewerten Chancen und Risiken kontextabhängig.</li></ul>
+  </section>
+  <section class="content">
+    
+<p><strong>Geneditierung</strong> bezeichnet Verfahren, mit denen DNA-Sequenzen gezielt verändert werden können. CRISPR/Cas9 ist ein besonders bekanntes Werkzeug.</p>
+<ol class="steps"><li>Eine guide-RNA wird so gewählt, dass sie zur Zielsequenz passt.</li><li>Die guide-RNA führt das Cas9-Protein zur passenden DNA-Stelle.</li><li>Cas9 erzeugt dort einen Schnitt.</li><li>Die zelleigenen Reparatursysteme reparieren den Schnitt; dabei kann eine Veränderung entstehen oder eine Vorlage genutzt werden.</li></ol>
+<div class="warning"><strong>Grenzen:</strong> „Gezielt“ bedeutet nicht „risikolos“. Unerwünschte Veränderungen, unvollständige Bearbeitung, Folgen für Zellfunktionen und ethische Fragen müssen berücksichtigt werden.</div>
+<h3>Bewertung je nach Kontext</h3>
+<p>Eine Veränderung in Körperzellen ist anders zu bewerten als eine Veränderung der Keimbahn. Auch Forschung, Landwirtschaft, somatische Gentherapie und Enhancement-Fragen müssen getrennt betrachtet werden.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Welche Rolle spielt die guide-RNA?</summary>
+          <p>Sie vermittelt über Basenpaarung die Zielerkennung und führt Cas9 zur passenden DNA-Sequenz.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum sind Keimbahnveränderungen besonders problematisch?</summary>
+          <p>Weil sie an Nachkommen weitergegeben werden können und damit zukünftige Personen betreffen, die nicht zustimmen können.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="gentherapie">
+  <div class="pagehead">
+    <div class="kicker">Anwendung</div>
+    <h2>21. Gentherapie und personalisierte Medizin</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="gentherapie"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären Grundideen gentherapeutischer Verfahren.</li><li>Sie unterscheiden Therapieansätze auf Körperzell- und Keimbahnebene.</li><li>Sie erläutern personalisierte Medizin als Nutzung individueller molekularer Informationen.</li></ul>
+  </section>
+  <section class="content">
+    
+<p><strong>Gentherapie</strong> zielt darauf, genetisch bedingte oder genetisch beeinflusste Erkrankungen durch Veränderung, Ergänzung oder Regulation genetischer Information zu behandeln. In der Schule ist meist der Grundgedanke wichtiger als technische Detailtiefe.</p>
+<div class="grid2"><div class="card"><h4>Gen ergänzen</h4><p>Eine funktionsfähige Kopie eines Gens wird eingebracht, wenn ein Genprodukt fehlt.</p></div><div class="card"><h4>Gen korrigieren oder editieren</h4><p>Eine krankheitsrelevante Sequenz soll gezielt verändert werden.</p></div><div class="card"><h4>Genaktivität beeinflussen</h4><p>Die Expression eines Gens wird erhöht, vermindert oder indirekt reguliert.</p></div><div class="card"><h4>Personalisierte Medizin</h4><p>Diagnostik und Therapie werden stärker an molekulare Eigenschaften einer Person oder eines Tumors angepasst.</p></div></div>
+<div class="exam"><strong>Bewertung:</strong> Prüfen Sie Nutzen, Wirksamkeit, Risiken, Langzeitfolgen, Zugänglichkeit, Kosten, Selbstbestimmung und gerechte Verteilung.</div>
+<p>Bei der personalisierten Medizin kann beispielsweise eine genetische oder molekulare Analyse helfen, Medikamente auszuwählen oder Therapierisiken abzuschätzen.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was unterscheidet somatische Gentherapie von Keimbahneingriffen?</summary>
+          <p>Somatische Gentherapie betrifft Körperzellen der behandelten Person; Keimbahneingriffe können vererbbar sein.</p>
+        </details>
+        <details class="qa">
+          <summary>Was meint personalisierte Medizin?</summary>
+          <p>Medizinische Entscheidungen werden stärker an individuellen molekularen, genetischen oder physiologischen Merkmalen ausgerichtet.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="bioethik">
+  <div class="pagehead">
+    <div class="kicker">Bewertungskompetenz</div>
+    <h2>22. Ethische und juristische Aspekte gentechnischer Verfahren</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="bioethik"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie entwickeln Kriterien für biologische Bewertungen.</li><li>Sie unterscheiden Sachurteil und Werturteil.</li><li>Sie formulieren begründete, abwägende Urteile.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Gentechnische Verfahren berühren medizinische, ökologische, ökonomische, ethische und juristische Fragen. Im LK reicht es nicht, „dafür“ oder „dagegen“ zu sein; Sie müssen Kriterien transparent machen und gegeneinander abwägen.</p>
+<table><tr><th>Kriterium</th><th>Leitfrage</th></tr><tr><td>medizinischer Nutzen</td><td>Wie groß ist der erwartbare Nutzen für Betroffene?</td></tr><tr><td>Risiko und Sicherheit</td><td>Wie wahrscheinlich und wie schwerwiegend sind Nebenfolgen?</td></tr><tr><td>Selbstbestimmung</td><td>Wer entscheidet, und auf welcher Informationsgrundlage?</td></tr><tr><td>Gerechtigkeit</td><td>Wer hat Zugang? Wer trägt Kosten oder Risiken?</td></tr><tr><td>Folgen für Dritte</td><td>Wer ist indirekt betroffen, zum Beispiel Angehörige oder zukünftige Generationen?</td></tr><tr><td>Umwelt und Gesellschaft</td><td>Welche langfristigen ökologischen oder sozialen Auswirkungen sind möglich?</td></tr></table>
+<div class="task"><strong>Urteilssatz:</strong> „Unter den Bedingungen ..., und unter besonderer Gewichtung von ..., ist der Einsatz von ... vertretbar / nicht vertretbar, weil ...“</div>
+<h3>Sachurteil und Werturteil</h3>
+<p>Ein Sachurteil klärt, was fachlich wahrscheinlich ist. Ein Werturteil legt offen, welche Kriterien und Werte bei der Entscheidung besonders gewichtet werden.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist eine reine Nutzenargumentation unvollständig?</summary>
+          <p>Weil Risiken, Rechte, Gerechtigkeit, Folgen für Dritte und langfristige Konsequenzen ebenfalls relevant sein können.</p>
+        </details>
+        <details class="qa">
+          <summary>Was macht ein gutes biologisches Bewertungsurteil aus?</summary>
+          <p>Es ist fachlich korrekt, kriteriengeleitet, abwägend, materialbezogen und transparent in der Gewichtung.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="chromosomen_mikroskopie">
+  <div class="pagehead">
+    <div class="kicker">Untersuchung</div>
+    <h2>23. Chromosomen mikroskopieren und DNA extrahieren</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="chromosomen_mikroskopie"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie ordnen einfache Untersuchungen in den molekulargenetischen Kontext ein.</li><li>Sie erklären, was man bei Chromosomenmikroskopie sieht und was nicht.</li><li>Sie beschreiben das Grundprinzip einer DNA-Extraktion.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Der Rahmenlehrplan nennt als Untersuchungen unter anderem die <strong>Mikroskopie von Chromosomen</strong> und im Leistungskurs die <strong>DNA-Extraktion</strong>. Beide Zugänge zeigen unterschiedliche Ebenen genetischer Information.</p>
+<div class="grid2"><div class="card"><h4>Chromosomenmikroskopie</h4><p>Sie macht kondensierte Chromosomen sichtbar. Erkennbar sind Anzahl, grobe Form und eventuell größere Auffälligkeiten, nicht aber einzelne Basensequenzen.</p></div><div class="card"><h4>DNA-Extraktion</h4><p>Zellen werden aufgeschlossen, Membranen und Proteine werden möglichst entfernt, DNA wird aus der Lösung ausgefällt und sichtbar gemacht.</p></div></div>
+<h3>Methodengrenzen</h3>
+<p>Eine mikroskopische Untersuchung kann keine Punktmutation erkennen. Eine DNA-Extraktion zeigt nicht automatisch, welche Sequenz vorliegt. Für Sequenzinformationen oder gezielte Nachweise braucht man weitere molekularbiologische Verfahren.</p>
+<div class="note"><strong>Methodenkompetenz:</strong> Fragen Sie bei jedem Verfahren: Welche Ebene wird sichtbar? Welche Aussage ist möglich? Welche Aussage wäre eine Überinterpretation?</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Kann man eine Punktmutation im Lichtmikroskop erkennen?</summary>
+          <p>Nein. Punktmutationen betreffen einzelne Basen und liegen weit unterhalb der lichtmikroskopischen Auflösung.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum wird DNA bei Extraktionen sichtbar?</summary>
+          <p>Weil viele DNA-Moleküle gemeinsam ausgefällt und gesammelt werden; einzelne DNA-Moleküle werden dabei nicht direkt in ihrer Sequenz sichtbar.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="materialauswertung">
+  <div class="pagehead">
+    <div class="kicker">Klausurtraining</div>
+    <h2>24. Molekulargenetische Materialien auswerten</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="materialauswertung"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie gehen systematisch mit Sequenzen, Diagrammen, Gelen und Stammbäumen um.</li><li>Sie formulieren materialgestützte Erklärungen.</li><li>Sie vermeiden typische Darstellungsfehler.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Q3-Aufgaben enthalten häufig Materialien: DNA- und mRNA-Sequenzen, Codesonne, Gelelektrophoresen, Stammbäume, Versuchsdaten, Schemata zu Regulation oder Fallbeispiele zu Gentests.</p>
+<h3>Vier-Schritt-Methode</h3>
+<ol class="steps"><li><strong>Materialtyp bestimmen:</strong> Sequenz, Diagramm, Stammbaum, Gel, Schema, Text?</li><li><strong>Fachliche Ebene festlegen:</strong> DNA, RNA, Protein, Zelle, Organismus, Familie, Gesellschaft?</li><li><strong>Daten sichern:</strong> Relevante Unterschiede, Muster, Auffälligkeiten und Kontrollen benennen.</li><li><strong>Kausal erklären:</strong> Molekularen Mechanismus mit Beobachtung und Fragestellung verknüpfen.</li></ol>
+<div class="exam"><strong>Gute LK-Formulierung:</strong> „Die Mutation verändert das Codon von ... zu .... Dadurch wird ... eingebaut. Da diese Aminosäure ..., ist zu erwarten, dass ... . Das erklärt im Material ..., weil ... .“</div>
+<h3>Häufige Fehler</h3>
+<ul><li>Sequenzen ohne Leseraster auswerten.</li><li>Banden im Gel als „Gene“ bezeichnen.</li><li>Erbgänge behaupten, ohne Alternativen zu prüfen.</li><li>Bewertung ohne Kriterien formulieren.</li><li>Von genetischem Risiko direkt auf sichere Erkrankung schließen.</li></ul>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was müssen Sie bei Sequenzaufgaben zuerst klären?</summary>
+          <p>Welcher Strang gezeigt ist, in welcher Richtung er gelesen wird und wo das Leseraster beginnt.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum sind Kontrollen in Experimenten wichtig?</summary>
+          <p>Sie zeigen, ob eine beobachtete Veränderung tatsächlich auf den untersuchten Faktor zurückgeführt werden kann.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="glossar">
+  <div class="pagehead">
+    <div class="kicker">Abschluss</div>
+    <h2>25. Glossar und letzter Selbstcheck</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="glossar"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie wiederholen zentrale Fachbegriffe des Themenfeldes.</li><li>Sie prüfen Ihren Lernstand vor einer Klausur.</li><li>Sie identifizieren die Themen, die Sie noch gezielt wiederholen sollten.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Nutzen Sie diese Seite als letzte Diagnose vor einer Klausur oder vor einer mündlichen Wiederholung.</p>
+<h3>Begriffe, die Sie sicher verwenden sollten</h3>
+<div class="columns"><ul><li>DNA</li><li>RNA</li><li>Nukleotid</li><li>Genom</li><li>Gen</li><li>Allel</li><li>Autosom</li><li>Gonosom</li><li>Chromatin</li><li>Promotor</li></ul><ul><li>semikonservative Replikation</li><li>Primer</li><li>DNA-Polymerase</li><li>Okazaki-Fragmente</li><li>Transkription</li><li>RNA-Prozessierung</li><li>Codon</li><li>Anticodon</li><li>Translation</li><li>genetischer Code</li></ul><ul><li>Genmutation</li><li>Mutagene</li><li>Genexpression</li><li>Transkriptionsfaktor</li><li>Methylierung</li><li>Histonmodifikation</li><li>RNA-Interferenz</li><li>Onkogen</li><li>Anti-Onkogen</li><li>Tumorsuppressorgen</li></ul><ul><li>PCR</li><li>Gelelektrophorese</li><li>Plasmid</li><li>Restriktionsenzym</li><li>rekombinante DNA</li><li>Geneditierung</li><li>CRISPR/Cas9</li><li>Gentest</li><li>Gentherapie</li><li>personalisierte Medizin</li></ul></div>
+<h3>Abschluss-Selbstcheck</h3>
+<div class="checkgrid"><label><input type="checkbox"> Ich kann den Bau von DNA und RNA erklären.</label><label><input type="checkbox"> Ich kann Replikation, Transkription und Translation unterscheiden.</label><label><input type="checkbox"> Ich kann eine DNA- oder mRNA-Sequenz korrekt auswerten.</label><label><input type="checkbox"> Ich kann Mutationsfolgen auf Proteinebene erklären.</label><label><input type="checkbox"> Ich kann PCR und Gelelektrophorese fachsprachlich erläutern.</label><label><input type="checkbox"> Ich kann Genregulation bei Eukaryoten auf mehreren Ebenen beschreiben.</label><label><input type="checkbox"> Ich kann Methylierung, Histonmodifikation und RNA-Interferenz einordnen.</label><label><input type="checkbox"> Ich kann Krebs als Fehlregulation erklären.</label><label><input type="checkbox"> Ich kann Familienstammbäume begründet auswerten.</label><label><input type="checkbox"> Ich kann Chancen und Grenzen von Gentests, Gentherapie und Geneditierung bewerten.</label></div>
+<div class="exam"><strong>Letzter Test:</strong> Erklären Sie das gesamte Themenfeld in fünf Minuten mündlich: DNA → Replikation → Transkription → RNA-Prozessierung → Translation → Mutation → Genregulation → PCR/Gel → Stammbaum/Gentest → Gentechnik/CRISPR → Bewertung. Wenn Sie die Übergänge sauber formulieren können, ist Ihre Wiederholung gut vernetzt.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Welche drei Themen würden Sie zuerst wiederholen, wenn morgen Klausur wäre?</summary>
+          <p>Priorisieren Sie die Themen, bei denen Sie Mechanismen nicht frei erklären oder Material nicht sicher auswerten können.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist das wichtigste Qualitätsmerkmal einer sehr guten LK-Antwort?</summary>
+          <p>Sie verbindet Materialbezug, Fachsprache, kausale Erklärung, Basiskonzepte und eine klare Struktur.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+    </main>
+  </div>
+
+  <footer>
+    <p>Hinweis für die manuelle Weiterbearbeitung: Jede Seite endet mit „Siehe auch ...“. Dort können Links auf konkrete Arbeitsblätter, Hefteinträge, Präsentationen, Versuchsprotokolle oder Klausurhinweise ergänzt werden.</p>
+  </footer>
+
+  <script>
+    const pages = ['start', 'ueberblick', 'dna_rna', 'gen_chromosom_genom', 'replikation', 'transkription', 'rna_prozessierung', 'translation', 'mutationen', 'pcr', 'gelelektrophorese', 'regulation_eukaryoten', 'methylierung', 'histonmodifikation', 'rna_interferenz', 'krebs', 'stammbaeume', 'gentest_beratung', 'gentechnik', 'geneditierung', 'gentherapie', 'bioethik', 'chromosomen_mikroskopie', 'materialauswertung', 'glossar'];
+    const buttons = Array.from(document.querySelectorAll('.navbtn'));
+    const pageEls = Array.from(document.querySelectorAll('.page'));
+    const boxes = Array.from(document.querySelectorAll('.donebox'));
+    const progressFill = document.getElementById('progressfill');
+    const progressText = document.getElementById('progresstext');
+    let current = pages[0];
+
+    function storageKey(id) { return 'bio-q3-lk-lernpfad-' + id; }
+
+    function updateProgress() {
+      let done = 0;
+      boxes.forEach(box => {
+        const checked = localStorage.getItem(storageKey(box.dataset.page)) === '1';
+        box.checked = checked;
+        if (checked) done++;
+      });
+      buttons.forEach(btn => {
+        const id = btn.dataset.target;
+        btn.classList.toggle('done', localStorage.getItem(storageKey(id)) === '1');
+      });
+      const pct = Math.round(done / pages.length * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `${done} von ${pages.length} Seiten erledigt · ${pct} %`;
+    }
+
+    function showPage(id, push=true) {
+      if (!pages.includes(id)) id = pages[0];
+      current = id;
+      pageEls.forEach(p => p.classList.toggle('active', p.id === id));
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+      const idx = pages.indexOf(id);
+      document.getElementById('prevBtn').disabled = idx === 0;
+      document.getElementById('nextBtn').disabled = idx === pages.length - 1;
+      if (push) history.replaceState(null, '', '#' + id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.target)));
+    boxes.forEach(box => box.addEventListener('change', () => {
+      localStorage.setItem(storageKey(box.dataset.page), box.checked ? '1' : '0');
+      updateProgress();
+    }));
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx > 0) showPage(pages[idx - 1]);
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx < pages.length - 1) showPage(pages[idx + 1]);
+    });
+
+    updateProgress();
+    showPage(location.hash ? location.hash.substring(1) : pages[0], false);
+  </script>
+</body>
+</html>
