@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lernpfad Sek I Wiederholung für Q3 Biologie LK – Molekulargenetische Grundlagen</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --paper: #ffffff;
+      --ink: #18202b;
+      --muted: #5b6677;
+      --line: #d9e1ec;
+      --accent: #315a8c;
+      --accent2: #5c7fa9;
+      --soft: #eaf1f9;
+      --good: #2f6f4e;
+      --warn: #8a5a00;
+      --danger: #8a2d2d;
+      --shadow: 0 12px 30px rgba(24, 32, 43, .10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; }
+    header { padding: 2.2rem clamp(1rem, 3vw, 2.5rem); background: linear-gradient(135deg, #203a5d, #315a8c 58%, #7a99b8); color: white; }
+    header h1 { max-width: 1100px; margin: 0 auto .6rem; font-size: clamp(1.7rem, 3.4vw, 3.1rem); line-height: 1.08; letter-spacing: -.02em; }
+    header p { max-width: 1100px; margin: 0 auto; font-size: clamp(1rem, 1.7vw, 1.2rem); opacity: .94; }
+    .meta { max-width: 1100px; margin: 1rem auto 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+    .pill { display: inline-flex; align-items: center; gap: .35rem; padding: .35rem .65rem; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; background: rgba(255,255,255,.12); font-size: .9rem; }
+    .layout { display: grid; grid-template-columns: minmax(260px, 330px) 1fr; gap: 1.2rem; max-width: 1400px; margin: 0 auto; padding: 1.2rem; }
+    aside { position: sticky; top: 0; align-self: start; max-height: 100vh; overflow: auto; padding: 1rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .progresswrap { margin-bottom: 1rem; padding-bottom: .85rem; border-bottom: 1px solid var(--line); }
+    .progressbar { height: .7rem; background: #edf1f7; border-radius: 99px; overflow: hidden; border: 1px solid var(--line); }
+    .progressbar > div { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width .25s ease; }
+    #progresstext { margin: .4rem 0 0; color: var(--muted); font-size: .92rem; }
+    .navlist { display: grid; gap: .35rem; }
+    .navbtn { width: 100%; text-align: left; border: 1px solid transparent; border-radius: 12px; padding: .58rem .65rem; background: transparent; color: var(--ink); cursor: pointer; display: grid; grid-template-columns: 2.4rem 1fr; gap: .25rem; align-items: center; font: inherit; line-height: 1.25; }
+    .navbtn:hover { background: var(--soft); }
+    .navbtn.active { background: var(--soft); border-color: #b9cbe0; color: #173d68; font-weight: 700; }
+    .navbtn.done .num { background: #dcefe6; color: var(--good); border-color: #b2d7c6; }
+    .num { display: inline-flex; justify-content: center; align-items: center; width: 2rem; height: 2rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-size: .82rem; font-weight: 700; }
+    main { min-width: 0; }
+    .toolbar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; gap: .8rem; align-items: center; padding: .8rem 0; background: linear-gradient(var(--bg), rgba(245,247,251,.92)); backdrop-filter: blur(6px); }
+    .toolbar button, .printbtn { border: 1px solid var(--line); background: var(--paper); border-radius: 999px; padding: .6rem .9rem; cursor: pointer; color: var(--ink); box-shadow: 0 3px 10px rgba(24,32,43,.05); font: inherit; }
+    .toolbar button:hover, .printbtn:hover { border-color: #aac0d8; color: var(--accent); }
+    .toolbar button:disabled { opacity: .45; cursor: not-allowed; }
+    .page { display: none; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(1rem, 2.4vw, 2rem); box-shadow: var(--shadow); margin-bottom: 1.2rem; }
+    .page.active { display: block; animation: fade .18s ease-out; }
+    @keyframes fade { from { opacity: .35; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    .pagehead { display: grid; grid-template-columns: 1fr auto; gap: .6rem; align-items: start; border-bottom: 1px solid var(--line); padding-bottom: 1rem; margin-bottom: 1rem; }
+    .kicker { grid-column: 1 / -1; color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 800; }
+    h2 { margin: 0; font-size: clamp(1.5rem, 2.6vw, 2.35rem); line-height: 1.12; }
+    h3 { margin-top: 1.4rem; margin-bottom: .45rem; color: #213b5a; }
+    h4 { margin: 0 0 .35rem; color: #23384f; }
+    .done { white-space: nowrap; align-self: center; padding: .45rem .65rem; border-radius: 999px; background: #f1f5fa; border: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
+    .goals { background: #f7f9fc; border: 1px solid var(--line); border-radius: 14px; padding: .8rem 1rem; }
+    .goals h3 { margin-top: 0; }
+    .goals ul { margin-bottom: 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0; overflow: hidden; border-radius: 12px; font-size: .96rem; }
+    th, td { border: 1px solid var(--line); padding: .7rem; vertical-align: top; }
+    th { background: #edf3fa; text-align: left; color: #223b59; }
+    .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1rem 0; }
+    .card { background: #f8fafc; border: 1px solid var(--line); border-radius: 14px; padding: .9rem; }
+    .card p:last-child { margin-bottom: 0; }
+    .callout, .note, .exam, .task, .warning { margin: 1rem 0; padding: .9rem 1rem; border-radius: 14px; border: 1px solid var(--line); }
+    .callout { background: #eef5ff; border-color: #cfe0f5; }
+    .note { background: #f4faf6; border-color: #c5e4d3; }
+    .exam { background: #f7f2e7; border-color: #e6d3a4; }
+    .task { background: #f8f1fb; border-color: #dec5ec; }
+    .warning { background: #fff0f0; border-color: #efc2c2; }
+    .steps { padding-left: 1.25rem; }
+    .steps li { margin: .35rem 0; }
+    .selfcheck { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+    .qa { margin: .55rem 0; border: 1px solid var(--line); border-radius: 12px; background: #fbfcfe; overflow: hidden; }
+    .qa summary { cursor: pointer; padding: .75rem .9rem; font-weight: 700; color: #223b59; }
+    .qa p { padding: 0 .9rem .85rem; margin: 0; }
+    .seealso { margin-top: 1.4rem; padding-top: 1rem; border-top: 2px dashed #c9d4e2; color: var(--muted); min-height: 3.5rem; }
+    .columns { columns: 3 16rem; column-gap: 2rem; }
+    .columns ul { margin-top: 0; break-inside: avoid; }
+    .checkgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; margin: 1rem 0; }
+    .checkgrid label { display: block; padding: .65rem .75rem; background: #f8fafc; border: 1px solid var(--line); border-radius: 12px; }
+    footer { max-width: 1400px; margin: 0 auto 2rem; padding: 0 1.2rem; color: var(--muted); font-size: .9rem; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } aside { position: relative; max-height: none; } .grid2 { grid-template-columns: 1fr; } .checkgrid { grid-template-columns: 1fr; } .pagehead { grid-template-columns: 1fr; } .done { justify-self: start; } }
+    @media print { body { background: white; } header, aside, .toolbar { display: none !important; } .layout { display: block; padding: 0; } .page { display: block !important; box-shadow: none; border: 0; page-break-after: always; } .qa p { display: block; } details > summary { list-style: none; } .seealso { min-height: 2.5rem; } }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lernpfad Biologie LK: Sek-I-Grundlagen für Q3 Molekulargenetik</h1>
+    <p>Ein klickbarer Wiederholungspfad für Schülerinnen und Schüler der Klasse 12 im Leistungskurs Biologie. Wiederholen Sie die Grundlagen aus der Sekundarstufe I, die Sie für das Themenfeld „Molekulargenetische Grundlagen des Lebens“ benötigen.</p>
+    <div class="meta">
+      <span class="pill">Sek-I-Wiederholung · Q3-Vorbereitung</span>
+      <span class="pill">Biologie · Leistungskurs</span>
+      <span class="pill">Berlin · Klasse 12</span>
+      <span class="pill">Stand: 05.07.2026</span>
+      <span class="pill">selbstständige Wiederholung</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside aria-label="Navigation">
+      <div class="progresswrap">
+        <strong>Fortschritt</strong>
+        <div class="progressbar" aria-hidden="true"><div id="progressfill"></div></div>
+        <p id="progresstext">0 von 22 Seiten erledigt</p>
+      </div>
+      <nav class="navlist" aria-label="Seiten des Lernpfads">
+        <button class="navbtn" data-target="start"><span class="num">01</span><span>So arbeiten Sie mit diesem Lernpfad</span></button>
+        <button class="navbtn" data-target="bruecke"><span class="num">02</span><span>Die Brücke von Sek I zu Q3</span></button>
+        <button class="navbtn" data-target="zelle_system"><span class="num">03</span><span>Die Zelle als kleinste Funktionseinheit</span></button>
+        <button class="navbtn" data-target="pflanzen_tier_prokaryot"><span class="num">04</span><span>Tierzelle, Pflanzenzelle und prokaryotische Zelle</span></button>
+        <button class="navbtn" data-target="zellkern_chromosomen"><span class="num">05</span><span>Zellkern, Chromosomen und DNA</span></button>
+        <button class="navbtn" data-target="mikroskopie_modelle"><span class="num">06</span><span>Mikroskopie, Modelle und Abstraktionsebenen</span></button>
+        <button class="navbtn" data-target="proteine_enzyme"><span class="num">07</span><span>Proteine, Enzyme und Schlüssel-Schloss-Prinzip</span></button>
+        <button class="navbtn" data-target="mitose"><span class="num">08</span><span>Mitose: genetische Kontinuität</span></button>
+        <button class="navbtn" data-target="meiose"><span class="num">09</span><span>Meiose und Befruchtung: Vielfalt erzeugen</span></button>
+        <button class="navbtn" data-target="gen_allel"><span class="num">10</span><span>Gen, Allel, Genotyp und Phänotyp</span></button>
+        <button class="navbtn" data-target="mendel"><span class="num">11</span><span>Mendelsche Regeln und Kreuzungsschemata</span></button>
+        <button class="navbtn" data-target="erbgange_mensch"><span class="num">12</span><span>Erbgänge beim Menschen: autosomal, gonosomal, Blutgruppen</span></button>
+        <button class="navbtn" data-target="mutation_modifikation"><span class="num">13</span><span>Mutation und Modifikation</span></button>
+        <button class="navbtn" data-target="karyogramm"><span class="num">14</span><span>Karyogramme und Chromosomenveränderungen</span></button>
+        <button class="navbtn" data-target="stammbaeume"><span class="num">15</span><span>Familienstammbäume systematisch auswerten</span></button>
+        <button class="navbtn" data-target="befruchtung_entwicklung"><span class="num">16</span><span>Befruchtung, Entwicklung und genetische Ausstattung</span></button>
+        <button class="navbtn" data-target="bakterien_viren"><span class="num">17</span><span>Bakterien und Viren: Bau, Vermehrung und Q3-Bezug</span></button>
+        <button class="navbtn" data-target="antigen_antikoerper"><span class="num">18</span><span>Antigen, Antikörper und spezifische Bindung</span></button>
+        <button class="navbtn" data-target="beratung_diagnostik"><span class="num">19</span><span>Genetische Beratung und pränatale Diagnostik</span></button>
+        <button class="navbtn" data-target="evolution_variation"><span class="num">20</span><span>Variation, Mutation und Selektion</span></button>
+        <button class="navbtn" data-target="materialkompetenz"><span class="num">21</span><span>Materialauswertung für Q3 vorbereiten</span></button>
+        <button class="navbtn" data-target="glossar"><span class="num">22</span><span>Glossar und Abschluss-Selbstcheck</span></button>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="toolbar">
+        <button id="prevBtn">← Zurück</button>
+        <button class="printbtn" onclick="window.print()">Drucken / als PDF sichern</button>
+        <button id="nextBtn">Weiter →</button>
+      </div>
+
+      <article class="page" id="start">
+  <div class="pagehead">
+    <div class="kicker">Start</div>
+    <h2>01. So arbeiten Sie mit diesem Lernpfad</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="start"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erkennen, wozu dieser Vorkurs dient und wie er mit Q3 zusammenhängt.</li><li>Sie planen eine Wiederholung, die Sek-I-Wissen auf LK-Niveau anschlussfähig macht.</li><li>Sie nutzen die Selbstchecks zur Diagnose eigener Lücken.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Dieser Lernpfad wiederholt ausgewählte Inhalte aus der Sekundarstufe I, die Sie für das Themenfeld <strong>„Molekulargenetische Grundlagen des Lebens“</strong> in Q3 benötigen. Er ersetzt nicht den Q3-Lernpfad, sondern schafft die fachliche Grundlage dafür: Zellbegriff, Zellkern, Chromosomen, DNA, Zellteilung, Vererbung, Mutation, Modifikation, Bakterien und Viren, Stammbaumanalyse sowie die ersten Bewertungsperspektiven der Humangenetik.</p>
+<div class="callout"><strong>Arbeitsweise:</strong> Bearbeiten Sie die Seiten in der vorgeschlagenen Reihenfolge, wenn Sie den Stoff systematisch auffrischen möchten. Markieren Sie eine Seite erst dann als erledigt, wenn Sie den jeweiligen Kernbegriff ohne Vorlage erklären und auf ein einfaches Beispiel anwenden können.</div>
+<h3>Was hier anders ist als in der Sekundarstufe I</h3>
+<p>Viele Begriffe kennen Sie bereits. Im Leistungskurs reicht es aber nicht, sie wiederzuerkennen. Sie müssen sie präzise verwenden, verschiedene Systemebenen verknüpfen und aus Material begründete Schlüsse ziehen. Beispiel: Aus „Gene bestimmen Merkmale“ wird in Q3 eine differenzierte Kette: DNA-Sequenz → RNA → Protein → Zellprozess → Merkmal → mögliche Erkrankung → diagnostische und ethische Fragen.</p>
+<div class="grid2"><div class="card"><h4>Ihr Ziel</h4><p>Sie können Sek-I-Begriffe so sicher verwenden, dass sie beim Lernen von Replikation, Transkription, Translation, Genregulation, PCR und Gentests nicht mehr im Weg stehen.</p></div><div class="card"><h4>Ihr Maßstab</h4><p>Sie können nicht nur Definitionen nennen, sondern Übergänge erklären: von der Zelle zur DNA, von Chromosomen zu Erbgängen, von Mutationen zu veränderten Merkmalen.</p></div></div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Wann sollten Sie eine Seite als erledigt markieren?</summary>
+          <p>Erst dann, wenn Sie den zentralen Zusammenhang frei, fachsprachlich und an einem einfachen Beispiel erklären können.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum wiederholen Sie Sek-I-Stoff im Leistungskurs?</summary>
+          <p>Weil Q3 auf diesen Grundlagen aufbaut. Unsichere Grundlagen führen sonst dazu, dass molekulargenetische Mechanismen nur auswendig gelernt, aber nicht verstanden werden.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="bruecke">
+  <div class="pagehead">
+    <div class="kicker">Orientierung</div>
+    <h2>02. Die Brücke von Sek I zu Q3</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="bruecke"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie ordnen Sek-I-Inhalte den späteren Q3-Themen zu.</li><li>Sie unterscheiden zelluläre, organismische, familiäre und evolutionäre Betrachtungsebenen.</li><li>Sie erkennen, welche Vorkenntnisse für molekulargenetische Methoden besonders wichtig sind.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die Sekundarstufe I liefert vor allem Begriffe und Grundmodelle. Q3 vertieft diese Begriffe auf molekularer Ebene. Das bedeutet: Ein Sek-I-Begriff bleibt meistens richtig, muss aber präzisiert werden.</p>
+<table><tr><th>Sek-I-Grundlage</th><th>Wofür Sie sie in Q3 brauchen</th><th>Typische Vertiefung</th></tr>
+<tr><td>Zelle, Zellkern, Chromosomen</td><td>Speicherung und Weitergabe genetischer Information</td><td>DNA-Struktur, Chromatin, Genom, Genexpression</td></tr>
+<tr><td>Mitose und Meiose</td><td>Verständnis von genetischer Kontinuität und Neukombination</td><td>Replikation vor der Zellteilung, Rekombination, Chromosomenfehlverteilung</td></tr>
+<tr><td>Gen, Allel, Genotyp, Phänotyp</td><td>Auswertung von Erbgängen und Gentests</td><td>Sequenzvarianten, Mutation, Genprodukt, Penetranz, Risiko</td></tr>
+<tr><td>Mutation und Modifikation</td><td>Unterscheidung genetischer und umweltbedingter Ursachen</td><td>Genmutation, Regulation, Epigenetik, Krebsentstehung</td></tr>
+<tr><td>Bakterien und Viren</td><td>Einordnung molekularbiologischer Werkzeuge und Vektoren</td><td>Plasmide, virale Vektoren, Gentechnik, Gentherapie</td></tr>
+<tr><td>Stammbäume und Beratung</td><td>Humangenetische Materialaufgaben</td><td>Erbganganalyse, prädiktive Diagnostik, ethische Bewertung</td></tr></table>
+<div class="note"><strong>Merksatz:</strong> Q3 fragt selten nur: „Was ist ein Gen?“ Häufiger lautet die eigentliche Aufgabe: „Welche Folgen hat eine bestimmte Veränderung eines Gens, und wie kann man sie nachweisen, erklären oder bewerten?“</div>
+<h3>Vier Ebenen, die Sie sauber trennen müssen</h3>
+<ul><li><strong>Molekulare Ebene:</strong> DNA, RNA, Protein, Enzym, Mutation.</li><li><strong>Zelluläre Ebene:</strong> Zellkern, Chromosomen, Zellteilung, Genaktivität.</li><li><strong>Organismische Ebene:</strong> Merkmal, Krankheit, Entwicklung, Umweltwirkung.</li><li><strong>Familiäre/evolutionäre Ebene:</strong> Vererbung, Stammbaum, Variation, Selektion.</li></ul>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist die Unterscheidung von Ebenen so wichtig?</summary>
+          <p>Weil viele Fehler dadurch entstehen, dass molekulare, zelluläre und organismische Aussagen vermischt werden. Ein Gen „hat“ nicht direkt ein Merkmal; ein Gen kann über Genprodukte und Zellprozesse zur Ausprägung eines Merkmals beitragen.</p>
+        </details>
+        <details class="qa">
+          <summary>Welche Sek-I-Grundlage ist für Stammbaumaufgaben besonders wichtig?</summary>
+          <p>Die sichere Verwendung von Gen, Allel, Genotyp, Phänotyp, dominant, rezessiv, autosomal und gonosomal sowie das systematische Prüfen von Erbgängen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="zelle_system">
+  <div class="pagehead">
+    <div class="kicker">Zellbiologische Grundlagen</div>
+    <h2>03. Die Zelle als kleinste Funktionseinheit</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="zelle_system"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären, warum die Zelle die zentrale Systemebene der Biologie ist.</li><li>Sie benennen wichtige Zellbestandteile und ordnen ihnen Funktionen zu.</li><li>Sie unterscheiden Zell-, Gewebe-, Organ- und Organismusebene.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die Zelle ist die kleinste lebensfähige Einheit. Alle höheren Strukturen — Gewebe, Organe und Organismen — bestehen aus Zellen oder gehen aus Zellen hervor. Für Q3 ist diese Idee zentral, weil genetische Information nicht abstrakt „im Lebewesen“ liegt, sondern in Zellen gespeichert, genutzt, kopiert und reguliert wird.</p>
+<div class="grid2"><div class="card"><h4>Zellmembran</h4><p>Grenzt die Zelle ab, reguliert Stoffaustausch und ermöglicht Kommunikation mit der Umgebung.</p></div><div class="card"><h4>Zellplasma</h4><p>Reaktionsraum vieler Stoffwechselprozesse; enthält gelöste Stoffe, Proteine und Organellen.</p></div><div class="card"><h4>Zellkern</h4><p>Enthält bei eukaryotischen Zellen den größten Teil der DNA und steuert über Genaktivität viele Zellprozesse.</p></div><div class="card"><h4>Mitochondrien</h4><p>Stellen durch Zellatmung ATP bereit und besitzen eigene DNA; für Q3 wichtig als Beispiel für genetische Information außerhalb des Zellkerns.</p></div></div>
+<h3>Warum das für Q3 wichtig ist</h3>
+<p>Replikation, Transkription und Genregulation laufen bei Eukaryoten in einem räumlich organisierten Zellinneren ab. Die DNA liegt im Zellkern, Proteinsynthese findet an Ribosomen statt, viele Proteine müssen anschließend transportiert, gefaltet oder verändert werden. Schon die einfache Frage „Wo ist die DNA?“ führt also zur Unterscheidung von Prokaryoten, Eukaryoten, Zellkern und Zellorganellen.</p>
+<div class="warning"><strong>Typischer Fehler:</strong> „Die DNA schwimmt einfach in der Zelle herum.“ Das trifft höchstens vereinfacht auf Prokaryoten zu. In eukaryotischen Zellen ist die DNA im Zellkern als Chromatin organisiert.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist die Zelle für genetische Prozesse die zentrale Ebene?</summary>
+          <p>Weil DNA in Zellen gespeichert, vor der Zellteilung kopiert, in RNA umgeschrieben und über Proteine für Zellfunktionen genutzt wird.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen Zellkern und Zellplasma?</summary>
+          <p>Der Zellkern ist ein abgegrenzter Bereich eukaryotischer Zellen, der DNA enthält; das Zellplasma ist der übrige Reaktionsraum der Zelle.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="pflanzen_tier_prokaryot">
+  <div class="pagehead">
+    <div class="kicker">Zelltypen vergleichen</div>
+    <h2>04. Tierzelle, Pflanzenzelle und prokaryotische Zelle</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="pflanzen_tier_prokaryot"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie vergleichen Tier-, Pflanzen- und Bakterienzellen.</li><li>Sie erklären, warum Prokaryoten für Molekulargenetik und Gentechnik bedeutsam sind.</li><li>Sie vermeiden falsche Verallgemeinerungen über Zellkerne und Chromosomen.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Nicht alle Zellen sind gleich aufgebaut. Für Q3 ist besonders wichtig, ob eine Zelle einen Zellkern besitzt oder nicht. Eukaryotische Zellen besitzen einen Zellkern; prokaryotische Zellen, also Bakterien, besitzen keinen Zellkern.</p>
+<table><tr><th>Merkmal</th><th>Tierzelle</th><th>Pflanzenzelle</th><th>Prokaryotische Zelle</th></tr>
+<tr><td>Zellkern</td><td>vorhanden</td><td>vorhanden</td><td>nicht vorhanden</td></tr>
+<tr><td>DNA-Lage</td><td>vor allem im Zellkern</td><td>vor allem im Zellkern</td><td>im Zellplasma, oft ringförmig; zusätzlich können Plasmide vorkommen</td></tr>
+<tr><td>Zellwand</td><td>keine Zellwand</td><td>Zellwand aus Cellulose</td><td>Zellwand, meist aus Murein</td></tr>
+<tr><td>Chloroplasten</td><td>keine</td><td>vorhanden in fotosynthetisch aktiven Zellen</td><td>keine Chloroplasten</td></tr>
+<tr><td>Bedeutung für Q3</td><td>Humangenetik, Krebs, Genregulation</td><td>Genetik von Pflanzen, Züchtung, Gentechnik</td><td>PCR-Enzyme, Plasmide, Transformation, Modellorganismen</td></tr></table>
+<h3>Plasmide als Vorschau auf Q3</h3>
+<p>Plasmide sind kleine, meist ringförmige DNA-Moleküle, die in Bakterien zusätzlich zum Hauptchromosom vorkommen können. In der Gentechnik nutzt man Plasmide als Vektoren, um DNA-Abschnitte in Bakterien einzuschleusen.</p>
+<div class="note"><strong>Prüfgedanke:</strong> Wenn ein Material Bakterien zeigt, fragen Sie sofort: Gibt es einen Zellkern? Gibt es Plasmide? Wird ein Gen in einen Vektor eingebaut? Wird ein Protein durch Bakterien produziert?</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum sind Bakterien für die Gentechnik so wichtig?</summary>
+          <p>Sie vermehren sich schnell, lassen sich oft gut kultivieren und können Plasmide aufnehmen, die als Träger rekombinanter DNA dienen.</p>
+        </details>
+        <details class="qa">
+          <summary>Haben Bakterien Chromosomen?</summary>
+          <p>Ja, sie besitzen genetisches Material, häufig als ringförmiges Bakterienchromosom. Sie besitzen aber keinen Zellkern wie Eukaryoten.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="zellkern_chromosomen">
+  <div class="pagehead">
+    <div class="kicker">Genetische Information lokalisieren</div>
+    <h2>05. Zellkern, Chromosomen und DNA</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="zellkern_chromosomen"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären den Zusammenhang zwischen DNA, Chromatin und Chromosom.</li><li>Sie unterscheiden Arbeitsform und Transportform der DNA.</li><li>Sie ordnen Chromosomen als Träger genetischer Information ein.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>In eukaryotischen Zellen liegt DNA nicht ungeordnet im Zellkern. Sie ist mit Proteinen verbunden und bildet <strong>Chromatin</strong>. Vor einer Zellteilung wird dieses Material stark verdichtet; dann sind <strong>Chromosomen</strong> als lichtmikroskopisch erkennbare Strukturen sichtbar.</p>
+<div class="grid2"><div class="card"><h4>DNA</h4><p>Molekül, das genetische Information in der Abfolge seiner Basen speichert.</p></div><div class="card"><h4>Chromatin</h4><p>DNA-Protein-Komplex im Zellkern. In dieser Form kann DNA je nach Bereich zugänglich oder weniger zugänglich sein.</p></div><div class="card"><h4>Chromosom</h4><p>Stark kondensierte Form des Chromatins, besonders während der Zellteilung sichtbar.</p></div><div class="card"><h4>Genom</h4><p>Gesamtheit der genetischen Information einer Zelle oder eines Organismus.</p></div></div>
+<h3>Arbeitsform und Transportform</h3>
+<p>Als vereinfachtes Modell kann man sagen: Entspiralisiertes Chromatin ist eher die <strong>Arbeitsform</strong>, weil DNA-Abschnitte zugänglich sein müssen, damit Gene abgelesen werden können. Kondensierte Chromosomen sind eher die <strong>Transportform</strong>, weil sie bei der Zellteilung geordnet verteilt werden müssen.</p>
+<div class="exam"><strong>LK-Anschluss:</strong> In Q3 wird diese Sek-I-Vorstellung vertieft: Ob DNA zugänglich ist, hängt unter anderem von Chromatinstruktur, Histonmodifikationen und DNA-Methylierung ab.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum sind Chromosomen während der Zellteilung besonders gut sichtbar?</summary>
+          <p>Weil das Chromatin stark kondensiert wird. Die DNA ist dadurch als kompakte Chromosomenstruktur lichtmikroskopisch besser erkennbar.</p>
+        </details>
+        <details class="qa">
+          <summary>Ist ein Chromosom dasselbe wie ein Gen?</summary>
+          <p>Nein. Ein Chromosom enthält sehr viele DNA-Abschnitte; Gene sind bestimmte funktionelle Abschnitte der DNA.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="mikroskopie_modelle">
+  <div class="pagehead">
+    <div class="kicker">Erkenntnisgewinnung</div>
+    <h2>06. Mikroskopie, Modelle und Abstraktionsebenen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="mikroskopie_modelle"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie unterscheiden Beobachtung, Deutung und Modell.</li><li>Sie erklären, was man mit Lichtmikroskopie sehen kann und was nicht.</li><li>Sie reflektieren Modellgrenzen bei Zell- und Chromosomenmodellen.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>In der Sekundarstufe I haben Sie Zellen, Zellbestandteile oder Dauerpräparate mikroskopiert und Modelle benutzt. Für Q3 ist wichtig, die Aussagekraft solcher Zugänge realistisch einzuschätzen.</p>
+<table><tr><th>Zugang</th><th>Was wird sichtbar?</th><th>Was bleibt unsichtbar?</th></tr>
+<tr><td>Lichtmikroskopie von Zellen</td><td>Zellform, Zellgrenzen, größere Zellstrukturen, manchmal Zellkerne</td><td>DNA-Sequenzen, einzelne Gene, Proteine, Punktmutationen</td></tr>
+<tr><td>Chromosomenpräparat</td><td>Anzahl und grobe Form kondensierter Chromosomen</td><td>Basenfolge, kleine Mutationen, Genaktivität</td></tr>
+<tr><td>Modell eines Chromosoms</td><td>Vereinfachte räumliche Ordnung und Begriffe wie Chromatid, Centromer</td><td>Dynamik, molekulare Details, Größenverhältnisse</td></tr>
+<tr><td>Stammbaum</td><td>Verteilung eines Merkmals in einer Familie</td><td>Die DNA-Sequenz selbst; oft auch sichere Vorhersagen für Einzelpersonen</td></tr></table>
+<div class="callout"><strong>Merksatz:</strong> Eine gute biologische Erklärung sagt nicht nur, was ein Modell zeigt, sondern auch, was es ausblendet.</div>
+<h3>Beobachtung und Deutung trennen</h3>
+<p><em>Beobachtung:</em> „In der Gelelektrophorese ist bei Person A eine Bande an Position X sichtbar.“ <em>Deutung:</em> „Person A besitzt ein DNA-Fragment bestimmter Länge.“ Die Deutung kann richtig sein, muss aber zum Verfahren, zur Fragestellung und zu den Kontrollen passen.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Kann man eine Punktmutation im Lichtmikroskop erkennen?</summary>
+          <p>Nein. Eine Punktmutation betrifft einzelne Basen. Dafür benötigt man molekulargenetische Verfahren, nicht einfache Lichtmikroskopie.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum sind Modelle trotz ihrer Grenzen nützlich?</summary>
+          <p>Sie machen komplexe Strukturen und Prozesse verständlicher. Gerade deshalb muss man wissen, welche Aspekte vereinfacht oder weggelassen wurden.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="proteine_enzyme">
+  <div class="pagehead">
+    <div class="kicker">Stoffwechsel als Grundlage</div>
+    <h2>07. Proteine, Enzyme und Schlüssel-Schloss-Prinzip</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="proteine_enzyme"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären, was Proteine und Enzyme für Zellfunktionen leisten.</li><li>Sie verwenden das Schlüssel-Schloss-Prinzip als Modell, nicht als wörtliche Beschreibung.</li><li>Sie verknüpfen Gene mit Proteinen und Merkmalen.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Q3 wird verständlicher, wenn Sie Proteine nicht nur als Nährstoffe, sondern als funktionelle Moleküle in Zellen betrachten. Viele Gene codieren für Proteine. Diese Proteine können Strukturproteine, Transportproteine, Rezeptoren oder Enzyme sein.</p>
+<div class="grid2"><div class="card"><h4>Protein</h4><p>Aus Aminosäuren aufgebautes Molekül. Seine Funktion hängt stark von seiner räumlichen Struktur ab.</p></div><div class="card"><h4>Enzym</h4><p>Protein, das eine chemische Reaktion katalysiert, indem es die Aktivierungsenergie senkt.</p></div><div class="card"><h4>Aktives Zentrum</h4><p>Bereich eines Enzyms, an den Substrate binden und umgesetzt werden.</p></div><div class="card"><h4>Schlüssel-Schloss-Prinzip</h4><p>Ein vereinfachtes Modell für die spezifische Wechselwirkung zwischen Enzym und Substrat.</p></div></div>
+<h3>Warum das für Genetik wichtig ist</h3>
+<p>Eine Mutation in einem Gen kann die Aminosäuresequenz eines Proteins verändern. Dadurch kann sich die räumliche Struktur ändern. Wenn sich die Struktur ändert, kann auch die Funktion verändert sein. Auf diese Weise kann eine molekulare Veränderung zu einem veränderten Merkmal oder zu einer Krankheit beitragen.</p>
+<div class="exam"><strong>Erklärungskette:</strong> veränderte DNA-Sequenz → veränderte mRNA → veränderte Aminosäuresequenz → veränderte Proteinstruktur → veränderte Zellfunktion → möglicher Phänotyp.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum kann eine kleine genetische Veränderung große Wirkung haben?</summary>
+          <p>Weil schon eine veränderte Aminosäure die Struktur eines Proteins und damit seine Funktion beeinflussen kann.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist das Schlüssel-Schloss-Prinzip nur ein Modell?</summary>
+          <p>Weil Enzyme und Substrate keine starren Gegenstände sind. Räumliche Passung, Ladungen, Beweglichkeit und Milieubedingungen spielen ebenfalls eine Rolle.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="mitose">
+  <div class="pagehead">
+    <div class="kicker">Zellteilung I</div>
+    <h2>08. Mitose: genetische Kontinuität</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="mitose"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie beschreiben die biologische Bedeutung der Mitose.</li><li>Sie erklären, warum DNA vor der Mitose verdoppelt werden muss.</li><li>Sie unterscheiden Chromosom, Chromatid und Tochterzelle korrekt.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die Mitose ist eine Form der Zellteilung, bei der aus einer Ausgangszelle zwei genetisch weitgehend identische Tochterzellen entstehen. Sie ist wichtig für Wachstum, Regeneration und ungeschlechtliche Vermehrung bei vielen Organismen.</p>
+<h3>Grundlogik der Mitose</h3>
+<ol class="steps"><li>Vor der Mitose wird die DNA verdoppelt. Jedes Chromosom besteht danach aus zwei Schwesterchromatiden.</li><li>Die Chromosomen kondensieren und werden sichtbar.</li><li>Die Schwesterchromatiden werden getrennt und auf zwei Zellpole verteilt.</li><li>Es entstehen zwei Zellkerne und schließlich zwei Tochterzellen.</li></ol>
+<div class="note"><strong>Q3-Anschluss:</strong> Die DNA-Verdopplung vor der Mitose ist die Replikation. In Q3 wird der molekulare Mechanismus dieser Verdopplung genauer untersucht.</div>
+<h3>Begriffe sauber verwenden</h3>
+<table><tr><th>Begriff</th><th>Bedeutung</th></tr><tr><td>Chromosom</td><td>DNA-Protein-Struktur, die genetische Information trägt; je nach Zellzyklus aus einem oder zwei Chromatiden.</td></tr><tr><td>Chromatid</td><td>Eine der beiden identischen Längseinheiten eines verdoppelten Chromosoms.</td></tr><tr><td>Centromer</td><td>Bereich, an dem Schwesterchromatiden verbunden sind und Spindelfasern ansetzen.</td></tr><tr><td>Tochterzelle</td><td>Zelle, die aus einer Zellteilung hervorgeht.</td></tr></table>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum muss DNA vor der Mitose verdoppelt werden?</summary>
+          <p>Damit jede Tochterzelle eine vollständige Kopie der genetischen Information erhält.</p>
+        </details>
+        <details class="qa">
+          <summary>Sind die Tochterzellen nach einer normalen Mitose genetisch gleich?</summary>
+          <p>Sie sind genetisch weitgehend identisch, sofern keine Mutationen oder Fehlverteilungen auftreten.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="meiose">
+  <div class="pagehead">
+    <div class="kicker">Zellteilung II</div>
+    <h2>09. Meiose und Befruchtung: Vielfalt erzeugen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="meiose"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären die Bedeutung der Meiose für die sexuelle Fortpflanzung.</li><li>Sie unterscheiden haploid und diploid.</li><li>Sie verknüpfen Meiose, Rekombination und genetische Vielfalt.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Die Meiose erzeugt Keimzellen mit einfachem Chromosomensatz. Beim Menschen entstehen aus diploiden Vorläuferzellen haploide Spermien oder Eizellen. Bei der Befruchtung verschmelzen zwei haploide Keimzellen; dadurch entsteht wieder eine diploide Zygote.</p>
+<div class="grid2"><div class="card"><h4>Diploid</h4><p>Zwei Chromosomensätze; beim Menschen in Körperzellen normalerweise 46 Chromosomen.</p></div><div class="card"><h4>Haploid</h4><p>Ein Chromosomensatz; beim Menschen in Keimzellen normalerweise 23 Chromosomen.</p></div><div class="card"><h4>Rekombination</h4><p>Neukombination genetischer Information, zum Beispiel durch Crossing-over und zufällige Verteilung homologer Chromosomen.</p></div><div class="card"><h4>Befruchtung</h4><p>Verschmelzung zweier haploider Keimzellen zur diploiden Zygote.</p></div></div>
+<h3>Warum die Meiose für Vererbung zentral ist</h3>
+<p>Durch Meiose werden Allele auf Keimzellen verteilt. Dadurch kann ein Elternteil unterschiedliche Allelkombinationen weitergeben. Die mendelschen Regeln beschreiben solche Verteilungsmuster auf der Ebene von Merkmalen; Q3 vertieft später die molekulare Grundlage.</p>
+<div class="warning"><strong>Typischer Fehler:</strong> Mitose und Meiose werden verwechselt. Mitose erhält den Chromosomensatz; Meiose halbiert ihn und erzeugt genetische Vielfalt.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum müssen Keimzellen haploid sein?</summary>
+          <p>Damit sich bei der Befruchtung nicht in jeder Generation die Chromosomenzahl verdoppelt.</p>
+        </details>
+        <details class="qa">
+          <summary>Welche zwei Prozesse der Meiose erhöhen genetische Vielfalt?</summary>
+          <p>Crossing-over und die zufällige Verteilung homologer Chromosomen auf die Keimzellen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="gen_allel">
+  <div class="pagehead">
+    <div class="kicker">Grundbegriffe der Vererbung</div>
+    <h2>10. Gen, Allel, Genotyp und Phänotyp</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="gen_allel"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie definieren zentrale genetische Grundbegriffe sicher.</li><li>Sie unterscheiden genetische Anlage und beobachtbares Merkmal.</li><li>Sie erklären, warum ein Gen nicht einfach „ein Merkmal“ ist.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Diese Begriffe sind für Q3 unverzichtbar. Sie bilden die Brücke zwischen klassischer Vererbungslehre und molekularer Genetik.</p>
+<table><tr><th>Begriff</th><th>Präzise Bedeutung</th><th>Q3-Anschluss</th></tr>
+<tr><td>Gen</td><td>DNA-Abschnitt, dessen Information zu einem funktionellen Produkt beitragen kann, meist RNA oder Protein.</td><td>Transkription, Translation, Genregulation</td></tr>
+<tr><td>Allel</td><td>Variante eines Gens.</td><td>Sequenzvariante, Mutation, Erbgang</td></tr>
+<tr><td>Genotyp</td><td>Genetische Ausstattung bezogen auf ein Merkmal oder mehrere Gene.</td><td>Gentest, Stammbaum, Risikoabschätzung</td></tr>
+<tr><td>Phänotyp</td><td>Beobachtbare Merkmalsausprägung; entsteht durch Zusammenwirken von Genotyp, Genaktivität, Umwelt und Entwicklung.</td><td>Penetranz, Modifikation, multifaktorielle Merkmale</td></tr></table>
+<h3>Vom Gen zum Merkmal</h3>
+<p>Ein häufiger Vereinfachungssatz lautet: „Ein Gen bestimmt ein Merkmal.“ Für die Sekundarstufe I kann das als Einstieg dienen, für Q3 ist es zu grob. Besser ist: Ein Gen kann über sein Genprodukt und dessen Wirkung in Zellen zur Ausprägung eines Merkmals beitragen. Viele Merkmale hängen von mehreren Genen und Umweltbedingungen ab.</p>
+<div class="exam"><strong>Gute Formulierung:</strong> „Das Allel enthält eine veränderte DNA-Sequenz. Dadurch kann ein verändertes Protein entstehen, das die Zellfunktion beeinflusst und zum beobachteten Phänotyp beiträgt.“</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen Gen und Allel?</summary>
+          <p>Ein Gen ist ein DNA-Abschnitt mit bestimmter Funktion; ein Allel ist eine Variante dieses Gens.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist der Phänotyp nicht immer eindeutig aus dem Genotyp ableitbar?</summary>
+          <p>Weil Genaktivität, Umwelt, Entwicklungsprozesse und Wechselwirkungen mit anderen Genen die Merkmalsausprägung beeinflussen können.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="mendel">
+  <div class="pagehead">
+    <div class="kicker">Klassische Genetik</div>
+    <h2>11. Mendelsche Regeln und Kreuzungsschemata</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="mendel"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie wiederholen die Grundidee mendelscher Vererbung.</li><li>Sie erstellen einfache Kreuzungsschemata.</li><li>Sie erkennen Grenzen einfacher Mendelmodelle.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Mendel untersuchte die Vererbung klar unterscheidbarer Merkmale. Seine Regeln beschreiben, wie Allele bei der Bildung von Keimzellen verteilt und bei der Befruchtung kombiniert werden können.</p>
+<h3>Wichtige Grundbegriffe</h3>
+<ul><li><strong>homozygot/reinerbig:</strong> zwei gleiche Allele eines Gens.</li><li><strong>heterozygot/mischerbig:</strong> zwei verschiedene Allele eines Gens.</li><li><strong>dominant:</strong> setzt sich im heterozygoten Zustand phänotypisch durch.</li><li><strong>rezessiv:</strong> tritt phänotypisch oft nur bei Homozygotie auf.</li><li><strong>Kreuzungsschema:</strong> Modell, mit dem mögliche Allelkombinationen der Nachkommen dargestellt werden.</li></ul>
+<h3>Beispiel: monohybrider Erbgang</h3>
+<table><tr><th></th><th>A</th><th>a</th></tr><tr><th>A</th><td>AA</td><td>Aa</td></tr><tr><th>a</th><td>Aa</td><td>aa</td></tr></table>
+<p>Bei zwei heterozygoten Elternteilen ergibt sich im einfachen dominant-rezessiven Modell ein Genotypverhältnis von 1 : 2 : 1 und ein Phänotypverhältnis von 3 : 1.</p>
+<div class="warning"><strong>Grenze:</strong> Viele reale Merkmale folgen nicht einfach einem monogenen dominant-rezessiven Modell. Es gibt intermediäre Erbgänge, Kodominanz, Polygenie, Umweltwirkungen und unvollständige Penetranz.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was zeigt ein Kreuzungsschema?</summary>
+          <p>Es zeigt mögliche Kombinationen elterlicher Allele bei Nachkommen und erlaubt Wahrscheinlichkeitsaussagen über Genotypen und Phänotypen.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum sind Mendelmodelle trotzdem nützlich, obwohl viele Merkmale komplexer sind?</summary>
+          <p>Sie liefern ein klares Grundmodell für Allelverteilung und Wahrscheinlichkeiten, das später erweitert werden kann.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="erbgange_mensch">
+  <div class="pagehead">
+    <div class="kicker">Humangenetik</div>
+    <h2>12. Erbgänge beim Menschen: autosomal, gonosomal, Blutgruppen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="erbgange_mensch"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie unterscheiden autosomale und gonosomale Vererbung.</li><li>Sie wenden dominant-rezessive Begriffe auf humangenetische Beispiele an.</li><li>Sie ordnen das AB0-System als Beispiel für mehrere Allele und Kodominanz ein.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Beim Menschen sind kontrollierte Kreuzungsexperimente nicht möglich. Deshalb arbeitet die Humangenetik mit Stammbäumen, statistischen Wahrscheinlichkeiten, Familienanamnese und molekulargenetischen Tests.</p>
+<table><tr><th>Erbgang</th><th>Typisches Muster</th><th>Hinweis in Stammbäumen</th></tr>
+<tr><td>autosomal-dominant</td><td>Ein verändertes Allel reicht häufig für den Phänotyp.</td><td>Merkmal oft in jeder Generation; Männer und Frauen ähnlich häufig betroffen.</td></tr>
+<tr><td>autosomal-rezessiv</td><td>Zwei veränderte Allele sind nötig.</td><td>Betroffene Kinder können phänotypisch unauffällige Eltern haben.</td></tr>
+<tr><td>X-chromosomal-rezessiv</td><td>Rezessive Allele auf dem X-Chromosom wirken sich bei Männern häufiger aus.</td><td>Häufig mehr betroffene Männer; keine Vater-Sohn-Weitergabe über das X-Chromosom.</td></tr>
+<tr><td>X-chromosomal-dominant</td><td>Ein dominantes Allel auf dem X-Chromosom reicht.</td><td>Betroffener Vater gibt das Merkmal an alle Töchter, aber nicht an Söhne weiter.</td></tr></table>
+<h3>AB0-System</h3>
+<p>Das AB0-System ist ein klassisches Beispiel dafür, dass es mehr als zwei Allele eines Gens geben kann. Die Allele A und B sind kodominant; beide können im Phänotyp sichtbar werden. Das Allel 0 ist gegenüber A und B rezessiv.</p>
+<div class="note"><strong>Q3-Anschluss:</strong> Ein Phänotyp wie Blutgruppe beruht auf Molekülen an Zelloberflächen. Damit wird aus einer klassischen Erbgangsfrage eine molekulare Struktur-Funktions-Frage.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was bedeutet autosomal?</summary>
+          <p>Das betreffende Gen liegt auf einem Autosom, also nicht auf einem Geschlechtschromosom.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum sind beim AB0-System die Allele A und B kodominant?</summary>
+          <p>Weil bei Genotyp AB beide Merkmale im Phänotyp ausgeprägt werden.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="mutation_modifikation">
+  <div class="pagehead">
+    <div class="kicker">Veränderung und Umweltwirkung</div>
+    <h2>13. Mutation und Modifikation</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="mutation_modifikation"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie unterscheiden Mutation und Modifikation.</li><li>Sie erklären, warum nur bestimmte Mutationen vererbbar sind.</li><li>Sie verknüpfen Mutationen mit genetischer Variation und möglichen Krankheiten.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Der Unterschied zwischen Mutation und Modifikation ist eine der wichtigsten Grundlagen für Q3.</p>
+<table><tr><th>Begriff</th><th>Definition</th><th>Vererbbar?</th><th>Beispiel</th></tr>
+<tr><td>Mutation</td><td>Dauerhafte Veränderung der genetischen Information.</td><td>Nur dann an Nachkommen vererbbar, wenn Keimzellen oder ihre Vorläufer betroffen sind.</td><td>Punktmutation in einem Gen; Chromosomenfehlverteilung.</td></tr>
+<tr><td>Modifikation</td><td>Umweltbedingte Veränderung des Phänotyps ohne Veränderung der DNA-Sequenz.</td><td>In der Regel nicht als DNA-Sequenzänderung vererbbar.</td><td>Trainingszustand, Sonnenbräune, Größenunterschiede durch Ernährung.</td></tr></table>
+<h3>Somatische Mutation und Keimbahnmutation</h3>
+<p><strong>Somatische Mutationen</strong> entstehen in Körperzellen. Sie können für den betroffenen Organismus bedeutsam sein, zum Beispiel bei Krebs, werden aber normalerweise nicht an Kinder weitergegeben. <strong>Keimbahnmutationen</strong> betreffen Keimzellen oder deren Vorläufer und können an Nachkommen vererbt werden.</p>
+<div class="exam"><strong>Q3-Anschluss:</strong> In Q3 unterscheiden Sie genauer zwischen Genmutationen, Chromosomenmutationen und Genommutationen. Außerdem erklären Sie Mutationsfolgen über den genetischen Code und die Proteinstruktur.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Ist jede Mutation vererbbar?</summary>
+          <p>Nein. Vererbbar sind vor allem Mutationen der Keimbahn. Somatische Mutationen bleiben normalerweise auf den betroffenen Organismus beschränkt.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist eine Modifikation keine Mutation?</summary>
+          <p>Weil bei einer Modifikation der Phänotyp durch Umweltbedingungen verändert wird, ohne dass sich die DNA-Sequenz ändert.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="karyogramm">
+  <div class="pagehead">
+    <div class="kicker">Chromosomen untersuchen</div>
+    <h2>14. Karyogramme und Chromosomenveränderungen</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="karyogramm"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie lesen einfache Karyogramme aus.</li><li>Sie unterscheiden numerische und strukturelle Chromosomenveränderungen.</li><li>Sie erklären die Grenzen eines Karyogramms.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Ein Karyogramm zeigt die geordneten Chromosomen einer Zelle. Beim Menschen werden homologe Chromosomenpaare nach Größe, Form und Bandenmuster angeordnet. Das 23. Chromosomenpaar bestimmt chromosomal das Geschlecht: XX oder XY.</p>
+<div class="grid2"><div class="card"><h4>Numerische Veränderung</h4><p>Die Anzahl der Chromosomen ist verändert, zum Beispiel Trisomie 21.</p></div><div class="card"><h4>Strukturelle Veränderung</h4><p>Ein Chromosom ist in seiner Struktur verändert, zum Beispiel durch Deletion, Duplikation, Inversion oder Translokation.</p></div></div>
+<h3>Was ein Karyogramm leisten kann</h3>
+<ul><li>Chromosomenzahl überprüfen.</li><li>Geschlechtschromosomen bestimmen.</li><li>Größere Chromosomenveränderungen erkennen.</li></ul>
+<h3>Was ein Karyogramm nicht leisten kann</h3>
+<ul><li>Einzelne Basen oder kleine Genmutationen erkennen.</li><li>Genaktivität feststellen.</li><li>Alle genetischen Krankheitsrisiken ausschließen.</li></ul>
+<div class="warning"><strong>Typischer Fehler:</strong> Aus einem unauffälligen Karyogramm folgt nicht, dass „genetisch alles gesund“ ist. Viele genetische Veränderungen liegen unterhalb der Auflösung eines Karyogramms.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen Genmutation und Genommutation?</summary>
+          <p>Eine Genmutation betrifft die Basensequenz eines Gens; eine Genommutation betrifft die Anzahl ganzer Chromosomen.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum kann ein Karyogramm keine Punktmutation zeigen?</summary>
+          <p>Weil eine Punktmutation viel zu klein ist, um auf der Ebene lichtmikroskopisch sichtbarer Chromosomen erkannt zu werden.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="stammbaeume">
+  <div class="pagehead">
+    <div class="kicker">Material auswerten</div>
+    <h2>15. Familienstammbäume systematisch auswerten</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="stammbaeume"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie beschreiben Stammbäume fachsprachlich.</li><li>Sie prüfen Erbgänge begründet statt nur nach Eindruck.</li><li>Sie formulieren Wahrscheinlichkeitsaussagen vorsichtig.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Stammbäume zeigen die Verteilung eines Merkmals in einer Familie. In Q3 werden solche Materialien oft mit molekulargenetischen Daten kombiniert.</p>
+<h3>Systematische Vorgehensweise</h3>
+<ol class="steps"><li><strong>Material sichern:</strong> Wer ist betroffen? Welche Geschlechter sind betroffen? In welchen Generationen tritt das Merkmal auf?</li><li><strong>Dominant oder rezessiv prüfen:</strong> Können gesunde Eltern betroffene Kinder haben? Überspringt das Merkmal Generationen?</li><li><strong>Autosomal oder gonosomal prüfen:</strong> Sind Männer und Frauen ähnlich betroffen? Gibt es Vater-Sohn-Weitergabe?</li><li><strong>Genotypen eintragen:</strong> Zuerst sichere Genotypen, danach mögliche Genotypen.</li><li><strong>Alternativen abwägen:</strong> Wenn mehrere Erbgänge möglich sind, muss das erwähnt werden.</li></ol>
+<div class="exam"><strong>Gute Formulierung:</strong> „Der Stammbaum spricht für einen autosomal-rezessiven Erbgang, weil zwei phänotypisch unauffällige Eltern ein betroffenes Kind haben. Ein dominanter Erbgang wäre damit nur unter zusätzlichen Annahmen plausibel.“</div>
+<h3>Grenzen von Stammbäumen</h3>
+<p>Stammbäume zeigen Phänotypen, nicht direkt DNA-Sequenzen. Unvollständige Penetranz, Neumutationen, kleine Familien, fehlende Informationen oder diagnostische Unsicherheit können die Auswertung erschweren.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum darf man einen Erbgang nicht nur „am Muster erkennen“?</summary>
+          <p>Weil ähnliche Muster durch verschiedene Ursachen entstehen können. Man muss Alternativen prüfen und mit konkreten Beobachtungen begründen.</p>
+        </details>
+        <details class="qa">
+          <summary>Was zeigt ein Stammbaum nicht direkt?</summary>
+          <p>Er zeigt nicht direkt DNA-Sequenzen oder Genaktivität, sondern die Verteilung eines Merkmals beziehungsweise eines diagnostischen Befundes in einer Familie.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="befruchtung_entwicklung">
+  <div class="pagehead">
+    <div class="kicker">Individualentwicklung</div>
+    <h2>16. Befruchtung, Entwicklung und genetische Ausstattung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="befruchtung_entwicklung"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie verknüpfen Befruchtung mit der Entstehung eines neuen Genotyps.</li><li>Sie erklären, warum fast alle Körperzellen eines Menschen dieselbe DNA besitzen.</li><li>Sie bereiten das Verständnis von Zelldifferenzierung und Genregulation vor.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Bei der Befruchtung verschmelzen Eizelle und Spermium. Dadurch entsteht eine Zygote mit einer neuen Kombination mütterlicher und väterlicher Allele. Aus dieser Zygote entstehen durch Mitose viele Körperzellen.</p>
+<h3>Ein zentrales Paradox für Q3</h3>
+<p>Fast alle Körperzellen eines Menschen besitzen dieselbe DNA. Trotzdem unterscheiden sich Nervenzellen, Muskelzellen, Hautzellen und Leberzellen deutlich. Der Grund liegt nicht darin, dass jede Zellart völlig andere Gene besitzt, sondern darin, dass unterschiedliche Gene aktiv oder inaktiv sind.</p>
+<div class="callout"><strong>Brücke zu Q3:</strong> Zelldifferenzierung ist ohne Genregulation nicht erklärbar. Q3 untersucht deshalb, wie Genaktivität gesteuert wird, zum Beispiel durch Transkriptionsfaktoren, DNA-Methylierung und Chromatinzustand.</div>
+<h3>Wichtige Begriffe</h3>
+<ul><li><strong>Zygote:</strong> Zelle, die aus der Verschmelzung von Ei- und Samenzelle entsteht.</li><li><strong>Embryonalentwicklung:</strong> frühe Entwicklung mit Zellteilungen, Differenzierung und Musterbildung.</li><li><strong>Zelldifferenzierung:</strong> Entwicklung spezialisierter Zelltypen mit unterschiedlicher Struktur und Funktion.</li></ul>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum haben verschiedene Zelltypen unterschiedliche Eigenschaften, obwohl sie meist dieselbe DNA besitzen?</summary>
+          <p>Weil in verschiedenen Zelltypen unterschiedliche Gene aktiv sind. Diese unterschiedliche Genexpression führt zu unterschiedlichen Proteinausstattungen und Funktionen.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum entsteht bei der Befruchtung genetische Vielfalt?</summary>
+          <p>Weil Keimzellen durch Meiose unterschiedliche Allelkombinationen tragen und bei der Befruchtung zufällig kombiniert werden.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="bakterien_viren">
+  <div class="pagehead">
+    <div class="kicker">Mikroorganismen als Grundlage</div>
+    <h2>17. Bakterien und Viren: Bau, Vermehrung und Q3-Bezug</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="bakterien_viren"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie unterscheiden Bakterien und Viren.</li><li>Sie erklären, warum beide in der Molekulargenetik wichtig sind.</li><li>Sie ordnen prokaryotische Zelle, Virus und Vektor begrifflich ein.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Bakterien und Viren begegnen Ihnen in der Sekundarstufe I meist im Zusammenhang mit Infektionskrankheiten. In Q3 werden sie zusätzlich als biologische Systeme und Werkzeuge der Molekulargenetik wichtig.</p>
+<table><tr><th>Merkmal</th><th>Bakterium</th><th>Virus</th></tr>
+<tr><td>Zellulärer Aufbau</td><td>Prokaryotische Zelle</td><td>Keine Zelle</td></tr>
+<tr><td>Genetisches Material</td><td>DNA, oft ringförmiges Chromosom; häufig Plasmide</td><td>DNA oder RNA, je nach Virusart</td></tr>
+<tr><td>Eigener Stoffwechsel</td><td>Ja</td><td>Nein</td></tr>
+<tr><td>Vermehrung</td><td>Zellteilung</td><td>Nur mithilfe einer Wirtszelle</td></tr>
+<tr><td>Q3-Bezug</td><td>Plasmide, Transformation, Proteinproduktion</td><td>Virale Vektoren, Gentherapie, Virusgenome</td></tr></table>
+<div class="note"><strong>Merksatz:</strong> Bakterien sind Zellen. Viren sind keine Zellen, sondern infektiöse Partikel, die Wirtszellen zur Vermehrung nutzen.</div>
+<h3>Warum das für Gentechnik relevant ist</h3>
+<p>Gentechnische Verfahren nutzen biologische Mechanismen. Plasmide können DNA transportieren. Virale Vektoren können genetisches Material in Zellen einschleusen. Für eine Bewertung solcher Verfahren müssen Sie die biologischen Grundlagen und die Risiken verstehen.</p>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum gelten Viren nicht als Zellen?</summary>
+          <p>Sie besitzen keinen eigenen Zellstoffwechsel und können sich nicht selbstständig durch Zellteilung vermehren.</p>
+        </details>
+        <details class="qa">
+          <summary>Was macht Plasmide für die Gentechnik interessant?</summary>
+          <p>Sie können als kleine DNA-Träger dienen und Gene in Bakterien oder andere Zielsysteme einbringen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="antigen_antikoerper">
+  <div class="pagehead">
+    <div class="kicker">Molekulare Erkennung</div>
+    <h2>18. Antigen, Antikörper und spezifische Bindung</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="antigen_antikoerper"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie wiederholen das Prinzip spezifischer molekularer Erkennung.</li><li>Sie erklären Antigen-Antikörper-Bindung als Struktur-Funktions-Beziehung.</li><li>Sie bereiten diagnostische Verfahren gedanklich vor.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Antikörper kennen Sie aus dem Themenfeld Gesundheit und Krankheit. Für Q3 ist weniger die gesamte Immunantwort entscheidend, sondern das Prinzip der spezifischen molekularen Erkennung.</p>
+<div class="grid2"><div class="card"><h4>Antigen</h4><p>Struktur, die von Bestandteilen des Immunsystems erkannt werden kann, zum Beispiel ein Oberflächenmolekül eines Erregers.</p></div><div class="card"><h4>Antikörper</h4><p>Protein, das spezifisch an ein Antigen binden kann.</p></div><div class="card"><h4>Spezifität</h4><p>Die Bindung beruht auf räumlicher Passung und chemischen Wechselwirkungen.</p></div><div class="card"><h4>Diagnostik</h4><p>Spezifische Bindung kann genutzt werden, um bestimmte Moleküle nachzuweisen.</p></div></div>
+<h3>Verbindung zu Genetik</h3>
+<p>Viele diagnostische Verfahren beruhen auf spezifischer Erkennung: Antikörper erkennen Proteine; Primer binden spezifisch an DNA-Sequenzen; Sonden können komplementäre Nukleinsäuresequenzen erkennen. Das Grundprinzip lautet immer: Struktur ermöglicht spezifische Bindung.</p>
+<div class="exam"><strong>LK-Anschluss:</strong> Wenn Sie später PCR-Primer, Restriktionsenzyme oder DNA-Sonden betrachten, nutzen Sie denselben Grundgedanken: Moleküle wechselwirken nicht beliebig, sondern abhängig von Struktur und Sequenz.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Was haben Antikörper und PCR-Primer gedanklich gemeinsam?</summary>
+          <p>Beide beruhen auf spezifischer Erkennung: Antikörper binden an passende Antigene, Primer an komplementäre DNA-Abschnitte.</p>
+        </details>
+        <details class="qa">
+          <summary>Warum ist Spezifität für Diagnostik wichtig?</summary>
+          <p>Nur wenn ein Nachweis möglichst spezifisch ist, kann man aus einem positiven Signal sinnvoll auf das gesuchte Molekül schließen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="beratung_diagnostik">
+  <div class="pagehead">
+    <div class="kicker">Bewertung vorbereiten</div>
+    <h2>19. Genetische Beratung und pränatale Diagnostik</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="beratung_diagnostik"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie wiederholen Grundideen genetischer Beratung.</li><li>Sie unterscheiden Information, Diagnose, Risiko und Entscheidung.</li><li>Sie formulieren Bewertungskriterien für humangenetische Fragestellungen.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Genetische Beratung und pränatale Diagnostik verbinden biologische Informationen mit persönlichen, ethischen und gesellschaftlichen Fragen. Für Q3 ist wichtig, dass ein genetischer Befund nicht automatisch eine einfache Handlungsanweisung liefert.</p>
+<h3>Begriffe</h3>
+<ul><li><strong>Diagnostik:</strong> Untersuchung mit dem Ziel, bestimmte Befunde festzustellen.</li><li><strong>Pränatale Diagnostik:</strong> Untersuchungen vor der Geburt.</li><li><strong>Genetische Beratung:</strong> Vermittlung und Einordnung genetischer Informationen, häufig mit Risikoabschätzung und Unterstützung bei Entscheidungen.</li><li><strong>Risiko:</strong> Wahrscheinlichkeit für ein Ereignis; nicht dasselbe wie sichere Vorhersage.</li></ul>
+<h3>Bewertungskriterien</h3>
+<table><tr><th>Kriterium</th><th>Leitfrage</th></tr><tr><td>Autonomie</td><td>Kann die betroffene Person informiert und frei entscheiden?</td></tr><tr><td>Nichtschaden</td><td>Welche psychischen, körperlichen oder sozialen Belastungen können entstehen?</td></tr><tr><td>Nutzen</td><td>Ermöglicht der Befund Therapie, Vorsorge oder Vorbereitung?</td></tr><tr><td>Datenschutz</td><td>Wer erfährt genetische Informationen und wofür werden sie genutzt?</td></tr><tr><td>Gerechtigkeit</td><td>Entstehen Benachteiligungen oder ungleiche Zugangsmöglichkeiten?</td></tr></table>
+<div class="warning"><strong>Wichtig:</strong> Formulieren Sie Bewertungen nie nur als Meinung. Eine gute Bewertung nennt Kriterien, wägt ab und kommt zu einem begründeten Urteil.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist genetisches Risiko nicht dasselbe wie sichere Erkrankung?</summary>
+          <p>Weil viele genetische Befunde nur Wahrscheinlichkeiten verändern. Ob ein Merkmal oder eine Krankheit tatsächlich auftritt, kann von weiteren Genen, Umweltfaktoren und Entwicklung abhängen.</p>
+        </details>
+        <details class="qa">
+          <summary>Was macht eine gute ethische Bewertung aus?</summary>
+          <p>Sie nennt transparente Kriterien, bezieht biologische Sachinformationen ein, wägt Vor- und Nachteile ab und formuliert ein begründetes Urteil.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="evolution_variation">
+  <div class="pagehead">
+    <div class="kicker">Evolutionärer Zusammenhang</div>
+    <h2>20. Variation, Mutation und Selektion</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="evolution_variation"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie erklären genetische Variation als Grundlage von Evolution.</li><li>Sie ordnen Mutationen als Quelle neuer Varianten ein.</li><li>Sie unterscheiden individuelle und evolutionäre Betrachtung.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Evolution wird in Q3 nicht im Zentrum stehen, bleibt aber als Hintergrund wichtig. Molekulargenetische Veränderungen betreffen zunächst DNA-Sequenzen einzelner Zellen oder Organismen. Wenn solche Veränderungen vererbbar sind und sich auf Fortpflanzungserfolg auswirken, können sie evolutionär bedeutsam werden.</p>
+<div class="grid2"><div class="card"><h4>Mutation</h4><p>Erzeugt neue genetische Varianten. Ob eine Mutation günstig, neutral oder nachteilig ist, hängt vom Kontext ab.</p></div><div class="card"><h4>Rekombination</h4><p>Kombiniert vorhandene Varianten neu, besonders bei sexueller Fortpflanzung.</p></div><div class="card"><h4>Selektion</h4><p>Führt dazu, dass bestimmte Varianten in einer Umwelt häufiger oder seltener werden können.</p></div><div class="card"><h4>Population</h4><p>Evolution findet nicht an einzelnen Individuen statt, sondern zeigt sich als Veränderung von Häufigkeiten in Populationen.</p></div></div>
+<h3>Warum das für Q3 nützlich ist</h3>
+<p>Viele Q3-Themen haben eine evolutionäre Dimension: Mutationen können Krankheiten verursachen, aber auch Variation bereitstellen. Antibiotikaresistenzen, Virusvarianten oder genetische Diversität lassen sich ohne Mutation, Rekombination und Selektion nicht sinnvoll erklären.</p>
+<div class="note"><strong>Merksatz:</strong> Mutation ist nicht zielgerichtet. Selektion wirkt auf vorhandene Variation.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist die Aussage „Organismen mutieren, weil sie sich anpassen müssen“ falsch?</summary>
+          <p>Mutationen entstehen nicht zielgerichtet, weil ein Organismus etwas braucht. Umweltbedingungen können aber beeinflussen, welche Varianten sich anschließend häufiger durchsetzen.</p>
+        </details>
+        <details class="qa">
+          <summary>Auf welcher Ebene findet Evolution statt?</summary>
+          <p>Evolution beschreibt Veränderungen von Merkmals- oder Allelhäufigkeiten in Populationen über Generationen, nicht die Veränderung eines einzelnen Individuums.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="materialkompetenz">
+  <div class="pagehead">
+    <div class="kicker">Klausurvorbereitung</div>
+    <h2>21. Materialauswertung für Q3 vorbereiten</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="materialkompetenz"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie wiederholen eine sichere Strategie zur Auswertung biologischer Materialien.</li><li>Sie trennen Beschreibung, Deutung und Bewertung.</li><li>Sie bereiten typische Q3-Materialtypen vor.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Im Leistungskurs erhalten Sie häufig Materialien, die Sie mit bekanntem Fachwissen verknüpfen müssen. Schon Sek-I-Materialien wie Karyogramme, Kreuzungsschemata, Stammbäume oder mikroskopische Bilder trainieren genau diese Kompetenz.</p>
+<h3>Drei-Schritt-Methode</h3>
+<ol class="steps"><li><strong>Beschreiben:</strong> Was ist direkt im Material erkennbar? Nennen Sie Daten, Muster und Auffälligkeiten.</li><li><strong>Deuten:</strong> Welche fachliche Erklärung passt zu den Beobachtungen?</li><li><strong>Bewerten:</strong> Welche Schlussfolgerung ist begründet, welche bleibt unsicher, welche Kriterien sind relevant?</li></ol>
+<table><tr><th>Materialtyp</th><th>Erste Frage</th><th>Typische Fehlerquelle</th></tr><tr><td>Karyogramm</td><td>Stimmt die Chromosomenzahl?</td><td>Kleine Genmutationen hineininterpretieren.</td></tr><tr><td>Stammbaum</td><td>Welcher Erbgang ist mit den Daten vereinbar?</td><td>Erbgang behaupten, ohne Alternativen zu prüfen.</td></tr><tr><td>Kreuzungsschema</td><td>Welche Gameten sind möglich?</td><td>Phänotyp- und Genotypverhältnis verwechseln.</td></tr><tr><td>Modellbild</td><td>Welche Ebene wird dargestellt?</td><td>Modell mit Wirklichkeit gleichsetzen.</td></tr></table>
+<div class="exam"><strong>Gute LK-Antwort:</strong> „Im Material ist zunächst erkennbar, dass ... . Dies spricht für ..., weil ... . Nicht sicher ableiten lässt sich ..., da ... .“</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Warum ist Beschreibung vor Deutung wichtig?</summary>
+          <p>Weil eine Deutung nur überzeugend ist, wenn sie klar auf konkrete Beobachtungen oder Daten bezogen wird.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist der Unterschied zwischen Deutung und Bewertung?</summary>
+          <p>Eine Deutung erklärt Befunde fachlich; eine Bewertung urteilt anhand von Kriterien über Bedeutung, Nutzen, Risiken oder Handlungsoptionen.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+<article class="page" id="glossar">
+  <div class="pagehead">
+    <div class="kicker">Abschluss</div>
+    <h2>22. Glossar und Abschluss-Selbstcheck</h2>
+    <label class="done"><input type="checkbox" class="donebox" data-page="glossar"> erledigt</label>
+  </div>
+  <section class="goals">
+    <h3>Ziele dieser Seite</h3>
+    <ul><li>Sie sichern zentrale Sek-I-Begriffe für Q3.</li><li>Sie prüfen, welche Grundlagen noch unsicher sind.</li><li>Sie verbinden klassische Genetik mit molekulargenetischem Denken.</li></ul>
+  </section>
+  <section class="content">
+    
+<p>Nutzen Sie diese Seite als letzte Diagnose, bevor Sie mit dem Q3-Lernpfad arbeiten oder molekulargenetische Klausuraufgaben üben.</p>
+<h3>Begriffe, die Sie sicher verwenden sollten</h3>
+<div class="columns"><ul><li>Zelle</li><li>Zellkern</li><li>Zellmembran</li><li>Zellplasma</li><li>Mitochondrium</li><li>Chloroplast</li><li>prokaryotische Zelle</li><li>eukaryotische Zelle</li><li>Bakterium</li><li>Virus</li></ul><ul><li>DNA</li><li>Chromatin</li><li>Chromosom</li><li>Chromatid</li><li>Centromer</li><li>Gen</li><li>Allel</li><li>Genom</li><li>Karyogramm</li><li>Plasmid</li></ul><ul><li>Mitose</li><li>Meiose</li><li>haploid</li><li>diploid</li><li>Befruchtung</li><li>Rekombination</li><li>Keimzelle</li><li>Zygote</li><li>Zelldifferenzierung</li><li>Mutation</li></ul><ul><li>Modifikation</li><li>Genotyp</li><li>Phänotyp</li><li>dominant</li><li>rezessiv</li><li>autosomal</li><li>gonosomal</li><li>Kreuzungsschema</li><li>Stammbaum</li><li>genetische Beratung</li></ul></div>
+<h3>Abschluss-Selbstcheck</h3>
+<div class="checkgrid"><label><input type="checkbox"> Ich kann erklären, warum die Zelle die Grundebene genetischer Prozesse ist.</label><label><input type="checkbox"> Ich kann DNA, Chromatin, Chromosom und Gen unterscheiden.</label><label><input type="checkbox"> Ich kann Mitose und Meiose sicher vergleichen.</label><label><input type="checkbox"> Ich kann Gen, Allel, Genotyp und Phänotyp korrekt verwenden.</label><label><input type="checkbox"> Ich kann einfache Kreuzungsschemata erstellen.</label><label><input type="checkbox"> Ich kann autosomale und gonosomale Erbgänge unterscheiden.</label><label><input type="checkbox"> Ich kann Mutation und Modifikation erklären.</label><label><input type="checkbox"> Ich kann Karyogramme und Stammbäume auswerten.</label><label><input type="checkbox"> Ich kann Bakterien und Viren unterscheiden.</label><label><input type="checkbox"> Ich kann eine genetische Bewertung mit Kriterien begründen.</label></div>
+<div class="exam"><strong>Letzter Test:</strong> Erklären Sie in fünf Minuten mündlich: Zelle → Zellkern → DNA/Chromosom → Mitose/Meiose → Gen/Allel → Genotyp/Phänotyp → Mutation/Modifikation → Stammbaum/Karyogramm → genetische Beratung → Q3-Molekulargenetik. Wenn diese Kette sicher gelingt, sind die Grundlagen tragfähig.</div>
+
+  </section>
+  <section class="selfcheck">
+    <h3>Selbstcheck</h3>
+        <details class="qa">
+          <summary>Welche drei Begriffe dürfen Sie in Q3 auf keinen Fall verwechseln?</summary>
+          <p>Besonders häufig werden Gen, Allel und Chromosom verwechselt. Ein Chromosom enthält viele DNA-Abschnitte; ein Gen ist ein funktioneller DNA-Abschnitt; ein Allel ist eine Variante eines Gens.</p>
+        </details>
+        <details class="qa">
+          <summary>Was ist das wichtigste Ziel dieser Wiederholung?</summary>
+          <p>Sie sollen Sek-I-Begriffe so präzise verwenden, dass Sie molekulargenetische Mechanismen in Q3 kausal erklären können.</p>
+        </details>
+  </section>
+  <p class="seealso"><strong>Siehe auch ...</strong></p>
+</article>
+    </main>
+  </div>
+
+  <footer>
+    <p>Hinweis für die manuelle Weiterbearbeitung: Jede Seite endet mit „Siehe auch ...“. Dort können Links auf konkrete Arbeitsblätter, Hefteinträge, Präsentationen, Versuchsprotokolle oder Klausurhinweise ergänzt werden.</p>
+    <p>Didaktische Orientierung: Rahmenlehrplan Biologie, Teil C, Jahrgangsstufen 7–10 Berlin/Brandenburg; Auswahl fokussiert auf die Grundlagen, die für Q3 „Molekulargenetische Grundlagen des Lebens“ anschlussfähig sind.</p>
+  </footer>
+
+  <script>
+    const pages = ['start', 'bruecke', 'zelle_system', 'pflanzen_tier_prokaryot', 'zellkern_chromosomen', 'mikroskopie_modelle', 'proteine_enzyme', 'mitose', 'meiose', 'gen_allel', 'mendel', 'erbgange_mensch', 'mutation_modifikation', 'karyogramm', 'stammbaeume', 'befruchtung_entwicklung', 'bakterien_viren', 'antigen_antikoerper', 'beratung_diagnostik', 'evolution_variation', 'materialkompetenz', 'glossar'];
+    const buttons = Array.from(document.querySelectorAll('.navbtn'));
+    const pageEls = Array.from(document.querySelectorAll('.page'));
+    const boxes = Array.from(document.querySelectorAll('.donebox'));
+    const progressFill = document.getElementById('progressfill');
+    const progressText = document.getElementById('progresstext');
+    let current = pages[0];
+
+    function storageKey(id) { return 'bio-seki-q3-grundlagen-' + id; }
+
+    function updateProgress() {
+      let done = 0;
+      boxes.forEach(box => {
+        const checked = localStorage.getItem(storageKey(box.dataset.page)) === '1';
+        box.checked = checked;
+        if (checked) done++;
+      });
+      buttons.forEach(btn => {
+        const id = btn.dataset.target;
+        btn.classList.toggle('done', localStorage.getItem(storageKey(id)) === '1');
+      });
+      const pct = Math.round(done / pages.length * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `${done} von ${pages.length} Seiten erledigt · ${pct} %`;
+    }
+
+    function showPage(id, push=true) {
+      if (!pages.includes(id)) id = pages[0];
+      current = id;
+      pageEls.forEach(p => p.classList.toggle('active', p.id === id));
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+      const idx = pages.indexOf(id);
+      document.getElementById('prevBtn').disabled = idx === 0;
+      document.getElementById('nextBtn').disabled = idx === pages.length - 1;
+      if (push) history.replaceState(null, '', '#' + id);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    buttons.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.target)));
+    boxes.forEach(box => box.addEventListener('change', () => {
+      localStorage.setItem(storageKey(box.dataset.page), box.checked ? '1' : '0');
+      updateProgress();
+    }));
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx > 0) showPage(pages[idx - 1]);
+    });
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const idx = pages.indexOf(current);
+      if (idx < pages.length - 1) showPage(pages[idx + 1]);
+    });
+
+    updateProgress();
+    showPage(location.hash ? location.hash.substring(1) : pages[0], false);
+  </script>
+</body>
+</html>
